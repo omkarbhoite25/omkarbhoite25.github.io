@@ -1,300 +1,297 @@
 <!DOCTYPE HTML>
 <html lang="en">
   <head>
-    <style>
-      sub {
-        vertical-align: sub;
-        font-size: smaller;
-      }
-      </style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Omkar Bhoite">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Omkar Bhoite - PhD Student at NTNU, Norway. Research in optimization, graph theory, robotics, and geometric deep learning.">
 
     <title>Omkar Bhoite</title>
 
-    <meta name="author" content="Omkar Bhoite">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="images/favicon/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    
   </head>
 
   <body>
-    <table style="width:100%;max-width:1100px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-      <tr style="padding:0px">
-        <td style="padding:0px">
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr style="padding:0px">
-              <td style="padding:2.5%;width:63%;vertical-align:middle">
-                <div  id="text-drop" class="h"> 
-                  <p class="name" style="text-align: center;">
-                    Omkar
-                  </p>&nbsp;
-                  <p class="name" style="text-align: center;">
-                    Bhoite
-                  </p>
+    <div class="container">
+      <!-- Hero Section -->
+      <header class="hero">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1 class="name-title">
+              <span class="first-name">Omkar</span>
+              <span class="last-name">Bhoite</span>
+            </h1>
+
+            <div class="bio">
+              <p>
+                Currently pursuing a <strong>Ph.D. at the Norwegian University of Science and Technology (NTNU)</strong>, Trondheim, Norway.
+                My research focuses on <strong>optimization, graph theory, spectral methods, network design and geometric deep learning</strong>, and their applications in <strong>urban mobility, distributed systems and robotics</strong>.
+              </p>
+
+              <p>
+                Graduated with a Master's in <strong>Robotics & Artificial Intelligence</strong> with specialization in <strong>Computer Science for Autonomous Driving</strong>
+                from <a href="https://www.kth.se/en">KTH Royal Institute of Technology [Sweden]</a>,
+                and as an exchange student at <a href="https://www.elte.hu/en/">Eötvös Loránd University [Hungary]</a>.
+              </p>
+
+              <p>
+                Passionately curious about robots, AI, machine learning, mathematics, computer vision, astrophysics, sensor systems, <a href="physics.html">physics</a>,
+                <a href="startup.html">startups</a> & <a href="images.html">photography</a>.
+              </p>
+
+              <div class="social-links">
+                <a href="mailto:omkarbhoite97@gmail.com" class="social-link">
+                  <span class="link-icon">✉</span> Email
+                </a>
+                <a href="#" class="social-link disabled" title="Coming soon">
+                  <span class="link-icon">📄</span> CV
+                </a>
+                <a href="#" class="social-link disabled" title="Coming soon">
+                  <span class="link-icon">🎓</span> Scholar
+                </a>
+                <a href="https://www.linkedin.com/in/omkar-bhoite-6335a51b5/" class="social-link">
+                  <span class="link-icon">💼</span> LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-image">
+            <img src="images/Omkar.jpg" alt="Omkar Bhoite profile photo" class="profile-photo">
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main>
+        <!-- Research Papers Section -->
+        <section class="section">
+          <h2 class="section-title">Research Papers</h2>
+
+          <article class="card" onmouseout="paper_stop()" onmouseover="paper_start()">
+            <div class="card-image">
+              <div class="image-container">
+                <div class="image-overlay" id='paper_image'>
+                  <video width="100%" height="100%" muted autoplay loop>
+                  </video>
                 </div>
-                <!-- <p>Upcoming PhD Student at <a href="https://www.ntnu.edu/"> NTNU [Norway]</a></p> -->
-                </p>
-                <p>
-                  Currently pursuing a <strong>Ph.D. at the Norwegian University of Science and Technology (NTNU)</strong>, Trondheim, Norway.  
-                  My research focuses on <strong>optimization, graph theory, spectral methods, network design and geometric deep learning</strong>, and their applications in <strong>urban mobility, distributed systems and robotics</strong>.
-                </p>
+                <img src="images/drone.png" alt="Drone research illustration" width="160">
+              </div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">
+                <a href="https://ieeexplore.ieee.org/document/10156429">
+                  Indoor vehicle-in-the-loop simulation of unmanned micro aerial vehicle with artificial companion
+                </a>
+              </h3>
+              <p class="card-authors">
+                <span>A. Hiba</span>,
+                <span>V. Kortvelyesi</span>,
+                <span>A. Kiskaroly</span>,
+                <span>Kfir Aberman</span>,
+                <strong>Omkar Bhoite</strong>,
+                <span>P. David</span>,
+                <span>A. Majdik</span>
+              </p>
+              <p class="card-meta">IEEE, 2023</p>
+              <p class="card-description">
+                VIL framework (an extension of HIL) for drone arena, with a use case of a companion drone in cooperative navigation.
+              </p>
+            </div>
+          </article>
+        </section>
 
-                <p>
-                  Graduated with a Master's in <strong>Robotics & Artificial Intelligence</strong> with specialization in <strong>Computer Science for Autonomous Driving</strong>  
-                  from <a href="https://www.kth.se/en">KTH Royal Institute of Technology [Sweden]</a>,  
-                  and as an exchange student at <a href="https://www.elte.hu/en/">Eötvös Loránd University [Hungary]</a>.
-                </p>
-                
-                <p>
-                  Passionately curious about robots, AI, machine learning, mathematics, computer vision, astrophysics, sensor systems, <a href="physics.html">physics</a>, 
-                  <a href="startup.html">startups</a> & <a href="images.html">photography</a>.
-                </p>
+        <!-- Thesis Section -->
+        <section class="section">
+          <h2 class="section-title">Thesis</h2>
 
-                
-                <div id="text-drop" class="o" margin:0 auto;>
-                    <a href="mailto:omkarbhoite97@gmail.com">Email</a> &nbsp;&nbsp;
-                    <a href="">CV [N/A]</a> &nbsp;&nbsp;
-                    <a href="">Scholar [N/A]</a> &nbsp;&nbsp;
-                    <a href="https://www.linkedin.com/in/omkar-bhoite-6335a51b5/">LinkedIn</a>&nbsp;&nbsp;
+          <article class="card" onmouseout="thesis_stop()" onmouseover="thesis_start()">
+            <div class="card-image">
+              <div class="image-container">
+                <div class="image-overlay" id='thesis_image'>
+                  <video width="100%" height="100%" muted autoplay loop>
+                  </video>
                 </div>
-                
-              </td>
-              <td style="padding:2.5%;width:70%;max-width:40%">
-                <a ><img style="width:80%;max-width:80%;object-fit: cover; border-radius: 50%;" alt="profile photo" src="images/Omkar.jpg" class="hoverZoomLink"></a>
-              </td>
-            </tr>
-          </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-              <tr>
-              <td style="padding:20px;width:100%;vertical-align:middle">
-                <h2> <u>Research Papers</u> </h2>
-            
-              </td>
-            </tr>
-          </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+                <img src="images/thesis.png" alt="Thesis illustration" width="160">
+              </div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">
+                <a href="images/reports/Thesis_MSc__Omkar_Bhoite_Mod.pdf">
+                  Vehicle in the loop simulation with real unmanned aerial vehicle (UAV) & artificial companion drone
+                </a>
+                <span class="badge">Thesis</span>
+              </h3>
+              <p class="card-authors">
+                Supervisor:
+                <a href="https://scholar.google.co.jp/citations?user=M54WX1YAAAAJ&hl=fi">Iván Eichhardt</a>,
+                <a href="https://scholar.google.com/citations?user=utkOvUwAAAAJ&hl=en">Antal Hiba</a>
+              </p>
+              <p class="card-description">
+                Drone navigation enhancement using companion drone in VIL simulation
+              </p>
+            </div>
+          </article>
+        </section>
 
-    <tr onmouseout="difsurvey_stop()" onmouseover="difsurvey_start()">
-      <td style="padding:20px;width:25%;vertical-align:middle">
-        <div class="one">
-        <div class="two" id='difsurvey_image'><video  width=100% height=100% muted autoplay loop>
-        </video></div>
-          <img src='images/drone.png' width="160">
-        </div>
-        <script type="text/javascript">
-          function difsurvey_start() {
-            document.getElementById('difsurvey_image').style.opacity = "1";
-          }
-    
-          function difsurvey_stop() {
-            document.getElementById('difsurvey_image').style.opacity = "0";
-          }
-          difsurvey_stop()
-        </script>
-      </td>
-      <td style="padding:20px;width:75%;vertical-align:middle">
-        <a href="https://ieeexplore.ieee.org/document/10156429">
-          <span class="papertitle">Indoor vehicle-in-the-loop simulation of unmanned micro aerial vehicle with artificial companion</span>
-        </a>
-        <br>
-        <a>A. Hiba</a>,
-        <a>V. Kortvelyesi</a>,
-        <a>A. Kiskaroly</a>,
-        <a>Kfir Aberman</a>,
-        <strong>Omkar Bhoite</strong>,
-        <a>P. David</a>,
-        <a>A. Majdik</a>
-        <br>
-        <em>IEEE<em>, 2023
-        <br>
-        <p></p>
+        <!-- Research Projects Section -->
+        <section class="section">
+          <h2 class="section-title">Research Projects</h2>
+
+          <article class="card">
+            <div class="card-image">
+              <video class="card-video" autoplay loop muted playsinline>
+                <source src="images/bosch.MOV" type="video/mp4">
+              </video>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">
+                <a href="https://github.com/omkarbhoite25/BFMC">
+                  ML algorithm to perform autonomous driving on a model car, 1/10th a size of an actual car
+                </a>
+              </h3>
+              <p class="card-authors">
+                <span>Shounak</span>,
+                <span>Alberto</span>,
+                <span>Adithya</span>,
+                <span>Vignesh</span>,
+                <span>Omkar</span>
+              </p>
+              <p class="card-description">
+                Semi-finalist of <a href="https://boschfuturemobility.com/">Bosch Future Mobility Challenge 2020-2021</a>
+              </p>
+            </div>
+          </article>
+
+          <article class="card" onmouseout="edvs_stop()" onmouseover="edvs_start()">
+            <div class="card-image">
+              <div class="image-container">
+                <div class="image-overlay" id='edvs_image'>
+                  <video width="100%" height="100%" muted autoplay loop>
+                  </video>
+                </div>
+                <img src="images/eDVS.png" alt="Neuromorphic camera illustration" width="160">
+              </div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">
+                <a href="https://github.com/omkarbhoite25/KTH-Neuro-Computing-Systems-Event-Based-Camera-eDVS4337">
+                  Neuromorphic Vision data pipeline
+                </a>
+              </h3>
+              <p class="card-authors">
+                Supervisor:
+                <a href="https://www.kth.se/profile/conr">Prof. Jorg Conradt</a>,
+                <a href="https://www.kth.se/profile/jprb?l=en">Juan Pablo Romero Bermudez</a>
+              </p>
+              <p class="card-description">
+                C++ based software to stream events from neuromorphic camera to NN,
+                for generating application specific commands
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-image">
+              <video class="card-video" autoplay loop muted playsinline>
+                <source src="images/movingRobotHead.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">
+                <a href="https://github.com/omkarbhoite25/KTH-Neuro-Computing-Systems">
+                  Humanoid robot head motion control using ROS
+                </a>
+              </h3>
+              <p class="card-authors">
+                Supervisor:
+                <a href="https://www.kth.se/profile/conr">Prof. Jorg Conradt</a>,
+                <a href="https://www.kth.se/profile/jprb?l=en">Juan Pablo Romero Bermudez</a>
+              </p>
+              <p class="card-description">
+                ROS based humanoid robot head motion control,
+                for emulating human head-eye movement
+              </p>
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
         <p>
-          VIL framework (an extension of HIL) for drone arena, with a use case of a companion drone in cooperative navigation.
+          Obviously I didn't design the original website template, but added significant modifications.
+          You can use the <a href="https://github.com/jonbarron/jonbarron_website">original source code</a>.
         </p>
-      </td>
-    </tr>
+      </footer>
+    </div>
 
-    <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-      <tr>
-      <td style="padding:20px;width:100%;vertical-align:middle">
-        <h2><u>Thesis</u> </h2>
-      </td>
-    </tr>
-    </tbody></table>
-    <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+    <script>
+      // Hover video effects
+      function paper_start() {
+        document.getElementById('paper_image').style.opacity = "1";
+      }
+      function paper_stop() {
+        document.getElementById('paper_image').style.opacity = "0";
+      }
 
-    <tr onmouseout="difsurvey_stop()" onmouseover="difsurvey_start()">
-      <td style="padding:20px;width:25%;vertical-align:middle">
-        <div class="one">
-        <div class="two" id='difsurvey_image'><video  width=100% height=100% muted autoplay loop>
-        </video></div>
-          <img src='images/thesis.png' width="160">
-        </div>
-        <script type="text/javascript">
-          function difsurvey_start() {
-            document.getElementById('difsurvey_image').style.opacity = "1";
-          }
-    
-          function difsurvey_stop() {
-            document.getElementById('difsurvey_image').style.opacity = "0";
-          }
-          difsurvey_stop()
-        </script>
-      </td>
-      <td style="padding:20px;width:75%;vertical-align:middle">
-        <a href="images/reports/Thesis_MSc__Omkar_Bhoite_Mod.pdf">
-          <span class="papertitle">Vehicle in the loop simulation with real unmanned aerial vehicle (UAV) &
-            artificial companion drone 
-          </span>
-        </a>&nbsp;
-        <strong>[Thesis]</strong>
-        <br>
-        Supervisor:
-        <a href="https://scholar.google.co.jp/citations?user=M54WX1YAAAAJ&hl=fi">Iván Eichhardt</a>,
-        <a href="https://scholar.google.com/citations?user=utkOvUwAAAAJ&hl=en">Antal Hiba</a>
-        <br>
-        <p></p>
-        <p>
-          Drone navigation enhancement using companion drone in VIL simulation
-        </p>
-      </td>
-    </tr>
+      function thesis_start() {
+        document.getElementById('thesis_image').style.opacity = "1";
+      }
+      function thesis_stop() {
+        document.getElementById('thesis_image').style.opacity = "0";
+      }
 
-    <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-      <tr>
-      <td style="padding:20px;width:100%;vertical-align:middle">
-        <h2><u> Research Projects </u></h2>
-      </td>
-    </tr>
-    </tbody></table>
-    <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+      function bosch_start() {
+        document.getElementById('bosch_image').style.opacity = "1";
+      }
+      function bosch_stop() {
+        document.getElementById('bosch_image').style.opacity = "0";
+      }
 
+      function edvs_start() {
+        document.getElementById('edvs_image').style.opacity = "1";
+      }
+      function edvs_stop() {
+        document.getElementById('edvs_image').style.opacity = "0";
+      }
 
-    <tr onmouseout="difsurvey_stop()" onmouseover="difsurvey_start()">
-      <td style="padding:20px;width:25%;vertical-align:middle">
-        <div class="one">
-        <div class="two" id='difsurvey_image'><video  width=100% height=100% muted autoplay loop>
-        <source src="images/bosch.MOV" type="video/mp4">
-        </video></div>
-          <!-- <img src='images/eDVS.png' width="160"> -->
-        </div>
-        <script type="text/javascript">
-          function difsurvey_start() {
-            document.getElementById('difsurvey_image').style.opacity = "1";
-          }
-    
-          function difsurvey_stop() {
-            document.getElementById('difsurvey_image').style.opacity = "0";
-          }
-          difsurvey_stop()
-        </script>
-      </td>
-      <td style="padding:20px;width:75%;vertical-align:middle">
-        <a href="https://github.com/omkarbhoite25/BFMC">
-          <span class="papertitle">ML algorithm to perform autonomous driving on a model car, 1/10th a size of an actual car
-    </span>
-        </a>
-      <br>
-        <a>Shounak</a>,
-        <a>Alberto</a>,
-        <a>Adithya</a>,
-        <a>Vignesh</a>,
-        <a>Omkar</a>
-        <br>
-        <p></p>
-        <p>
-        Semi-finalist of <a href="https://boschfuturemobility.com/">Bosch Future Mobility Challenge 2020-2021</a> 
-        </p>
-      </td>
-    </tr>
+      function robot_start() {
+        document.getElementById('robot_image').style.opacity = "1";
+      }
+      function robot_stop() {
+        document.getElementById('robot_image').style.opacity = "0";
+      }
 
-    <tr onmouseout="difsurvey_stop()" onmouseover="difsurvey_start()">
-      <td style="padding:20px;width:25%;vertical-align:middle">
-        <div class="one">
-        <div class="two" id='difsurvey_image'><video  width=100% height=100% muted autoplay loop>
-        </video></div>
-          <img src='images/eDVS.png' width="160">
-        </div>
-        <script type="text/javascript">
-          function difsurvey_start() {
-            document.getElementById('difsurvey_image').style.opacity = "1";
+      // Smooth scroll behavior
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
           }
-    
-          function difsurvey_stop() {
-            document.getElementById('difsurvey_image').style.opacity = "0";
-          }
-          difsurvey_stop()
-        </script>
-      </td>
-      <td style="padding:20px;width:75%;vertical-align:middle">
-        <a href="https://github.com/omkarbhoite25/KTH-Neuro-Computing-Systems-Event-Based-Camera-eDVS4337">
-          <span class="papertitle">Neuromorphic Vision data pipeline
-    </span>
-        </a>
-      <br>
-      Supervisor:
-      <a href="https://www.kth.se/profile/conr">Prof. Jorg Conradt</a>,
-      <a href="https://www.kth.se/profile/jprb?l=en">Juan Pablo Romero Bermudez</a>
-        <br>
-        <p></p>
-        <p>
-        C++ based software to stream events from neuromorphic camera to NN, 
-        for generating application specific commands 
-        </p>
-      </td>
-    </tr>
+        });
+      });
 
-    <tr onmouseout="difsurvey_stop()" onmouseover="difsurvey_start()">
-      <td style="padding:20px;width:25%;vertical-align:middle">
-        <div class="one">
-        <div class="two" id='difsurvey_image'><video  width=100% height=100% muted autoplay loop>
-        <source src="images/movingRobotHead.mp4" type="video/mp4">
-        </video></div>
-          <!-- <img src='images/movingRobotHead.mp4' width="160"> -->
-        </div>
-        <script type="text/javascript">
-          function difsurvey_start() {
-            document.getElementById('difsurvey_image').style.opacity = "1";
+      // Add animation on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
           }
-    
-          function difsurvey_stop() {
-            document.getElementById('difsurvey_image').style.opacity = "0";
-          }
-          difsurvey_stop()
-        </script>
-      </td>
-      <td style="padding:20px;width:75%;vertical-align:middle">
-        <a href="https://github.com/omkarbhoite25/KTH-Neuro-Computing-Systems">
-          <span class="papertitle">Humaniod robot head motion control using ROS
-    </span>
-        </a>
-      <br>
-      Supervisor:
-      <a href="https://www.kth.se/profile/conr">Prof. Jorg Conradt</a>,
-      <a href="https://www.kth.se/profile/jprb?l=en">Juan Pablo Romero Bermudez</a>
-        <br>
-        <p></p>
-        <p>
-        ROS based humaniod robot head motion control,
-        for emulating human head-eye movement
-        </p>
-      </td>
-    </tr>      
- 
-          </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:0px">
-                <br>
-                <p style="text-align:center;font-size:small;">
-                  Obiviously I didn't design the website template, added few modifications though. You can use the following original <a href="https://github.com/jonbarron/jonbarron_website">source code</a>.
-                </p>
-              </td>
-            </tr>
-          </tbody></table>
-        </td>
-      </tr>
-    </table>
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.card, .section-title').forEach((el) => {
+        observer.observe(el);
+      });
+    </script>
   </body>
 </html>
