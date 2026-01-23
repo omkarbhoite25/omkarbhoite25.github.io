@@ -1,0 +1,883 @@
+/* ===========================================
+   Navigation Component
+   =========================================== */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  min-height: 64px;
+  max-height: 64px;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: none;
+  box-shadow: none;
+  z-index: 1000;
+  transition: background-color var(--theme-transition);
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--accent-primary);
+  transition: color 0.2s ease;
+}
+
+.navbar-brand:hover {
+  color: var(--accent-secondary);
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-link {
+  position: relative;
+  padding: var(--spacing-sm) 0;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-primary);
+  transition: width 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--accent-primary);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Mobile Nav Toggle */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: var(--spacing-sm);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+@media (max-width: 639px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .navbar-nav {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--nav-bg);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--nav-border);
+    padding: 16px;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .navbar-nav.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-link {
+    padding: 16px;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+  }
+}
+
+/* ===========================================
+   Project/Paper Card Component - Space Theme
+   =========================================== */
+
+/* Light mode - Semi-transparent frosted glass */
+.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-2xl);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease,
+              background 0.3s ease;
+  overflow: hidden;
+}
+
+/* Dark mode - Semi-transparent space theme with starfield */
+[data-theme="dark"] .card {
+  background:
+    /* Starfield layer */
+    radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+    radial-gradient(1px 1px at 30% 65%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+    radial-gradient(1.5px 1.5px at 50% 10%, rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+    radial-gradient(1px 1px at 70% 80%, rgba(255, 255, 255, 0.35) 1px, transparent 1px),
+    radial-gradient(1px 1px at 85% 30%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+    radial-gradient(1.5px 1.5px at 15% 85%, rgba(255, 255, 255, 0.45) 1px, transparent 1px),
+    radial-gradient(1px 1px at 45% 45%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+    radial-gradient(1px 1px at 90% 60%, rgba(255, 255, 255, 0.35) 1px, transparent 1px),
+    /* Base gradient - more transparent */
+    linear-gradient(135deg,
+      rgba(15, 23, 42, 0.55) 0%,
+      rgba(30, 41, 59, 0.5) 50%,
+      rgba(15, 23, 42, 0.55) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Light mode - no nebula effect */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-xl);
+  background: transparent;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+/* Dark mode - Animated nebula glow */
+[data-theme="dark"] .card::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+  opacity: 0.6;
+}
+
+/* Light mode - subtle shimmer on hover */
+.card::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: -100%;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(99, 102, 241, 0.4) 50%,
+    transparent 100%);
+  border-radius: 2px;
+  pointer-events: none;
+  opacity: 0;
+  transition: left 0.6s ease, opacity 0.3s ease;
+}
+
+/* Dark mode - shooting star accent */
+[data-theme="dark"] .card::after {
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    transparent 100%);
+}
+
+@media (min-width: 640px) {
+  .card {
+    grid-template-columns: 200px 1fr;
+    gap: var(--spacing-2xl);
+  }
+}
+
+/* Light mode hover */
+.card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  border-color: rgba(99, 102, 241, 0.35);
+}
+
+.card:hover::before {
+  opacity: 0;
+}
+
+.card:hover::after {
+  left: 110%;
+  opacity: 1;
+}
+
+/* Dark mode hover */
+[data-theme="dark"] .card:hover {
+  transform: translateY(-6px);
+  background:
+    radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+    radial-gradient(1px 1px at 30% 65%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+    radial-gradient(1.5px 1.5px at 50% 10%, rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+    radial-gradient(1px 1px at 70% 80%, rgba(255, 255, 255, 0.35) 1px, transparent 1px),
+    radial-gradient(1px 1px at 85% 30%, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+    radial-gradient(1.5px 1.5px at 15% 85%, rgba(255, 255, 255, 0.45) 1px, transparent 1px),
+    radial-gradient(1px 1px at 45% 45%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+    radial-gradient(1px 1px at 90% 60%, rgba(255, 255, 255, 0.35) 1px, transparent 1px),
+    linear-gradient(135deg,
+      rgba(15, 23, 42, 0.65) 0%,
+      rgba(30, 41, 59, 0.6) 50%,
+      rgba(15, 23, 42, 0.65) 100%);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.35),
+    0 0 30px rgba(99, 102, 241, 0.2);
+  border-color: rgba(129, 140, 248, 0.45);
+}
+
+[data-theme="dark"] .card:hover::before {
+  opacity: 1;
+}
+
+/* Card Thumbnail */
+/* Light mode card thumbnail */
+.card-thumbnail {
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 1;
+  overflow: hidden;
+  margin: 0 auto;
+  clip-path: polygon(
+    0 12px,
+    12px 0,
+    calc(100% - 12px) 0,
+    100% 12px,
+    100% calc(100% - 12px),
+    calc(100% - 12px) 100%,
+    12px 100%,
+    0 calc(100% - 12px)
+  );
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover .card-thumbnail {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark mode card thumbnail */
+[data-theme="dark"] .card-thumbnail {
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.15);
+}
+
+[data-theme="dark"] .card:hover .card-thumbnail {
+  box-shadow: 0 8px 25px rgba(168, 85, 247, 0.25);
+}
+
+@media (min-width: 640px) {
+  .card-thumbnail {
+    margin: 0;
+    max-width: 200px;
+  }
+}
+
+.card-thumbnail img,
+.card-thumbnail video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover .card-thumbnail img,
+.card:hover .card-thumbnail video {
+  transform: scale(1.05);
+}
+
+.card-thumbnail video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+}
+
+/* Card Content */
+.card-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Light mode card text */
+.card-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #4f46e5;
+  margin-bottom: var(--spacing-md);
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+  line-height: 1.4;
+  text-shadow: none;
+}
+
+.card-title:hover {
+  color: #6366f1;
+  text-shadow: none;
+}
+
+/* Dark mode card title */
+[data-theme="dark"] .card-title {
+  color: #a5b4fc;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 10px rgba(165, 180, 252, 0.3);
+}
+
+[data-theme="dark"] .card-title:hover {
+  color: #c7d2fe;
+  text-shadow: 0 0 20px rgba(199, 210, 254, 0.5);
+}
+
+/* Light mode card authors */
+.card-authors {
+  font-size: 1.125rem;
+  color: #334155;
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.6;
+}
+
+.card-authors strong {
+  color: #1e293b;
+}
+
+.card-authors a {
+  color: #4f46e5;
+  text-shadow: none;
+}
+
+.card-authors a:hover {
+  color: #6366f1;
+  text-shadow: none;
+}
+
+/* Dark mode card authors */
+[data-theme="dark"] .card-authors {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .card-authors strong {
+  color: #e2e8f0;
+}
+
+[data-theme="dark"] .card-authors a {
+  color: #60a5fa;
+  text-shadow: 0 0 8px rgba(96, 165, 250, 0.3);
+}
+
+[data-theme="dark"] .card-authors a:hover {
+  color: #93c5fd;
+  text-shadow: 0 0 12px rgba(147, 197, 253, 0.5);
+}
+
+/* Light mode card meta & description */
+.card-meta {
+  font-size: 1rem;
+  color: #64748b;
+  font-style: italic;
+  margin-bottom: var(--spacing-md);
+}
+
+.card-description {
+  font-size: 1.1875rem;
+  color: #475569;
+  margin-bottom: 0;
+  line-height: 1.8;
+}
+
+/* Dark mode card description */
+[data-theme="dark"] .card-description {
+  color: #cbd5e1;
+}
+
+/* Card Tags */
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.tag {
+  display: inline-flex;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--accent-primary);
+  background: rgba(37, 99, 235, 0.1);
+  border-radius: var(--radius-sm);
+  transition: background-color 0.2s ease;
+}
+
+/* Card Actions */
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: auto;
+  padding-top: var(--spacing-md);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  color: var(--bg-primary);
+  background: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
+}
+
+.btn-primary:hover {
+  background: var(--accent-secondary);
+  border-color: var(--accent-secondary);
+  color: white;
+}
+
+.btn-secondary {
+  color: var(--link-color);
+  background: transparent;
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  border-color: var(--link-color);
+  background: var(--bg-card);
+}
+
+/* ===========================================
+   Background Canvas Container
+   =========================================== */
+
+.canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.background-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#light-bg {
+  opacity: var(--light-canvas-opacity);
+}
+
+/* ===========================================
+   Loading State
+   =========================================== */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-secondary) 25%,
+    var(--bg-tertiary) 50%,
+    var(--bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ===========================================
+   Lazy Load Image Placeholder
+   =========================================== */
+
+.lazy-image {
+  background: var(--bg-secondary);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lazy-image.loaded {
+  opacity: 1;
+}
+
+/* ===========================================
+   Spaceship Launch Button
+   =========================================== */
+
+.launch-button-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 100;
+}
+
+.launch-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0f172a;
+  background: rgba(34, 211, 238, 0.9);
+  border: 1px solid rgba(34, 211, 238, 0.6);
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(6, 182, 212, 0.2);
+}
+
+.launch-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 50%);
+  border-radius: 7px;
+  pointer-events: none;
+}
+
+.launch-button:hover::before {
+  opacity: 1;
+}
+
+.launch-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.25);
+  background: rgba(34, 211, 238, 1);
+}
+
+.launch-button:active {
+  transform: translateY(0);
+}
+
+/* Rocket icon */
+.launch-button-icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.launch-button:hover .launch-button-icon {
+  transform: translateX(2px) translateY(-2px);
+}
+
+/* Launched state */
+.launch-button.launched {
+  background: rgba(239, 68, 68, 0.9);
+  border-color: rgba(239, 68, 68, 0.6);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
+}
+
+.launch-button.launched:hover {
+  background: rgba(239, 68, 68, 1);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+.launch-button.launched .launch-button-icon {
+  transform: rotate(180deg);
+}
+
+/* Dark mode styles */
+[data-theme="dark"] .launch-button {
+  color: #f0fdfa;
+  background: rgba(34, 211, 238, 0.2);
+  border-color: rgba(34, 211, 238, 0.4);
+  box-shadow: 0 2px 8px rgba(6, 182, 212, 0.15);
+}
+
+[data-theme="dark"] .launch-button:hover {
+  background: rgba(34, 211, 238, 0.3);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
+}
+
+[data-theme="dark"] .launch-button.launched {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+[data-theme="dark"] .launch-button.launched:hover {
+  background: rgba(239, 68, 68, 0.35);
+}
+
+/* Mobile adjustments */
+@media (max-width: 639px) {
+  .launch-button-container {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .launch-button {
+    padding: 8px 16px;
+    font-size: 0.6875rem;
+    gap: 8px;
+  }
+
+  .launch-button-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ===========================================
+   Portal Toggle Button
+   =========================================== */
+
+.portal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portal-container.minimized {
+  top: auto;
+  left: 24px;
+  bottom: 24px;
+  transform: translate(0, 0);
+}
+
+.portal-button {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, width 0.6s cubic-bezier(0.16, 1, 0.3, 1), height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portal-container.minimized .portal-button {
+  width: 50px;
+  height: 50px;
+}
+
+.portal-button:hover {
+  transform: scale(1.1);
+}
+
+.portal-button:active {
+  transform: scale(0.95);
+}
+
+.portal-button.activating {
+  animation: portalActivate 0.8s ease-out;
+}
+
+@keyframes portalActivate {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* Portal Rings */
+.portal-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: transparent;
+}
+
+.portal-ring-1 {
+  width: 100%;
+  height: 100%;
+  border-color: #06b6d4;
+  animation: portalSpin1 8s linear infinite;
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.5), inset 0 0 15px rgba(6, 182, 212, 0.3);
+}
+
+.portal-ring-2 {
+  width: 75%;
+  height: 75%;
+  border-color: #8b5cf6;
+  animation: portalSpin2 6s linear infinite reverse;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.5), inset 0 0 12px rgba(139, 92, 246, 0.3);
+}
+
+.portal-ring-3 {
+  width: 50%;
+  height: 50%;
+  border-color: #ec4899;
+  animation: portalSpin3 4s linear infinite;
+  box-shadow: 0 0 10px rgba(236, 72, 153, 0.5), inset 0 0 10px rgba(236, 72, 153, 0.3);
+}
+
+/* Portal Core */
+.portal-core {
+  position: absolute;
+  width: 25%;
+  height: 25%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, #06b6d4 40%, #8b5cf6 70%, #ec4899 100%);
+  animation: portalPulse 2s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.8), 0 0 40px rgba(139, 92, 246, 0.6), 0 0 60px rgba(236, 72, 153, 0.4);
+}
+
+/* Portal Text */
+.portal-text {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+  transition: opacity 0.3s ease, font-size 0.6s ease;
+}
+
+.portal-container.minimized .portal-text {
+  font-size: 0.625rem;
+}
+
+[data-theme="dark"] .portal-text {
+  color: #e2e8f0;
+  text-shadow: 0 0 15px rgba(6, 182, 212, 0.7);
+}
+
+/* Portal Animations */
+@keyframes portalSpin1 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes portalSpin2 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes portalSpin3 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes portalPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+/* Content Visibility Classes */
+.content-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.content-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Mobile responsive adjustments for portal */
+@media (max-width: 639px) {
+  .portal-button {
+    width: 80px;
+    height: 80px;
+  }
+
+  .portal-container.minimized .portal-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .portal-container.minimized {
+    left: 16px;
+    bottom: 16px;
+  }
+
+  .portal-text {
+    font-size: 0.75rem;
+  }
+
+  .portal-container.minimized .portal-text {
+    font-size: 0.5rem;
+  }
+}

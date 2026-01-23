@@ -1,0 +1,307 @@
+/* ===========================================
+   Layout System
+   =========================================== */
+
+/* ===========================================
+   Container
+   =========================================== */
+
+.container {
+  width: 100%;
+  max-width: clamp(320px, 90vw, var(--container-max));
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+@media (min-width: 1600px) {
+  .container {
+    max-width: clamp(1100px, 85vw, 1600px);
+  }
+}
+
+/* ===========================================
+   Main Content Area
+   =========================================== */
+
+.main-content {
+  position: relative;
+  z-index: 1;
+  padding-top: calc(var(--nav-height) + var(--spacing-xl));
+  padding-bottom: var(--spacing-3xl);
+  min-height: 100vh;
+}
+
+/* ===========================================
+   Hero Section
+   =========================================== */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-2xl);
+  align-items: center;
+  padding: var(--spacing-2xl) 0;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr auto;
+    gap: var(--spacing-3xl);
+  }
+}
+
+.hero-content {
+  order: 2;
+}
+
+@media (min-width: 768px) {
+  .hero-content {
+    order: 1;
+  }
+}
+
+.hero-content p {
+  font-size: 1.1875rem;
+  line-height: 1.85;
+}
+
+@media (min-width: 768px) {
+  .hero-content p {
+    font-size: 1.3125rem;
+  }
+}
+
+.hero-image {
+  order: 1;
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .hero-image {
+    order: 2;
+  }
+}
+
+.hero-image img {
+  width: auto;
+  height: 320px;
+  max-width: 280px;
+  border-radius: 0;
+  border: none;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.15));
+  transition: transform 0.3s ease,
+              filter 0.3s ease;
+}
+
+.hero-image img:hover {
+  transform: scale(1.02);
+  filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.2));
+  box-shadow: none;
+}
+
+@media (min-width: 768px) {
+  .hero-image img {
+    height: 380px;
+    max-width: 320px;
+  }
+}
+
+/* ===========================================
+   Name/Title Animation
+   =========================================== */
+
+.hero-name {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+}
+
+.hero-name span {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5.5vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  opacity: 0;
+  animation: dropIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-name span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.hero-name span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+/* ===========================================
+   Social Links
+   =========================================== */
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards 1s;
+}
+
+.social-links a {
+  padding: var(--spacing-xs) 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.social-links a:hover {
+  border-bottom-color: var(--accent-primary);
+}
+
+/* ===========================================
+   Section Styles
+   =========================================== */
+
+.section {
+  padding: var(--spacing-2xl) 0;
+}
+
+.section-title {
+  position: relative;
+  display: inline-block;
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+  text-shadow: none;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--accent-primary),
+    var(--accent-secondary));
+  border-radius: var(--radius-sm);
+}
+
+/* ===========================================
+   Grid Layouts
+   =========================================== */
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+}
+
+@media (min-width: 640px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===========================================
+   Project/Paper Row Layout
+   =========================================== */
+
+.item-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+  align-items: start;
+}
+
+@media (min-width: 640px) {
+  .item-row {
+    grid-template-columns: 160px 1fr;
+    gap: var(--spacing-xl);
+  }
+}
+
+/* ===========================================
+   Footer
+   =========================================== */
+
+.footer {
+  padding: var(--spacing-xl) 0;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  margin-top: var(--spacing-2xl);
+}
+
+.footer p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* ===========================================
+   Page Header (for sub-pages)
+   =========================================== */
+
+.page-header {
+  text-align: center;
+  padding: var(--spacing-2xl) 0;
+  margin-bottom: var(--spacing-xl);
+}
+
+.page-header h1 {
+  color: var(--link-color);
+  font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* ===========================================
+   Gallery Layout (for images.html)
+   =========================================== */
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 640px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  aspect-ratio: 1;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
