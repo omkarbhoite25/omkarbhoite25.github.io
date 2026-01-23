@@ -192,7 +192,7 @@
 
 .timeline-marker {
   position: absolute;
-  top: var(--spacing-lg);
+  bottom: var(--spacing-lg);
   right: var(--spacing-lg);
   display: flex;
   align-items: center;
@@ -579,7 +579,7 @@
   }
 
   .timeline-marker {
-    top: var(--spacing-md);
+    bottom: var(--spacing-md);
     right: var(--spacing-md);
   }
 

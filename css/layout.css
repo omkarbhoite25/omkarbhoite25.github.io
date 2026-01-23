@@ -61,14 +61,8 @@
 }
 
 .hero-content p {
-  font-size: 1.1875rem;
+  font-size: clamp(1rem, 2.8vw, 1.3125rem);
   line-height: 1.85;
-}
-
-@media (min-width: 768px) {
-  .hero-content p {
-    font-size: 1.3125rem;
-  }
 }
 
 .hero-image {
@@ -153,7 +147,7 @@
 
 .social-links a {
   padding: var(--spacing-xs) 0;
-  font-size: 1.125rem;
+  font-size: clamp(0.9375rem, 2.5vw, 1.125rem);
   font-weight: 500;
   border-bottom: 2px solid transparent;
   transition: color 0.2s ease, border-color 0.2s ease;
