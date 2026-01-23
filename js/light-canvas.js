@@ -20,6 +20,15 @@ const LightCanvas = (function() {
   let lastTime = 0;
   let time = 0;
 
+  // Universe enhancement state variables
+  let galaxies = [];
+  let dustLanes = [];
+  let deepSkyObjects = [];
+  let satellites = [];
+  let meteorShower = { active: false, radiantX: 0, radiantY: 0, intensity: 0, duration: 0, elapsed: 0 };
+  let mouseX = 0, mouseY = 0, targetMouseX = 0, targetMouseY = 0;
+  let milkyWayStars = [];
+
   // Solar system configurations
   const config = {
     solarSystem1: {
@@ -789,46 +798,69 @@ const LightCanvas = (function() {
     }
   }
 
-  // Spawn a shooting star
-  function spawnShootingStar() {
+  // Spawn a shooting star (optionally from meteor shower radiant)
+  function spawnShootingStar(fromShower = false) {
     // Find an inactive star
     const star = shootingStars.find(s => !s.active);
     if (!star) return;
 
     const ss = config.shootingStars;
-
-    // Spawn from edges (favor top and sides)
-    const edge = Math.random();
     let startX, startY, angle;
 
-    if (edge < 0.4) {
-      // Top edge
-      startX = Math.random() * W;
-      startY = -10;
-      angle = Math.PI * 0.25 + Math.random() * Math.PI * 0.5; // 45-135 degrees down
-    } else if (edge < 0.7) {
-      // Left edge
-      startX = -10;
-      startY = Math.random() * H * 0.6;
-      angle = -Math.PI * 0.25 + Math.random() * Math.PI * 0.5; // -45 to 45 degrees right
+    if (fromShower && meteorShower.active) {
+      // Spawn from meteor shower radiant point
+      startX = meteorShower.radiantX + (Math.random() - 0.5) * 50;
+      startY = meteorShower.radiantY + (Math.random() - 0.5) * 50;
+      // Radiate outward from radiant point
+      const targetX = startX + (Math.random() - 0.5) * W;
+      const targetY = startY + Math.random() * H * 0.8;
+      angle = Math.atan2(targetY - startY, targetX - startX);
     } else {
-      // Right edge
-      startX = W + 10;
-      startY = Math.random() * H * 0.6;
-      angle = Math.PI * 0.75 + Math.random() * Math.PI * 0.5; // 135-225 degrees left
+      // Spawn from edges (favor top and sides)
+      const edge = Math.random();
+
+      if (edge < 0.4) {
+        // Top edge
+        startX = Math.random() * W;
+        startY = -10;
+        angle = Math.PI * 0.25 + Math.random() * Math.PI * 0.5; // 45-135 degrees down
+      } else if (edge < 0.7) {
+        // Left edge
+        startX = -10;
+        startY = Math.random() * H * 0.6;
+        angle = -Math.PI * 0.25 + Math.random() * Math.PI * 0.5; // -45 to 45 degrees right
+      } else {
+        // Right edge
+        startX = W + 10;
+        startY = Math.random() * H * 0.6;
+        angle = Math.PI * 0.75 + Math.random() * Math.PI * 0.5; // 135-225 degrees left
+      }
     }
 
     const speed = ss.minSpeed + Math.random() * (ss.maxSpeed - ss.minSpeed);
 
-    // Darker colors for light background visibility
-    const colorRoll = Math.random();
+    // Color selection based on mode
     let color;
-    if (colorRoll < 0.4) {
-      color = 'rgba(100, 116, 139, 0.9)'; // slate gray
-    } else if (colorRoll < 0.7) {
-      color = 'rgba(71, 85, 105, 0.85)'; // darker slate
+    if (isDarkMode) {
+      // Bright colors for dark mode
+      const colorRoll = Math.random();
+      if (colorRoll < 0.5) {
+        color = 'rgba(255, 255, 255, 0.95)'; // white
+      } else if (colorRoll < 0.75) {
+        color = 'rgba(200, 220, 255, 0.9)'; // blue-white
+      } else {
+        color = 'rgba(255, 220, 180, 0.9)'; // warm white
+      }
     } else {
-      color = 'rgba(148, 163, 184, 0.9)'; // lighter slate
+      // Darker colors for light background visibility
+      const colorRoll = Math.random();
+      if (colorRoll < 0.4) {
+        color = 'rgba(100, 116, 139, 0.9)'; // slate gray
+      } else if (colorRoll < 0.7) {
+        color = 'rgba(71, 85, 105, 0.85)'; // darker slate
+      } else {
+        color = 'rgba(148, 163, 184, 0.9)'; // lighter slate
+      }
     }
 
     star.active = true;
@@ -841,6 +873,7 @@ const LightCanvas = (function() {
     star.maxLifetime = ss.minLifetime + Math.random() * (ss.maxLifetime - ss.minLifetime);
     star.trail = [];
     star.color = color;
+    star.isShowerMeteor = fromShower;
 
     // Pre-fill trail
     for (let i = 0; i < ss.tailSegments; i++) {
@@ -848,13 +881,49 @@ const LightCanvas = (function() {
     }
   }
 
+  // Trigger a meteor shower event
+  function triggerMeteorShower() {
+    if (meteorShower.active) return;
+
+    meteorShower.active = true;
+    meteorShower.radiantX = Math.random() * W * 0.6 + W * 0.2;
+    meteorShower.radiantY = Math.random() * H * 0.3;
+    meteorShower.intensity = 3 + Math.floor(Math.random() * 4); // 3-6 meteors
+    meteorShower.duration = 2 + Math.random() * 3; // 2-5 seconds
+    meteorShower.elapsed = 0;
+  }
+
   // Update and draw shooting stars
   function updateAndDrawShootingStars(dt) {
     const ss = config.shootingStars;
 
-    // Chance to spawn new star
+    // Regular spawn chance
     if (Math.random() < ss.spawnChance) {
-      spawnShootingStar();
+      spawnShootingStar(false);
+    }
+
+    // Meteor shower handling (dark mode only)
+    if (isDarkMode) {
+      // 0.5% chance per second to trigger shower
+      if (!meteorShower.active && Math.random() < dt * 0.005) {
+        triggerMeteorShower();
+      }
+
+      // Process active meteor shower
+      if (meteorShower.active) {
+        meteorShower.elapsed += dt;
+
+        // Spawn shower meteors
+        const spawnRate = meteorShower.intensity / meteorShower.duration;
+        if (Math.random() < spawnRate * dt) {
+          spawnShootingStar(true);
+        }
+
+        // End shower when duration expires
+        if (meteorShower.elapsed >= meteorShower.duration) {
+          meteorShower.active = false;
+        }
+      }
     }
 
     for (const star of shootingStars) {
@@ -883,34 +952,77 @@ const LightCanvas = (function() {
       const fadeOut = 1 - Math.pow(lifeProgress, 2);
       const baseFade = fadeIn * fadeOut;
 
-      // Draw trail
-      for (let i = 0; i < star.trail.length; i++) {
-        const t = star.trail[i];
-        const segmentFade = 1 - (i / star.trail.length);
-        const alpha = baseFade * segmentFade * 0.7;
-        const size = star.size * segmentFade;
+      if (isDarkMode) {
+        // Bright shooting stars for dark mode
+        // Draw trail with glow
+        for (let i = 0; i < star.trail.length; i++) {
+          const t = star.trail[i];
+          const segmentFade = 1 - (i / star.trail.length);
+          const alpha = baseFade * segmentFade;
+          const size = star.size * segmentFade;
 
-        if (alpha > 0.01 && size > 0.1) {
-          ctx.globalAlpha = alpha;
-          ctx.fillStyle = star.color;
-          ctx.beginPath();
-          ctx.arc(t.x, t.y, size, 0, Math.PI * 2);
-          ctx.fill();
+          if (alpha > 0.01 && size > 0.1) {
+            // Outer glow
+            ctx.globalAlpha = alpha * 0.3;
+            ctx.fillStyle = star.color;
+            ctx.beginPath();
+            ctx.arc(t.x, t.y, size * 2.5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Core
+            ctx.globalAlpha = alpha;
+            ctx.fillStyle = star.color;
+            ctx.beginPath();
+            ctx.arc(t.x, t.y, size, 0, Math.PI * 2);
+            ctx.fill();
+          }
         }
+
+        // Bright head with enhanced glow
+        ctx.globalAlpha = baseFade;
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size * 1.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Head glow
+        ctx.globalAlpha = baseFade * 0.5;
+        ctx.fillStyle = star.color;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size * 4, 0, Math.PI * 2);
+        ctx.fill();
+
+      } else {
+        // Original light mode rendering
+        // Draw trail
+        for (let i = 0; i < star.trail.length; i++) {
+          const t = star.trail[i];
+          const segmentFade = 1 - (i / star.trail.length);
+          const alpha = baseFade * segmentFade * 0.7;
+          const size = star.size * segmentFade;
+
+          if (alpha > 0.01 && size > 0.1) {
+            ctx.globalAlpha = alpha;
+            ctx.fillStyle = star.color;
+            ctx.beginPath();
+            ctx.arc(t.x, t.y, size, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+
+        // Draw bright head
+        ctx.globalAlpha = baseFade * 1.0;
+        ctx.fillStyle = '#475569'; // dark slate for visibility
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size * 1.2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Glow around head
+        ctx.globalAlpha = baseFade * 0.5;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size * 3, 0, Math.PI * 2);
+        ctx.fill();
       }
-
-      // Draw bright head
-      ctx.globalAlpha = baseFade * 1.0;
-      ctx.fillStyle = '#475569'; // dark slate for visibility
-      ctx.beginPath();
-      ctx.arc(star.x, star.y, star.size * 1.2, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Glow around head
-      ctx.globalAlpha = baseFade * 0.5;
-      ctx.beginPath();
-      ctx.arc(star.x, star.y, star.size * 3, 0, Math.PI * 2);
-      ctx.fill();
 
       ctx.globalAlpha = 1;
     }
@@ -969,6 +1081,472 @@ const LightCanvas = (function() {
       gradient.addColorStop(1, 'rgba(226, 232, 240, 0.3)');
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, W, H);
+    }
+  }
+
+  // Initialize Milky Way band stars
+  function initMilkyWay() {
+    milkyWayStars = [];
+    if (!isDarkMode) return;
+
+    const starCount = 200;
+    for (let i = 0; i < starCount; i++) {
+      // Gaussian distribution across the band
+      const gaussRandom = () => {
+        let u = 0, v = 0;
+        while (u === 0) u = Math.random();
+        while (v === 0) v = Math.random();
+        return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+      };
+
+      // Position along the diagonal band
+      const t = Math.random();
+      const bandX = t * W * 1.4 - W * 0.2;
+      const bandY = (1 - t) * H * 1.2 - H * 0.1;
+
+      // Offset from center of band (Gaussian spread)
+      const spreadOffset = gaussRandom() * Math.min(W, H) * 0.08;
+      const angle = Math.PI * 0.25; // 45 degrees diagonal
+      const offsetX = Math.sin(angle) * spreadOffset;
+      const offsetY = Math.cos(angle) * spreadOffset;
+
+      milkyWayStars.push({
+        x: bandX + offsetX,
+        y: bandY + offsetY,
+        r: Math.random() * 0.8 + 0.3,
+        alpha: Math.random() * 0.4 + 0.2,
+        twinkle: Math.random() * 3 + 1
+      });
+    }
+  }
+
+  // Draw Milky Way band (diagonal glowing band across sky)
+  function drawMilkyWay() {
+    if (!isDarkMode) return;
+
+    // Main Milky Way glow band
+    const gradient = ctx.createLinearGradient(0, H, W, 0);
+    gradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
+    gradient.addColorStop(0.2, 'rgba(88, 60, 120, 0.04)');
+    gradient.addColorStop(0.4, 'rgba(150, 130, 180, 0.06)');
+    gradient.addColorStop(0.5, 'rgba(180, 170, 200, 0.08)');
+    gradient.addColorStop(0.6, 'rgba(150, 130, 180, 0.06)');
+    gradient.addColorStop(0.8, 'rgba(88, 60, 120, 0.04)');
+    gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+    ctx.save();
+    ctx.translate(W / 2, H / 2);
+    ctx.rotate(-Math.PI * 0.25); // 45 degree diagonal
+
+    const bandWidth = Math.max(W, H) * 1.8;
+    const bandHeight = Math.min(W, H) * 0.35;
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(-bandWidth / 2, -bandHeight / 2, bandWidth, bandHeight);
+    ctx.restore();
+
+    // Draw concentrated stars within the band
+    for (const star of milkyWayStars) {
+      const twinkle = 0.7 + 0.3 * Math.sin(time * star.twinkle);
+      ctx.globalAlpha = star.alpha * twinkle;
+      ctx.fillStyle = '#e8e0ff';
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  // Initialize distant galaxies
+  function initGalaxies() {
+    galaxies = [];
+    if (!isDarkMode) return;
+
+    const galaxyCount = 2 + Math.floor(Math.random() * 2); // 2-3 galaxies
+    for (let i = 0; i < galaxyCount; i++) {
+      galaxies.push({
+        x: Math.random() * W * 0.8 + W * 0.1,
+        y: Math.random() * H * 0.6 + H * 0.1,
+        size: 20 + Math.random() * 30,
+        rotation: Math.random() * Math.PI * 2,
+        rotationSpeed: (Math.random() - 0.5) * 0.02,
+        type: Math.random() > 0.5 ? 'spiral' : 'elliptical',
+        opacity: 0.08 + Math.random() * 0.12,
+        tilt: Math.random() * 0.6 + 0.2, // How tilted the galaxy appears
+        arms: Math.floor(Math.random() * 2) + 2, // 2-3 spiral arms
+        armStars: []
+      });
+
+      // Pre-generate arm stars for spiral galaxies
+      if (galaxies[i].type === 'spiral') {
+        for (let a = 0; a < galaxies[i].arms; a++) {
+          for (let s = 0; s < 15; s++) {
+            const armAngle = (a / galaxies[i].arms) * Math.PI * 2;
+            const dist = s / 15;
+            const spiralAngle = armAngle + dist * Math.PI * 1.5;
+            const scatter = (Math.random() - 0.5) * 0.3;
+            galaxies[i].armStars.push({
+              angle: spiralAngle + scatter,
+              dist: dist * 0.8 + 0.2 + (Math.random() - 0.5) * 0.15,
+              size: Math.random() * 0.8 + 0.3,
+              brightness: Math.random() * 0.5 + 0.3
+            });
+          }
+        }
+      }
+    }
+  }
+
+  // Draw distant galaxies
+  function drawGalaxies() {
+    if (!isDarkMode) return;
+
+    for (const galaxy of galaxies) {
+      // Update rotation
+      galaxy.rotation += galaxy.rotationSpeed;
+
+      ctx.save();
+      ctx.translate(galaxy.x, galaxy.y);
+      ctx.rotate(galaxy.rotation);
+      ctx.scale(1, galaxy.tilt); // Tilt effect
+
+      if (galaxy.type === 'spiral') {
+        // Core glow
+        const coreGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, galaxy.size * 0.3);
+        coreGrad.addColorStop(0, `rgba(255, 250, 240, ${galaxy.opacity * 1.5})`);
+        coreGrad.addColorStop(0.5, `rgba(255, 230, 200, ${galaxy.opacity})`);
+        coreGrad.addColorStop(1, 'rgba(255, 230, 200, 0)');
+        ctx.fillStyle = coreGrad;
+        ctx.beginPath();
+        ctx.arc(0, 0, galaxy.size * 0.3, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Spiral arms with scattered stars
+        for (const star of galaxy.armStars) {
+          const x = Math.cos(star.angle) * galaxy.size * star.dist;
+          const y = Math.sin(star.angle) * galaxy.size * star.dist;
+          ctx.globalAlpha = galaxy.opacity * star.brightness;
+          ctx.fillStyle = '#f0e8ff';
+          ctx.beginPath();
+          ctx.arc(x, y, star.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Faint disk glow
+        const diskGrad = ctx.createRadialGradient(0, 0, galaxy.size * 0.2, 0, 0, galaxy.size);
+        diskGrad.addColorStop(0, `rgba(200, 180, 220, ${galaxy.opacity * 0.3})`);
+        diskGrad.addColorStop(1, 'rgba(200, 180, 220, 0)');
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = diskGrad;
+        ctx.beginPath();
+        ctx.arc(0, 0, galaxy.size, 0, Math.PI * 2);
+        ctx.fill();
+
+      } else {
+        // Elliptical galaxy - simple elongated glow
+        const ellipGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, galaxy.size);
+        ellipGrad.addColorStop(0, `rgba(255, 240, 220, ${galaxy.opacity * 1.2})`);
+        ellipGrad.addColorStop(0.3, `rgba(255, 220, 200, ${galaxy.opacity * 0.6})`);
+        ellipGrad.addColorStop(0.7, `rgba(220, 200, 180, ${galaxy.opacity * 0.2})`);
+        ellipGrad.addColorStop(1, 'rgba(200, 180, 160, 0)');
+        ctx.fillStyle = ellipGrad;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, galaxy.size, galaxy.size * 0.6, 0, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.restore();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  // Initialize cosmic dust lanes
+  function initDustLanes() {
+    dustLanes = [];
+    if (!isDarkMode) return;
+
+    const laneCount = 2 + Math.floor(Math.random() * 2); // 2-3 dust lanes
+    for (let i = 0; i < laneCount; i++) {
+      const turbulencePoints = [];
+      const pointCount = 8 + Math.floor(Math.random() * 5);
+      for (let p = 0; p < pointCount; p++) {
+        turbulencePoints.push({
+          offset: (Math.random() - 0.5) * 100,
+          phase: Math.random() * Math.PI * 2,
+          freq: Math.random() * 0.5 + 0.2
+        });
+      }
+
+      dustLanes.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        width: 80 + Math.random() * 120,
+        height: 40 + Math.random() * 80,
+        rotation: Math.random() * Math.PI * 2,
+        opacity: 0.03 + Math.random() * 0.04,
+        turbulence: turbulencePoints
+      });
+    }
+  }
+
+  // Draw cosmic dust lanes (dark nebula patches)
+  function drawDustLanes() {
+    if (!isDarkMode) return;
+
+    for (const lane of dustLanes) {
+      ctx.save();
+      ctx.translate(lane.x, lane.y);
+      ctx.rotate(lane.rotation);
+
+      // Create organic wispy shape using turbulence
+      ctx.beginPath();
+      const points = lane.turbulence.length;
+      for (let i = 0; i <= points; i++) {
+        const t = i / points;
+        const angle = t * Math.PI * 2;
+        const turbIdx = i % lane.turbulence.length;
+        const turb = lane.turbulence[turbIdx];
+        const wobble = Math.sin(time * turb.freq + turb.phase) * turb.offset * 0.3;
+
+        const radiusX = lane.width / 2 + wobble;
+        const radiusY = lane.height / 2 + wobble * 0.5;
+        const x = Math.cos(angle) * radiusX;
+        const y = Math.sin(angle) * radiusY;
+
+        if (i === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      }
+      ctx.closePath();
+
+      // Dark gradient fill (obscures background slightly)
+      const dustGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, Math.max(lane.width, lane.height));
+      dustGrad.addColorStop(0, `rgba(0, 0, 10, ${lane.opacity})`);
+      dustGrad.addColorStop(0.5, `rgba(5, 5, 20, ${lane.opacity * 0.7})`);
+      dustGrad.addColorStop(1, 'rgba(10, 10, 30, 0)');
+      ctx.fillStyle = dustGrad;
+      ctx.fill();
+
+      ctx.restore();
+    }
+  }
+
+  // Initialize deep sky objects (nebulae)
+  function initDeepSkyObjects() {
+    deepSkyObjects = [];
+    if (!isDarkMode) return;
+
+    const nebulaCount = 1 + Math.floor(Math.random() * 2); // 1-2 nebulae
+    for (let i = 0; i < nebulaCount; i++) {
+      const centralStars = [];
+      const starCount = 3 + Math.floor(Math.random() * 4); // Trapezium-like cluster
+      for (let s = 0; s < starCount; s++) {
+        centralStars.push({
+          x: (Math.random() - 0.5) * 15,
+          y: (Math.random() - 0.5) * 15,
+          size: 1 + Math.random() * 1.5,
+          brightness: 0.6 + Math.random() * 0.4
+        });
+      }
+
+      deepSkyObjects.push({
+        x: Math.random() * W * 0.8 + W * 0.1,
+        y: Math.random() * H * 0.7 + H * 0.1,
+        size: 40 + Math.random() * 50,
+        opacity: 0.06 + Math.random() * 0.08,
+        centralStars: centralStars,
+        // Colors: pink/red emission core, blue reflection outer
+        emissionHue: Math.random() > 0.5 ? 'pink' : 'red',
+        pulsePhase: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  // Draw deep sky objects (emission/reflection nebulae)
+  function drawDeepSkyObjects() {
+    if (!isDarkMode) return;
+
+    for (const dso of deepSkyObjects) {
+      const pulse = 1 + Math.sin(time * 0.3 + dso.pulsePhase) * 0.1;
+
+      // Blue reflection nebula (outer)
+      const outerGrad = ctx.createRadialGradient(
+        dso.x, dso.y, dso.size * 0.3,
+        dso.x, dso.y, dso.size * pulse
+      );
+      outerGrad.addColorStop(0, 'rgba(100, 140, 200, 0)');
+      outerGrad.addColorStop(0.5, `rgba(80, 120, 180, ${dso.opacity * 0.4})`);
+      outerGrad.addColorStop(0.8, `rgba(60, 100, 160, ${dso.opacity * 0.2})`);
+      outerGrad.addColorStop(1, 'rgba(40, 80, 140, 0)');
+      ctx.fillStyle = outerGrad;
+      ctx.beginPath();
+      ctx.arc(dso.x, dso.y, dso.size * pulse, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Pink/red emission core
+      const emissionColor = dso.emissionHue === 'pink'
+        ? { r: 220, g: 100, b: 140 }
+        : { r: 200, g: 80, b: 80 };
+      const coreGrad = ctx.createRadialGradient(
+        dso.x, dso.y, 0,
+        dso.x, dso.y, dso.size * 0.4 * pulse
+      );
+      coreGrad.addColorStop(0, `rgba(${emissionColor.r}, ${emissionColor.g}, ${emissionColor.b}, ${dso.opacity * 1.2})`);
+      coreGrad.addColorStop(0.4, `rgba(${emissionColor.r}, ${emissionColor.g}, ${emissionColor.b}, ${dso.opacity * 0.6})`);
+      coreGrad.addColorStop(1, `rgba(${emissionColor.r}, ${emissionColor.g}, ${emissionColor.b}, 0)`);
+      ctx.fillStyle = coreGrad;
+      ctx.beginPath();
+      ctx.arc(dso.x, dso.y, dso.size * 0.4 * pulse, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Central bright stars (Trapezium-like)
+      for (const star of dso.centralStars) {
+        ctx.globalAlpha = star.brightness;
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(dso.x + star.x, dso.y + star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Glow
+        ctx.globalAlpha = star.brightness * 0.4;
+        ctx.beginPath();
+        ctx.arc(dso.x + star.x, dso.y + star.y, star.size * 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  // Initialize satellites
+  function initSatellites() {
+    satellites = [];
+  }
+
+  // Spawn a new satellite
+  function spawnSatellite() {
+    if (!isDarkMode || satellites.length >= 2) return;
+
+    const edge = Math.random();
+    let startX, startY, endX, endY;
+
+    if (edge < 0.5) {
+      // Left to right
+      startX = -10;
+      startY = Math.random() * H * 0.7;
+      endX = W + 10;
+      endY = Math.random() * H * 0.7;
+    } else {
+      // Right to left
+      startX = W + 10;
+      startY = Math.random() * H * 0.7;
+      endX = -10;
+      endY = Math.random() * H * 0.7;
+    }
+
+    satellites.push({
+      x: startX,
+      y: startY,
+      startX: startX,
+      startY: startY,
+      endX: endX,
+      endY: endY,
+      progress: 0,
+      speed: 0.02 + Math.random() * 0.02, // Speed across screen
+      size: 1 + Math.random() * 0.5,
+      flarePhase: Math.random() * Math.PI * 2,
+      flareFreq: Math.random() * 2 + 0.5
+    });
+  }
+
+  // Update and draw satellites
+  function updateSatellites(dt) {
+    if (!isDarkMode) return;
+
+    // Chance to spawn new satellite (~every 30 seconds)
+    if (Math.random() < dt * 0.033) {
+      spawnSatellite();
+    }
+
+    for (let i = satellites.length - 1; i >= 0; i--) {
+      const sat = satellites[i];
+
+      // Update progress
+      sat.progress += sat.speed * dt;
+
+      // Remove if completed
+      if (sat.progress >= 1) {
+        satellites.splice(i, 1);
+        continue;
+      }
+
+      // Calculate position
+      sat.x = sat.startX + (sat.endX - sat.startX) * sat.progress;
+      sat.y = sat.startY + (sat.endY - sat.startY) * sat.progress;
+
+      // Tumbling flare effect
+      const flare = Math.sin(time * sat.flareFreq + sat.flarePhase);
+      const brightness = 0.5 + (flare > 0.8 ? 0.5 : 0); // Occasional bright flare
+
+      ctx.globalAlpha = brightness;
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(sat.x, sat.y, sat.size, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Subtle trail
+      ctx.globalAlpha = brightness * 0.3;
+      const trailX = sat.x - (sat.endX - sat.startX) * 0.01;
+      const trailY = sat.y - (sat.endY - sat.startY) * 0.01;
+      ctx.beginPath();
+      ctx.moveTo(trailX, trailY);
+      ctx.lineTo(sat.x, sat.y);
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = sat.size * 0.5;
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  // Draw aurora edge glow at bottom of screen
+  function drawAuroraEdge() {
+    if (!isDarkMode) return;
+
+    // Slow hue shift
+    const hueShift = time * 0.05;
+    const hue1 = (180 + Math.sin(hueShift) * 30) % 360; // Cyan-green range
+    const hue2 = (280 + Math.sin(hueShift + 1) * 40) % 360; // Purple-pink range
+
+    // Create aurora gradient at bottom edge
+    const auroraGrad = ctx.createLinearGradient(0, H, 0, H - H * 0.15);
+    auroraGrad.addColorStop(0, `hsla(${hue1}, 70%, 50%, 0.03)`);
+    auroraGrad.addColorStop(0.3, `hsla(${(hue1 + hue2) / 2}, 60%, 40%, 0.02)`);
+    auroraGrad.addColorStop(0.7, `hsla(${hue2}, 50%, 30%, 0.01)`);
+    auroraGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+    ctx.fillStyle = auroraGrad;
+    ctx.fillRect(0, H - H * 0.15, W, H * 0.15);
+
+    // Add subtle wave effect
+    const waveCount = 3;
+    for (let w = 0; w < waveCount; w++) {
+      ctx.beginPath();
+      const waveY = H - 20 - w * 15;
+      const wavePhase = time * 0.5 + w * 1.5;
+
+      ctx.moveTo(0, waveY);
+      for (let x = 0; x <= W; x += 20) {
+        const y = waveY + Math.sin(x * 0.01 + wavePhase) * 5;
+        ctx.lineTo(x, y);
+      }
+      ctx.lineTo(W, H);
+      ctx.lineTo(0, H);
+      ctx.closePath();
+
+      const waveHue = hue1 + w * 20;
+      ctx.fillStyle = `hsla(${waveHue}, 60%, 50%, 0.008)`;
+      ctx.fill();
     }
   }
 
@@ -1374,60 +1952,203 @@ const LightCanvas = (function() {
   // Draw subtle stars (very faint)
   let stars = [];
 
-  // Star color palette for dark mode variety
-  const starColors = [
-    '#ffffff',      // Pure white
-    '#fff8f0',      // Warm white
-    '#f0f8ff',      // Cool white/blue
-    '#e8e0ff',      // Light purple tint
-    '#ffe4e1',      // Warm pink tint
-    '#e0ffff',      // Cyan tint
-  ];
+  // Star color palette based on spectral type (temperature)
+  // O/B stars (hot, blue-white), A stars (white), F/G stars (yellow-white), K/M stars (orange-red)
+  const starColorsByMagnitude = {
+    bright: [
+      '#9bb0ff',      // O-type blue
+      '#aabfff',      // B-type blue-white
+      '#cad7ff',      // A-type white-blue
+      '#ffffff',      // White
+    ],
+    medium: [
+      '#f8f7ff',      // A-type white
+      '#fff4e8',      // F-type yellow-white
+      '#ffeedd',      // G-type yellow (sun-like)
+      '#ffd9b3',      // K-type orange
+    ],
+    dim: [
+      '#ffcc99',      // K-type orange
+      '#ffbb88',      // Late K-type
+      '#ff9966',      // M-type red dwarf
+      '#ff8855',      // Late M-type
+    ]
+  };
 
   function initStars() {
     stars = [];
-    // 4x more stars in dark mode
+    // More stars in dark mode with power-law distribution
     const count = isDarkMode
-      ? Math.floor((W * H) / 5000)  // Many more stars in dark mode
+      ? Math.floor((W * H) / 3500)  // Many more stars in dark mode
       : Math.floor((W * H) / 20000); // Normal count in light mode
 
     for (let i = 0; i < count; i++) {
-      // Pick a random color for variety in dark mode
-      const colorIndex = Math.floor(Math.random() * starColors.length);
+      // Power-law distribution: few bright stars, many dim ones
+      // magnitude 0 = very bright, 6 = very dim (realistic astronomical scale)
+      const uniformRandom = Math.random();
+      const magnitude = Math.pow(uniformRandom, 0.4) * 6; // Power-law skew towards dim stars
+
+      // Determine star properties based on magnitude
+      let radius, baseAlpha, color, depthLayer;
+
+      if (magnitude < 1.5) {
+        // Very bright stars (rare)
+        radius = 2.5 + (1.5 - magnitude) * 1.5;
+        baseAlpha = 0.9 + (1.5 - magnitude) * 0.1;
+        const colors = starColorsByMagnitude.bright;
+        color = colors[Math.floor(Math.random() * colors.length)];
+        depthLayer = 3; // Closest - most parallax
+      } else if (magnitude < 3.5) {
+        // Medium bright stars
+        radius = 1.2 + (3.5 - magnitude) * 0.6;
+        baseAlpha = 0.5 + (3.5 - magnitude) * 0.2;
+        const colors = starColorsByMagnitude.medium;
+        color = colors[Math.floor(Math.random() * colors.length)];
+        depthLayer = 2; // Medium depth
+      } else {
+        // Dim stars (most common)
+        radius = 0.4 + (6 - magnitude) * 0.3;
+        baseAlpha = 0.15 + (6 - magnitude) * 0.1;
+        const colors = starColorsByMagnitude.dim;
+        color = colors[Math.floor(Math.random() * colors.length)];
+        depthLayer = 1; // Farthest - least parallax
+      }
+
       stars.push({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        r: Math.random() * 1.5 + 0.5,
-        alpha: Math.random() * 0.12 + 0.08,
-        twinkle: Math.random() * 2,
-        color: starColors[colorIndex]
+        baseX: Math.random() * W,  // Base position (for parallax)
+        baseY: Math.random() * H,
+        x: 0,  // Rendered position (updated with parallax)
+        y: 0,
+        r: radius,
+        alpha: baseAlpha,
+        magnitude: magnitude,
+        // Multi-frequency twinkle parameters
+        twinkle1: Math.random() * 2 + 0.5,
+        twinkle2: Math.random() * 5 + 2,
+        twinkle3: Math.random() * 0.5 + 0.1,
+        twinklePhase: Math.random() * Math.PI * 2,
+        color: color,
+        depthLayer: depthLayer,
+        // Chromatic aberration for bright stars
+        chromaticShift: magnitude < 2 ? Math.random() * 0.3 : 0
       });
+    }
+  }
+
+  // Update star positions with parallax effect
+  function updateStarPositions() {
+    // Smooth mouse interpolation
+    mouseX += (targetMouseX - mouseX) * 0.05;
+    mouseY += (targetMouseY - mouseY) * 0.05;
+
+    const centerX = W / 2;
+    const centerY = H / 2;
+    const offsetX = (mouseX - centerX) / centerX;
+    const offsetY = (mouseY - centerY) / centerY;
+
+    for (const star of stars) {
+      // Parallax based on depth layer (farther = less movement)
+      const parallaxStrength = star.depthLayer * 5; // Max 15px for closest stars
+      star.x = star.baseX + offsetX * parallaxStrength;
+      star.y = star.baseY + offsetY * parallaxStrength;
     }
   }
 
   function drawStars() {
     if (isDarkMode) {
-      // Bright glowing stars in dark mode with color variety
       for (const star of stars) {
-        const alpha = (star.alpha * 3) * (0.7 + 0.3 * Math.sin(time * star.twinkle));
-        ctx.globalAlpha = Math.min(1, alpha);
-        ctx.fillStyle = star.color || '#ffffff';
+        // Multi-frequency twinkle (atmospheric scintillation simulation)
+        const twinkle1 = Math.sin(time * star.twinkle1 + star.twinklePhase);
+        const twinkle2 = Math.sin(time * star.twinkle2 + star.twinklePhase * 1.5) * 0.5;
+        const twinkle3 = Math.sin(time * star.twinkle3 + star.twinklePhase * 2) * 0.3;
+        const combinedTwinkle = 0.65 + (twinkle1 + twinkle2 + twinkle3) * 0.2;
+
+        // Brighter stars twinkle more dramatically
+        const twinkleIntensity = star.magnitude < 2 ? 1.5 : (star.magnitude < 4 ? 1.2 : 1);
+        const alpha = Math.min(1, star.alpha * combinedTwinkle * twinkleIntensity);
+
+        // Chromatic aberration for bright stars (color shifts)
+        let displayColor = star.color;
+        if (star.chromaticShift > 0 && star.magnitude < 2) {
+          const colorShift = Math.sin(time * 0.8 + star.twinklePhase) * star.chromaticShift;
+          if (colorShift > 0.1) {
+            displayColor = '#aaccff'; // Shift to blue
+          } else if (colorShift < -0.1) {
+            displayColor = '#ffddaa'; // Shift to warm
+          }
+        }
+
+        // Cross-flare effect for the brightest stars (magnitude < 1)
+        if (star.magnitude < 1 && alpha > 0.7) {
+          ctx.globalAlpha = alpha * 0.3;
+          ctx.strokeStyle = displayColor;
+          ctx.lineWidth = 0.5;
+          const flareLength = star.r * 8 * (0.8 + twinkle1 * 0.2);
+
+          // Horizontal flare
+          ctx.beginPath();
+          ctx.moveTo(star.x - flareLength, star.y);
+          ctx.lineTo(star.x + flareLength, star.y);
+          ctx.stroke();
+
+          // Vertical flare
+          ctx.beginPath();
+          ctx.moveTo(star.x, star.y - flareLength);
+          ctx.lineTo(star.x, star.y + flareLength);
+          ctx.stroke();
+
+          // Diagonal flares (fainter)
+          ctx.globalAlpha = alpha * 0.15;
+          const diagLength = flareLength * 0.7;
+          ctx.beginPath();
+          ctx.moveTo(star.x - diagLength, star.y - diagLength);
+          ctx.lineTo(star.x + diagLength, star.y + diagLength);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(star.x + diagLength, star.y - diagLength);
+          ctx.lineTo(star.x - diagLength, star.y + diagLength);
+          ctx.stroke();
+        }
+
+        // Outer glow (for brighter stars)
+        if (star.magnitude < 4) {
+          ctx.globalAlpha = alpha * 0.2;
+          ctx.fillStyle = displayColor;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.r * 3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Star core glow
+        ctx.globalAlpha = alpha * 0.5;
+        ctx.fillStyle = displayColor;
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.r * 0.8, 0, Math.PI * 2);
+        ctx.arc(star.x, star.y, star.r * 1.8, 0, Math.PI * 2);
         ctx.fill();
-        // Glow effect with matching color
-        ctx.globalAlpha = alpha * 0.3;
+
+        // Star center (brightest point)
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = displayColor;
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.r * 2, 0, Math.PI * 2);
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
         ctx.fill();
+
+        // White-hot center for bright stars
+        if (star.magnitude < 3) {
+          ctx.globalAlpha = alpha * 0.8;
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.r * 0.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
     } else {
       ctx.fillStyle = '#94a3b8';
       for (const star of stars) {
-        const alpha = star.alpha * (0.7 + 0.3 * Math.sin(time * star.twinkle));
+        const alpha = star.alpha * (0.7 + 0.3 * Math.sin(time * star.twinkle1));
         ctx.globalAlpha = alpha;
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        ctx.arc(star.baseX, star.baseY, star.r, 0, Math.PI * 2);
         ctx.fill();
       }
     }
@@ -1442,10 +2163,32 @@ const LightCanvas = (function() {
     lastTime = ts;
     time += dt;
 
+    // Draw background
     drawBackground();
+
+    // === Dark mode cosmic enhancements (drawn in specific order for depth) ===
+    if (isDarkMode) {
+      drawAuroraEdge();       // Horizon glow (behind everything)
+      drawMilkyWay();         // Galaxy band
+      drawDustLanes();        // Dark nebula patches
+      drawGalaxies();         // Distant galaxies
+      drawDeepSkyObjects();   // Nebulae
+    }
+
+    // Update star parallax positions
+    if (isDarkMode) {
+      updateStarPositions();
+    }
+
+    // Draw stars
     drawStars();
 
-    // Draw shooting stars
+    // Draw satellites (dark mode only)
+    if (isDarkMode) {
+      updateSatellites(dt);
+    }
+
+    // Draw shooting stars / meteor showers
     updateAndDrawShootingStars(dt);
 
     // Draw both solar systems
@@ -1477,6 +2220,20 @@ const LightCanvas = (function() {
         initStars();
         initShootingStars();
         initAsteroids();
+
+        // Reinitialize cosmic elements for new dimensions
+        initMilkyWay();
+        initGalaxies();
+        initDustLanes();
+        initDeepSkyObjects();
+        // Don't reset satellites - let them naturally expire
+
+        // Reset mouse position to center
+        mouseX = W / 2;
+        mouseY = H / 2;
+        targetMouseX = W / 2;
+        targetMouseY = H / 2;
+
         // Reinit spaceship trail for new dimensions (preserve state)
         const savedState = {
           progress: spaceship.progress,
@@ -1501,6 +2258,13 @@ const LightCanvas = (function() {
       }
       ctx = canvas.getContext('2d', { alpha: false });
       window.addEventListener('resize', handleResize);
+
+      // Mouse tracking for parallax effect
+      window.addEventListener('mousemove', (e) => {
+        targetMouseX = e.clientX;
+        targetMouseY = e.clientY;
+      });
+
       return true;
     },
 
@@ -1524,6 +2288,20 @@ const LightCanvas = (function() {
       initStars();
       initShootingStars();
       initSpaceship();
+
+      // Initialize cosmic enhancements (for dark mode)
+      initMilkyWay();
+      initGalaxies();
+      initDustLanes();
+      initDeepSkyObjects();
+      initSatellites();
+
+      // Initialize mouse position to center
+      mouseX = W / 2;
+      mouseY = H / 2;
+      targetMouseX = W / 2;
+      targetMouseY = H / 2;
+
       animationId = requestAnimationFrame(loop);
     },
 
@@ -1541,15 +2319,26 @@ const LightCanvas = (function() {
 
     setDarkMode(dark) {
       isDarkMode = dark;
-      // Reinitialize stars for different density in dark/light mode
+      // Reinitialize stars and cosmic elements for different density in dark/light mode
       if (isRunning) {
         initStars();
+        initMilkyWay();
+        initGalaxies();
+        initDustLanes();
+        initDeepSkyObjects();
+        initSatellites();
+        // Reset meteor shower state
+        meteorShower.active = false;
       }
     },
 
     reinitStars() {
       if (isRunning) {
         initStars();
+        initMilkyWay();
+        initGalaxies();
+        initDustLanes();
+        initDeepSkyObjects();
       }
     },
 
@@ -1624,6 +2413,18 @@ const LightCanvas = (function() {
       shootingStars = [];
       stars = [];
       spaceship = { progress: 0, direction: 1, x: 0, y: 0, angle: 0, trail: [], engineParticles: [], launched: false, launchAnimation: 0, shieldPulse: 0 };
+
+      // Clean up cosmic enhancement state
+      galaxies = [];
+      dustLanes = [];
+      deepSkyObjects = [];
+      satellites = [];
+      milkyWayStars = [];
+      meteorShower = { active: false, radiantX: 0, radiantY: 0, intensity: 0, duration: 0, elapsed: 0 };
+      mouseX = 0;
+      mouseY = 0;
+      targetMouseX = 0;
+      targetMouseY = 0;
     }
   };
 })();
