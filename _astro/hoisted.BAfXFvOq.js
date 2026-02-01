@@ -1,1 +1,0 @@
-import"./ViewTransitions.astro_astro_type_script_index_0_lang.Dx6LbD8n.js";function t(){document.querySelectorAll(".page-link").forEach(e=>{e.addEventListener("click",()=>{e.classList.add("clicking"),setTimeout(()=>{e.classList.remove("clicking")},400)})})}document.addEventListener("DOMContentLoaded",t);document.addEventListener("astro:page-load",t);
