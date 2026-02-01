@@ -1,6 +1,44 @@
-<!DOCTYPE html><html lang="en" class="scroll-smooth" data-astro-cid-mppcwxlb> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AETHERIA | Institute for Advanced Astrophysics</title><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="/_astro/astrophysics.Cu-TMP2B.css">
+<!DOCTYPE html><html lang="en" class="scroll-smooth" data-astro-cid-mppcwxlb> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AETHERIA | Institute for Advanced Astrophysics</title><script src="https://cdn.tailwindcss.com"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"><script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['Cinzel', 'serif'],
+                        'mono': ['Space Mono', 'monospace'],
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'cosmic': {
+                            900: '#0a0a0f',
+                            800: '#12121a',
+                            700: '#1a1a2e',
+                            600: '#252545',
+                            accent: '#00d4ff',
+                            gold: '#ffd700',
+                            purple: '#b026ff',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'twinkle': 'twinkle 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        twinkle: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.3' },
+                        }
+                    }
+                }
+            }
+        }
+    </script><link rel="stylesheet" href="/_astro/astrophysics.Cu-TMP2B.css">
 <style>body{background-color:#0a0a0f;color:#e2e8f0;overflow-x:hidden}.glass-panel[data-astro-cid-mppcwxlb]{background:#1a1a2e66;backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1)}.nebula-gradient[data-astro-cid-mppcwxlb]{background:radial-gradient(ellipse at center,rgba(176,38,255,.15) 0%,transparent 70%),radial-gradient(ellipse at top right,rgba(0,212,255,.1) 0%,transparent 50%),radial-gradient(ellipse at bottom left,rgba(255,215,0,.05) 0%,transparent 50%)}.text-glow[data-astro-cid-mppcwxlb]{text-shadow:0 0 20px rgba(0,212,255,.5)}.grid-bg[data-astro-cid-mppcwxlb]{background-image:linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.03) 1px,transparent 1px);background-size:50px 50px}.orbit-ring[data-astro-cid-mppcwxlb]{border:1px solid rgba(255,255,255,.1);border-radius:50%;position:absolute;animation:rotate 20s linear infinite}@keyframes rotate{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.particle[data-astro-cid-mppcwxlb]{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;pointer-events:none}.data-stream[data-astro-cid-mppcwxlb]{background:linear-gradient(180deg,transparent,rgba(0,212,255,.3),transparent);animation:stream 3s linear infinite}@keyframes stream{0%{transform:translateY(-100%)}to{transform:translateY(100%)}}.hologram[data-astro-cid-mppcwxlb]{position:relative;overflow:hidden}.hologram[data-astro-cid-mppcwxlb]:before{content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,212,255,.03) 2px,rgba(0,212,255,.03) 4px);animation:scan 8s linear infinite;pointer-events:none}@keyframes scan{0%{transform:translateY(0)}to{transform:translateY(50%)}}.constellation-line[data-astro-cid-mppcwxlb]{stroke:#00d4ff4d;stroke-width:1;fill:none;stroke-dasharray:5,5;animation:dash 20s linear infinite}@keyframes dash{to{stroke-dashoffset:100}}.black-hole[data-astro-cid-mppcwxlb]{background:radial-gradient(circle at center,#000 30%,#1a0b2e 60%,transparent 70%);box-shadow:0 0 60px 20px #b026ff4d}.accretion-disk[data-astro-cid-mppcwxlb]{background:conic-gradient(from 0deg,transparent,#ffd700,#ff6b6b,transparent);opacity:.6;animation:spin 10s linear infinite}@keyframes spin{0%{transform:rotate(0)}to{transform:rotate(360deg)}}.modal-overlay[data-astro-cid-mppcwxlb]{opacity:0;pointer-events:none;transition:opacity .3s ease}.modal-overlay[data-astro-cid-mppcwxlb].active{opacity:1;pointer-events:all}.modal-content[data-astro-cid-mppcwxlb]{transform:scale(.8) translateY(50px);opacity:0;transition:all .4s cubic-bezier(.4,0,.2,1)}.modal-overlay[data-astro-cid-mppcwxlb].active .modal-content[data-astro-cid-mppcwxlb]{transform:scale(1) translateY(0);opacity:1}.data-grid[data-astro-cid-mppcwxlb]{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}.metric-card[data-astro-cid-mppcwxlb]{background:#0006;border:1px solid rgba(255,255,255,.1);padding:1rem;border-radius:.5rem;border-left:3px solid #00d4ff}
-</style><script type="module" src="/_astro/hoisted.Dhz2J-qx.js"></script></head> <body class="font-sans antialiased" data-astro-cid-mppcwxlb> <!-- Navigation --> <nav class="fixed w-full z-50 glass-panel border-b border-white/10 transition-all duration-300" id="navbar" data-astro-cid-mppcwxlb> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-astro-cid-mppcwxlb> <div class="flex justify-between items-center h-20" data-astro-cid-mppcwxlb> <div class="flex items-center space-x-3 group cursor-pointer" data-astro-cid-mppcwxlb> <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cosmic-accent to-cosmic-purple flex items-center justify-center animate-pulse-slow" data-astro-cid-mppcwxlb> <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" data-astro-cid-mppcwxlb></path> </svg> </div> <span class="font-serif text-2xl font-bold tracking-widest text-white group-hover:text-cosmic-accent transition-colors" data-astro-cid-mppcwxlb>AETHERIA</span> </div> <div class="hidden md:flex space-x-8" data-astro-cid-mppcwxlb> <a href="#observatory" class="text-sm font-mono text-gray-400 hover:text-cosmic-accent transition-colors tracking-widest uppercase" data-astro-cid-mppcwxlb>Observatory</a> <a href="#cosmology" class="text-sm font-mono text-gray-400 hover:text-cosmic-accent transition-colors tracking-widest uppercase" data-astro-cid-mppcwxlb>Cosmology</a> <a href="#phenomena" class="text-sm font-mono text-gray-400 hover:text-cosmic-accent transition-colors tracking-widest uppercase" data-astro-cid-mppcwxlb>Phenomena</a> <a href="#research" class="text-sm font-mono text-gray-400 hover:text-cosmic-accent transition-colors tracking-widest uppercase" data-astro-cid-mppcwxlb>Research</a> </div> <button class="px-6 py-2 border border-cosmic-accent text-cosmic-accent font-mono text-sm hover:bg-cosmic-accent hover:text-black transition-all duration-300 rounded-sm" data-astro-cid-mppcwxlb>
+</style></head> <body class="font-sans antialiased" data-astro-cid-mppcwxlb> <!-- Navigation --> <nav class="fixed w-full z-50 glass-panel border-b border-white/10 transition-all duration-300" id="navbar" data-astro-cid-mppcwxlb> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-astro-cid-mppcwxlb> <div class="flex justify-between items-center h-20" data-astro-cid-mppcwxlb> <div class="flex items-center space-x-3 group cursor-pointer" data-astro-cid-mppcwxlb> <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cosmic-accent to-cosmic-purple flex items-center justify-center animate-pulse-slow" data-astro-cid-mppcwxlb> <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" data-astro-cid-mppcwxlb></path> </svg> </div> <span class="font-serif text-2xl font-bold tracking-widest text-white group-hover:text-cosmic-accent transition-colors" data-astro-cid-mppcwxlb>AETHERIA</span> </div> <div class="hidden md:flex space-x-8" data-astro-cid-mppcwxlb> <a href="#observatory" class="text-sm font-mono text-gray-400 hover:text-cosmic-accent transition-colors tracking-widest uppercase" data-astro-cid-mppcwxlb>Observatory</a> <a href="#cosmology" class="text-sm font-mono text-gray-400 hover:text-cosmic-accent transition-colors tracking-widest uppercase" data-astro-cid-mppcwxlb>Cosmology</a> <a href="#phenomena" class="text-sm font-mono text-gray-400 hover:text-cosmic-accent transition-colors tracking-widest uppercase" data-astro-cid-mppcwxlb>Phenomena</a> <a href="#research" class="text-sm font-mono text-gray-400 hover:text-cosmic-accent transition-colors tracking-widest uppercase" data-astro-cid-mppcwxlb>Research</a> </div> <button class="px-6 py-2 border border-cosmic-accent text-cosmic-accent font-mono text-sm hover:bg-cosmic-accent hover:text-black transition-all duration-300 rounded-sm" data-astro-cid-mppcwxlb>
 ACCESS ARCHIVES
 </button> </div> </div> </nav> <!-- Hero Section with Three.js Background --> <section class="relative h-screen w-full overflow-hidden flex items-center justify-center" data-astro-cid-mppcwxlb> <div id="canvas-container" class="absolute inset-0 z-0" data-astro-cid-mppcwxlb></div> <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-cosmic-900 z-10" data-astro-cid-mppcwxlb></div> <div class="relative z-20 text-center px-4 max-w-6xl mx-auto" data-astro-cid-mppcwxlb> <div class="mb-6 inline-block" data-astro-cid-mppcwxlb> <span class="font-mono text-cosmic-accent text-sm tracking-[0.5em] uppercase animate-pulse" data-astro-cid-mppcwxlb>Est. 2024 • Institute for Advanced Astrophysics</span> </div> <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-8 leading-none tracking-tight" data-astro-cid-mppcwxlb> <span class="block transform hover:scale-105 transition-transform duration-700 cursor-default" data-astro-cid-mppcwxlb>AETHERIA</span> <span class="block text-2xl md:text-4xl font-light text-gray-400 mt-4 tracking-[0.3em]" data-astro-cid-mppcwxlb>BEYOND THE VEIL</span> </h1> <p class="font-mono text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed" data-astro-cid-mppcwxlb>
 Exploring the fundamental nature of spacetime, dark matter, and the cosmic web that binds our universe together.
@@ -24,4 +62,365 @@ Advancing humanity's understanding of the universe through computational astroph
 Description goes here...
 </p> </div> <!-- Technical Details --> <div class="glass-panel p-6 rounded-xl border border-white/10" data-astro-cid-mppcwxlb> <h4 class="font-mono text-cosmic-accent text-sm tracking-widest mb-4 uppercase" data-astro-cid-mppcwxlb>Technical Specifications</h4> <div id="modal-technical" class="grid md:grid-cols-2 gap-4 font-mono text-sm text-gray-400" data-astro-cid-mppcwxlb> <!-- Populated by JS --> </div> </div> <!-- Observable Instances --> <div data-astro-cid-mppcwxlb> <h4 class="font-mono text-cosmic-accent text-sm tracking-widest mb-4 uppercase" data-astro-cid-mppcwxlb>Notable Examples</h4> <ul id="modal-examples" class="space-y-3" data-astro-cid-mppcwxlb> <!-- Populated by JS --> </ul> </div> <!-- Research Status --> <div class="flex items-center justify-between p-4 bg-cosmic-accent/10 rounded-lg border border-cosmic-accent/20" data-astro-cid-mppcwxlb> <div class="flex items-center space-x-3" data-astro-cid-mppcwxlb> <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse" data-astro-cid-mppcwxlb></div> <span class="font-mono text-sm text-white" data-astro-cid-mppcwxlb>Active Research Program</span> </div> <button class="px-4 py-2 bg-cosmic-accent text-black font-bold font-mono text-xs rounded hover:bg-white transition-colors" data-astro-cid-mppcwxlb>
 ACCESS RAW DATA
-</button> </div> </div> </div> </div>  </body> </html>
+</button> </div> </div> </div> </div> <script>
+        // Three.js Starfield
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Create stars
+        const starsGeometry = new THREE.BufferGeometry();
+        const starsCount = 8000;
+        const posArray = new Float32Array(starsCount * 3);
+        const colorArray = new Float32Array(starsCount * 3);
+
+        for(let i = 0; i < starsCount * 3; i += 3) {
+            // Position
+            posArray[i] = (Math.random() - 0.5) * 100;
+            posArray[i+1] = (Math.random() - 0.5) * 100;
+            posArray[i+2] = (Math.random() - 0.5) * 100;
+
+            // Color (blue to white to purple)
+            const colorChoice = Math.random();
+            if(colorChoice > 0.8) {
+                colorArray[i] = 0.7; colorArray[i+1] = 0.8; colorArray[i+2] = 1; // Blue-ish
+            } else if(colorChoice > 0.6) {
+                colorArray[i] = 0.8; colorArray[i+1] = 0.7; colorArray[i+2] = 1; // Purple-ish
+            } else {
+                colorArray[i] = 1; colorArray[i+1] = 1; colorArray[i+2] = 1; // White
+            }
+        }
+
+        starsGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        starsGeometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
+
+        const starsMaterial = new THREE.PointsMaterial({
+            size: 0.1,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8,
+            sizeAttenuation: true
+        });
+
+        const starsMesh = new THREE.Points(starsGeometry, starsMaterial);
+        scene.add(starsMesh);
+
+        camera.position.z = 30;
+
+        // Mouse interaction
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - windowHalfX) / 100;
+            mouseY = (event.clientY - windowHalfY) / 100;
+        });
+
+        // Animation loop
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const elapsedTime = clock.getElapsedTime();
+
+            targetX = mouseX * 0.5;
+            targetY = mouseY * 0.5;
+
+            starsMesh.rotation.y += 0.0005;
+            starsMesh.rotation.x += 0.0002;
+
+            // Smooth camera movement
+            camera.position.x += (mouseX - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            // Twinkle effect
+            starsMaterial.opacity = 0.6 + Math.sin(elapsedTime) * 0.2;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // GSAP Scroll Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Fade in elements on scroll
+        gsap.utils.toArray('.glass-panel').forEach((element, i) => {
+            gsap.from(element, {
+                scrollTrigger: {
+                    trigger: element,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                delay: i * 0.1,
+                ease: "power3.out"
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-cosmic-900/90');
+            } else {
+                navbar.classList.remove('bg-cosmic-900/90');
+            }
+        });
+
+        // Particle effect on click
+        document.addEventListener('click', (e) => {
+            // Don't create particles if clicking on a card or modal
+            if(e.target.closest('.phenomena-card') || e.target.closest('#detail-modal')) return;
+            createParticles(e.clientX, e.clientY);
+        });
+
+        function createParticles(x, y) {
+            for (let i = 0; i < 8; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.background = `hsl(${Math.random() * 60 + 180}, 100%, 50%)`;
+                document.body.appendChild(particle);
+
+                const angle = (Math.PI * 2 * i) / 8;
+                const velocity = 50 + Math.random() * 50;
+
+                gsap.to(particle, {
+                    x: Math.cos(angle) * velocity,
+                    y: Math.sin(angle) * velocity,
+                    opacity: 0,
+                    duration: 1,
+                    ease: "power2.out",
+                    onComplete: () => particle.remove()
+                });
+            }
+        }
+
+        // Modal Data
+        const phenomenonData = {
+            blackhole: {
+                title: "Supermassive Black Holes",
+                subtitle: "Class: Singularity | Event Horizon Radius: Variable",
+                metrics: [
+                    { label: "Mass Range", value: "10^6 - 10^10 M☉", color: "border-cosmic-purple" },
+                    { label: "Schwarzschild Radius", value: "0.08 - 800 AU", color: "border-cosmic-accent" },
+                    { label: "Spin Parameter", value: "0.0 - 0.998", color: "border-cosmic-gold" },
+                    { label: "Hawking Temp", value: "~10^-18 K", color: "border-green-500" }
+                ],
+                description: "Supermassive black holes (SMBHs) reside at the centers of most massive galaxies, with masses ranging from millions to tens of billions of solar masses. These cosmic giants form through hierarchical merging of smaller black holes and accretion of baryonic matter. The Event Horizon Telescope has resolved the shadow of M87* and Sagittarius A*, confirming Einstein's predictions of general relativity in strong gravitational fields.",
+                technical: [
+                    "<span class='text-white'>Accretion Disk Temp:</span> 10^4 - 10^7 K",
+                    "<span class='text-white'>Eddington Limit:</span> 10^40 - 10^44 erg/s",
+                    "<span class='text-white'>Jet Velocity:</span> 0.99c (relativistic)",
+                    "<span class='text-white'>Last Stable Orbit:</span> 3R_s (Schwarzschild)"
+                ],
+                examples: [
+                    "<span class='text-cosmic-accent'>TON 618:</span> 66 billion solar masses, most massive known",
+                    "<span class='text-cosmic-accent'>Phoenix A:</span> Most luminous black hole, 100 trillion L☉",
+                    "<span class='text-cosmic-accent'>Sagittarius A*:</span> 4.3 million solar masses, Milky Way center"
+                ]
+            },
+            magnetar: {
+                title: "Magnetars",
+                subtitle: "Class: Neutron Star | Magnetic Monster",
+                metrics: [
+                    { label: "Magnetic Field", value: "10^14 - 10^15 G", color: "border-cosmic-purple" },
+                    { label: "Rotation Period", value: "0.3 - 12 seconds", color: "border-cosmic-accent" },
+                    { label: "Mass", value: "1.4 - 2.16 M☉", color: "border-cosmic-gold" },
+                    { label: "Density", value: "10^17 kg/m³", color: "border-green-500" }
+                ],
+                description: "Magnetars are neutron stars with extraordinarily powerful magnetic fields, a quadrillion times stronger than Earth's. These fields generate intense stress on the stellar crust, causing starquakes that release gamma-ray flares. The magnetic field is so extreme that it polarizes the vacuum and distorts atomic structure, creating an environment where chemistry as we know it cannot exist.",
+                technical: [
+                    "<span class='text-white'>Crustal Shear:</span> 10^25 N/m² stress",
+                    "<span class='text-white'>Decay Time:</span> 10,000 years (rapid rotators)",
+                    "<span class='text-white'>Flare Energy:</span> 10^44 - 10^47 ergs",
+                    "<span class='text-white'>Surface Gravity:</span> 10^12 m/s²"
+                ],
+                examples: [
+                    "<span class='text-cosmic-accent'>SGR 1806-20:</span> Most powerful magnetic field observed",
+                    "<span class='text-cosmic-accent'>PSR J1745-2900:</span> Magnetar near Galactic Center",
+                    "<span class='text-cosmic-accent'>1E 1048.1-5937:</span> First confirmed anomalous X-ray pulsar"
+                ]
+            },
+            darkmatter: {
+                title: "Dark Matter Halos",
+                subtitle: "Class: Exotic Matter | Non-Baryonic",
+                metrics: [
+                    { label: "Density", value: "~0.3 GeV/c²/cm³", color: "border-cosmic-purple" },
+                    { label: "Temperature", value: "Cold (non-relativistic)", color: "border-cosmic-accent" },
+                    { label: "Fraction", value: "85% of total matter", color: "border-cosmic-gold" },
+                    { label: "Interaction", value: "Weak & Gravitational", color: "border-green-500" }
+                ],
+                description: "Dark matter forms the cosmic scaffolding upon which visible matter assembles. It does not interact with electromagnetic radiation, making it invisible to telescopes, but reveals itself through gravitational lensing and galaxy rotation curves. Leading candidates include WIMPs (Weakly Interacting Massive Particles) and axions, though its true nature remains one of physics' greatest mysteries.",
+                technical: [
+                    "<span class='text-white'>Velocity Dispersion:</span> 200-300 km/s (typical galaxies)",
+                    "<span class='text-white'>NFW Profile:</span> ρ(r) ∝ r⁻¹ at center",
+                    "<span class='text-white'>Free Streaming:</span> < 1 Mpc (small scale cutoff)",
+                    "<span class='text-white'>Self-Interaction:</span> σ/m < 1 cm²/g"
+                ],
+                examples: [
+                    "<span class='text-cosmic-accent'>Bullet Cluster:</span> Direct evidence of dark matter collision",
+                    "<span class='text-cosmic-accent'>Dragonfly 44:</span> 99.99% dark matter galaxy",
+                    "<span class='text-cosmic-accent'>Local Group Halo:</span> 1-2 x 10^12 M☉ surrounding Milky Way"
+                ]
+            },
+            gravitational: {
+                title: "Gravitational Waves",
+                subtitle: "Class: Spacetime Perturbation | Relativistic",
+                metrics: [
+                    { label: "Propagation Speed", value: "c (light speed)", color: "border-cosmic-purple" },
+                    { label: "Amplitude", value: "10^-21 to 10^-23", color: "border-cosmic-accent" },
+                    { label: "Frequency Range", value: "10^-16 to 10^4 Hz", color: "border-cosmic-gold" },
+                    { label: "Polarization", value: "Plus & Cross modes", color: "border-green-500" }
+                ],
+                description: "Gravitational waves are ripples in the fabric of spacetime predicted by Einstein's general relativity in 1916 and directly detected by LIGO in 2015. Generated by accelerating massive objects, particularly merging black holes and neutron stars, these waves carry information about cataclysmic cosmic events and provide a new spectrum for observing the universe beyond electromagnetic radiation.",
+                technical: [
+                    "<span class='text-white'>Strain Sensitivity:</span> ΔL/L < 10^-23 (LIGO)",
+                    "<span class='text-white'>Energy Flux:</span> 10^-3 erg/s/cm² (typical merger)",
+                    "<span class='text-white'>Wavelength:</span> λ = c/f (lightyears to kilometers)",
+                    "<span class='text-white'>Chirp Mass:</span> ℳ = (m₁m₂)^(3/5)/(m₁+m₂)^(1/5)"
+                ],
+                examples: [
+                    "<span class='text-cosmic-accent'>GW150914:</span> First direct detection, 36+29 M☉ merger",
+                    "<span class='text-cosmic-accent'>GW170817:</span> Neutron star merger, multi-messenger event",
+                    "<span class='text-cosmic-accent'>Sagittarius A*:</span> Continuous wave background detection candidate"
+                ]
+            },
+            grb: {
+                title: "Gamma-Ray Bursts",
+                subtitle: "Class: High-Energy Transient | Cosmic Beacon",
+                metrics: [
+                    { label: "Energy Output", value: "10^44 - 10^47 erg/s", color: "border-cosmic-purple" },
+                    { label: "Duration", value: "0.01 - 1000 seconds", color: "border-cosmic-accent" },
+                    { label: "Redshift Range", value: "0.1 - 9.4 (observed)", color: "border-cosmic-gold" },
+                    { label: "Jet Opening", value: "2° - 20°", color: "border-green-500" }
+                ],
+                description: "Gamma-ray bursts are the most luminous electromagnetic events in the universe since the Big Bang. Occurring when massive stars collapse into black holes (long GRBs) or neutron stars merge (short GRBs), these explosions release focused jets of radiation. If Earth were within a few kiloparsecs of a GRB, the ozone layer could be destroyed, making them potential drivers of mass extinctions.",
+                technical: [
+                    "<span class='text-white'>Lorentz Factor:</span> Γ ~ 100-1000 (ultra-relativistic)",
+                    "<span class='text-white'>Prompt Emission:</span> Non-thermal synchrotron radiation",
+                    "<span class='text-white'>Afterglow:</span> X-ray to radio, days to months",
+                    "<span class='text-white'>Progenitor Mass:</span> > 20-25 M☉ for long GRBs"
+                ],
+                examples: [
+                    "<span class='text-cosmic-accent'>GRB 221009A:</span> Brightest ever detected, 'Boat' event",
+                    "<span class='text-cosmic-accent'>GRB 090423:</span> Most distant, 13.2 billion light-years",
+                    "<span class='text-cosmic-accent'>GRB 080319B:</span> Naked-eye visible, 7.5 billion light-years"
+                ]
+            },
+            quasar: {
+                title: "Quasars",
+                subtitle: "Class: Active Galactic Nucleus | Primordial Beacon",
+                metrics: [
+                    { label: "Luminosity", value: "10^40 - 10^47 erg/s", color: "border-cosmic-purple" },
+                    { label: "Redshift", value: "z = 0.06 - 7.64", color: "border-cosmic-accent" },
+                    { label: "Accretion Rate", value: "1 - 1000 M☉/year", color: "border-cosmic-gold" },
+                    { label: "Lifespan", value: "10^6 - 10^8 years", color: "border-green-500" }
+                ],
+                description: "Quasars (Quasi-Stellar Objects) are ancient supermassive black holes actively accreting matter at the centers of distant galaxies. Their immense luminosity, powered by friction in the accretion disk, outshines their entire host galaxy combined. Serving as cosmic lighthouses, quasars illuminate the intergalactic medium and provide probes of the universe during its formative years.",
+                technical: [
+                    "<span class='text-white'>Broad Line Region:</span> 10^3-10^4 km/s velocity dispersion",
+                    "<span class='text-white'>Fe II Emission:</span> Complex UV/optical line spectrum",
+                    "<span class='text-white'>Radio Loudness:</span> R = F(5GHz)/F(B-band)",
+                    "<span class='text-white'>Eddington Ratio:</span> L/L_Edd ~ 0.01 - 1.0"
+                ],
+                examples: [
+                    "<span class='text-cosmic-accent'>J0529-4351:</span> Brightest known quasar, 500 trillion L☉",
+                    "<span class='text-cosmic-accent'>ULAS J1342+0928:</span> Most distant, z=7.54 (680 Myr old universe)",
+                    "<span class='text-cosmic-accent'>3C 273:</span> First identified quasar, 2.4 billion light-years"
+                ]
+            }
+        };
+
+        // Modal Functionality
+        const modal = document.getElementById('detail-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalSubtitle = document.getElementById('modal-subtitle');
+        const modalDescription = document.getElementById('modal-description');
+        const modalMetrics = document.getElementById('modal-metrics');
+        const modalTechnical = document.getElementById('modal-technical');
+        const modalExamples = document.getElementById('modal-examples');
+        const closeModal = document.getElementById('close-modal');
+
+        // Add click handlers to cards
+        document.querySelectorAll('.phenomena-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const phenomenon = card.getAttribute('data-phenomenon');
+                const data = phenomenonData[phenomenon];
+
+                if(data) {
+                    // Populate modal
+                    modalTitle.textContent = data.title;
+                    modalSubtitle.textContent = data.subtitle;
+                    modalDescription.textContent = data.description;
+
+                    // Populate metrics
+                    modalMetrics.innerHTML = data.metrics.map(metric => `
+                        <div class="metric-card ${metric.color}">
+                            <div class="font-mono text-xs text-gray-400 mb-1">${metric.label}</div>
+                            <div class="font-serif text-xl text-white font-bold">${metric.value}</div>
+                        </div>
+                    `).join('');
+
+                    // Populate technical specs
+                    modalTechnical.innerHTML = data.technical.map(spec => `
+                        <div class="flex items-start space-x-2">
+                            <span class="text-cosmic-accent mt-1">›</span>
+                            <span>${spec}</span>
+                        </div>
+                    `).join('');
+
+                    // Populate examples
+                    modalExamples.innerHTML = data.examples.map(example => `
+                        <li class="font-mono text-sm text-gray-300 border-l-2 border-cosmic-accent/30 pl-4 py-1 hover:border-cosmic-accent transition-colors">
+                            ${example}
+                        </li>
+                    `).join('');
+
+                    // Show modal
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        // Close modal handlers
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script> </body> </html>
