@@ -1,52 +1,75 @@
-<!DOCTYPE html><html lang="en" class="scroll-smooth" data-astro-cid-mppcwxlb> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>COSMOS | Institute for Advanced Astrophysics</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png"><script src="https://cdn.tailwindcss.com"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'serif': ['Cinzel', 'serif'],
-                        'mono': ['Space Mono', 'monospace'],
-                        'sans': ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        'cosmic': {
-                            900: '#0a0a0f',
-                            800: '#12121a',
-                            700: '#1a1a2e',
-                            600: '#252545',
-                            accent: '#00d4ff',
-                            gold: '#ffd700',
-                            purple: '#b026ff',
-                        }
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'twinkle': 'twinkle 3s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        },
-                        twinkle: {
-                            '0%, 100%': { opacity: '1' },
-                            '50%': { opacity: '0.3' },
-                        }
-                    }
-                }
-            }
-        }
-    </script><link rel="stylesheet" href="/_astro/astrophysics.BJEiugUT.css">
-<link rel="stylesheet" href="/_astro/astrophysics.CJqxSZ3A.css"></head> <body class="font-sans antialiased" data-astro-cid-mppcwxlb> <!-- Navigation --> <nav class="fixed w-full z-50 glass-panel border-b border-white/10 transition-all duration-300" id="navbar" data-astro-cid-mppcwxlb> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-astro-cid-mppcwxlb> <div class="flex justify-between items-center h-20" data-astro-cid-mppcwxlb> <div class="flex items-center space-x-3 group cursor-pointer" data-astro-cid-mppcwxlb> <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cosmic-accent to-cosmic-purple flex items-center justify-center animate-pulse-slow" data-astro-cid-mppcwxlb> <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" data-astro-cid-mppcwxlb></path> </svg> </div> <span class="font-serif text-2xl font-bold tracking-widest text-white group-hover:text-cosmic-accent transition-colors" data-astro-cid-mppcwxlb>COSMOS</span> </div> <div class="hidden md:flex space-x-8" data-astro-cid-mppcwxlb> <a href="#observatory" class="text-sm font-mono text-gray-400 hover:text-cosmic-accent transition-colors tracking-widest uppercase" data-astro-cid-mppcwxlb>Observatory</a> <a href="#cosmology" class="text-sm font-mono text-gray-400 hover:text-cosmic-accent transition-colors tracking-widest uppercase" data-astro-cid-mppcwxlb>Cosmology</a> <a href="#phenomena" class="text-sm font-mono text-gray-400 hover:text-cosmic-accent transition-colors tracking-widest uppercase" data-astro-cid-mppcwxlb>Phenomena</a> <a href="#research" class="text-sm font-mono text-gray-400 hover:text-cosmic-accent transition-colors tracking-widest uppercase" data-astro-cid-mppcwxlb>Research</a> </div> <button class="px-6 py-2 border border-cosmic-accent text-cosmic-accent font-mono text-sm hover:bg-cosmic-accent hover:text-black transition-all duration-300 rounded-sm" data-astro-cid-mppcwxlb>
-ACCESS ARCHIVES
-</button> </div> </div> </nav> <!-- Hero Section with Three.js Background --> <section class="relative h-screen w-full overflow-hidden flex items-center justify-center" data-astro-cid-mppcwxlb> <div id="canvas-container" class="absolute inset-0 z-0" data-astro-cid-mppcwxlb></div> <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-cosmic-900 z-10" data-astro-cid-mppcwxlb></div> <div class="relative z-20 text-center px-4 max-w-6xl mx-auto" data-astro-cid-mppcwxlb> <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-8 leading-none tracking-tight" data-astro-cid-mppcwxlb> <span class="block transform hover:scale-105 transition-transform duration-700 cursor-default" data-astro-cid-mppcwxlb>COSMOS</span> <span class="block text-2xl md:text-4xl font-light text-gray-400 mt-4 tracking-[0.3em]" data-astro-cid-mppcwxlb>BEYOND THE VEIL</span> </h1> <p class="font-mono text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed" data-astro-cid-mppcwxlb>
+<!DOCTYPE html><html lang="en" class="scroll-smooth" data-astro-cid-mppcwxlb> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>COSMOS | Institute for Advanced Astrophysics</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdnjs.cloudflare.com"><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="/_astro/astrophysics.BJEiugUT.css">
+<link rel="stylesheet" href="/_astro/astrophysics.CJqxSZ3A.css">
+<style>
+/* Cosmic color utilities - replacing Tailwind CDN JIT */
+.bg-cosmic-900 { background-color: #0a0a0f; }
+.bg-cosmic-800 { background-color: #12121a; }
+.bg-cosmic-700 { background-color: #1a1a2e; }
+.bg-cosmic-600 { background-color: #252545; }
+.text-cosmic-accent { color: #00d4ff; }
+.text-cosmic-purple { color: #b026ff; }
+.text-cosmic-gold { color: #ffd700; }
+.border-cosmic-accent { border-color: #00d4ff; }
+.border-cosmic-purple { border-color: #b026ff; }
+.border-cosmic-gold { border-color: #ffd700; }
+.border-cosmic-accent\/20 { border-color: rgba(0, 212, 255, 0.2); }
+.border-cosmic-accent\/30 { border-color: rgba(0, 212, 255, 0.3); }
+.border-cosmic-accent\/50 { border-color: rgba(0, 212, 255, 0.5); }
+.border-cosmic-purple\/30 { border-color: rgba(176, 38, 255, 0.3); }
+.border-cosmic-purple\/50 { border-color: rgba(176, 38, 255, 0.5); }
+.border-cosmic-gold\/50 { border-color: rgba(255, 215, 0, 0.5); }
+.bg-cosmic-accent { background-color: #00d4ff; }
+.bg-cosmic-purple { background-color: #b026ff; }
+.bg-cosmic-gold { background-color: #ffd700; }
+.bg-cosmic-accent\/10 { background-color: rgba(0, 212, 255, 0.1); }
+.bg-cosmic-900\/90 { background-color: rgba(10, 10, 15, 0.9); }
+.bg-cosmic-900\/95 { background-color: rgba(10, 10, 15, 0.95); }
+.bg-black\/90 { background-color: rgba(0, 0, 0, 0.9); }
+.shadow-cosmic-accent\/20 { --tw-shadow-color: rgba(0, 212, 255, 0.2); --tw-shadow: var(--tw-shadow-colored); }
+.from-cosmic-accent { --tw-gradient-from: #00d4ff var(--tw-gradient-from-position); --tw-gradient-to: rgba(0, 212, 255, 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+.to-cosmic-purple { --tw-gradient-to: #b026ff var(--tw-gradient-to-position); }
+.to-cosmic-900 { --tw-gradient-to: #0a0a0f var(--tw-gradient-to-position); }
+.text-transparent { color: transparent; }
+.bg-clip-text { -webkit-background-clip: text; background-clip: text; }
+.font-serif { font-family: 'Cinzel', serif; }
+.font-mono { font-family: 'Space Mono', monospace; }
+.font-sans { font-family: 'Inter', sans-serif; }
+.hover\:text-cosmic-accent:hover { color: #00d4ff; }
+.hover\:bg-cosmic-accent:hover { background-color: #00d4ff; }
+.hover\:border-cosmic-accent:hover { border-color: #00d4ff; }
+.hover\:border-cosmic-accent\/50:hover { border-color: rgba(0, 212, 255, 0.5); }
+.hover\:border-cosmic-purple\/50:hover { border-color: rgba(176, 38, 255, 0.5); }
+.hover\:border-cosmic-gold\/50:hover { border-color: rgba(255, 215, 0, 0.5); }
+/* Custom animations */
+.animate-pulse-slow { animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-twinkle { animation: twinkle 3s ease-in-out infinite; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+@keyframes twinkle { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+/* Semi-transparent backgrounds for starfield visibility */
+.bg-cosmic-900\/80 { background-color: rgba(10, 10, 15, 0.8); }
+.bg-cosmic-800\/75 { background-color: rgba(18, 18, 26, 0.75); }
+.bg-black\/85 { background-color: rgba(0, 0, 0, 0.85); }
+.to-cosmic-900\/80 { --tw-gradient-to: rgba(10, 10, 15, 0.8) var(--tw-gradient-to-position); }
+.nebula-gradient-transparent { background: radial-gradient(ellipse at center, rgba(176, 38, 255, 0.12) 0%, transparent 70%), radial-gradient(ellipse at top right, rgba(0, 212, 255, 0.08) 0%, transparent 50%), radial-gradient(ellipse at bottom left, rgba(255, 215, 0, 0.04) 0%, transparent 50%); }
+/* Leaflet map blending */
+#visitor-map { background: transparent !important; }
+#visitor-map .leaflet-container { background: transparent !important; }
+.leaflet-control-attribution { display: none !important; }
+.leaflet-tile-pane { opacity: 1; }
+/* Font overrides for astrophysics page */
+body[data-astro-cid-mppcwxlb] { font-family: 'Inter', sans-serif; }
+body[data-astro-cid-mppcwxlb] .font-serif { font-family: 'Cinzel', serif; }
+body[data-astro-cid-mppcwxlb] .font-mono { font-family: 'Space Mono', monospace; }
+body[data-astro-cid-mppcwxlb] .font-sans { font-family: 'Inter', sans-serif; }
+</style></head> <body class="font-sans antialiased" data-astro-cid-mppcwxlb> <div id="canvas-container" class="fixed inset-0 z-0" data-astro-cid-mppcwxlb></div> <!-- Navigation --> <nav class="fixed w-full z-50 border-b border-white/5 transition-all duration-500" id="navbar" data-astro-cid-mppcwxlb> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-astro-cid-mppcwxlb> <div class="flex justify-between items-center h-16" data-astro-cid-mppcwxlb> <a href="/" class="flex items-center space-x-3 group" data-astro-cid-mppcwxlb> <svg class="w-5 h-5 text-gray-500 group-hover:text-cosmic-accent transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 19l-7-7m0 0l7-7m-7 7h18" data-astro-cid-mppcwxlb></path></svg> <span class="font-mono text-xs text-gray-500 group-hover:text-cosmic-accent transition-colors tracking-widest uppercase" data-astro-cid-mppcwxlb>Return to Earth</span> </a> <div class="hidden md:flex items-center space-x-1" data-astro-cid-mppcwxlb> <a href="#observatory" class="nav-dot group relative px-4 py-2" data-astro-cid-mppcwxlb><span class="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-cosmic-accent inline-block transition-colors" data-astro-cid-mppcwxlb></span><span class="absolute -bottom-5 left-1/2 -translate-x-1/2 font-mono text-[10px] text-gray-600 group-hover:text-cosmic-accent transition-colors tracking-widest opacity-0 group-hover:opacity-100 whitespace-nowrap" data-astro-cid-mppcwxlb>I</span></a> <span class="w-8 h-px bg-white/10" data-astro-cid-mppcwxlb></span> <a href="#cosmology" class="nav-dot group relative px-4 py-2" data-astro-cid-mppcwxlb><span class="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-cosmic-purple inline-block transition-colors" data-astro-cid-mppcwxlb></span><span class="absolute -bottom-5 left-1/2 -translate-x-1/2 font-mono text-[10px] text-gray-600 group-hover:text-cosmic-purple transition-colors tracking-widest opacity-0 group-hover:opacity-100 whitespace-nowrap" data-astro-cid-mppcwxlb>II</span></a> <span class="w-8 h-px bg-white/10" data-astro-cid-mppcwxlb></span> <a href="#phenomena" class="nav-dot group relative px-4 py-2" data-astro-cid-mppcwxlb><span class="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-cosmic-gold inline-block transition-colors" data-astro-cid-mppcwxlb></span><span class="absolute -bottom-5 left-1/2 -translate-x-1/2 font-mono text-[10px] text-gray-600 group-hover:text-cosmic-gold transition-colors tracking-widest opacity-0 group-hover:opacity-100 whitespace-nowrap" data-astro-cid-mppcwxlb>III</span></a> <span class="w-8 h-px bg-white/10" data-astro-cid-mppcwxlb></span> <a href="#research" class="nav-dot group relative px-4 py-2" data-astro-cid-mppcwxlb><span class="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-cosmic-accent inline-block transition-colors" data-astro-cid-mppcwxlb></span><span class="absolute -bottom-5 left-1/2 -translate-x-1/2 font-mono text-[10px] text-gray-600 group-hover:text-cosmic-accent transition-colors tracking-widest opacity-0 group-hover:opacity-100 whitespace-nowrap" data-astro-cid-mppcwxlb>IV</span></a> <span class="w-8 h-px bg-white/10" data-astro-cid-mppcwxlb></span> <a href="#visitors" class="nav-dot group relative px-4 py-2" data-astro-cid-mppcwxlb><span class="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-green-400 inline-block transition-colors" data-astro-cid-mppcwxlb></span><span class="absolute -bottom-5 left-1/2 -translate-x-1/2 font-mono text-[10px] text-gray-600 group-hover:text-green-400 transition-colors tracking-widest opacity-0 group-hover:opacity-100 whitespace-nowrap" data-astro-cid-mppcwxlb>V</span></a> </div> <div class="font-mono text-[10px] text-gray-600 tracking-[0.3em] uppercase hidden lg:block" data-astro-cid-mppcwxlb>47.3714° N &middot; 8.5412° E</div> </div> </div> </nav> <!-- Hero Section with Three.js Background --> <section class="relative h-screen w-full overflow-hidden flex items-center justify-center" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-transparent z-10" data-astro-cid-mppcwxlb></div> <div class="relative z-20 text-center px-4 max-w-6xl mx-auto" data-astro-cid-mppcwxlb> <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-8 leading-none tracking-tight" data-astro-cid-mppcwxlb> <span class="block transform hover:scale-105 transition-transform duration-700 cursor-default" data-astro-cid-mppcwxlb>COSMOS</span> <span class="block text-2xl md:text-4xl font-light text-gray-400 mt-4 tracking-[0.3em]" data-astro-cid-mppcwxlb>BEYOND THE VEIL</span> </h1> <p class="font-mono text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed" data-astro-cid-mppcwxlb>
 Exploring the fundamental nature of spacetime, dark matter, and the cosmic web that binds our universe together.
-</p> <div class="flex flex-col md:flex-row gap-6 justify-center items-center" data-astro-cid-mppcwxlb> <button class="group relative px-8 py-4 bg-cosmic-accent text-black font-bold font-mono tracking-widest overflow-hidden rounded-sm hover:scale-105 transition-transform duration-300" data-astro-cid-mppcwxlb> <span class="relative z-10" data-astro-cid-mppcwxlb>INITIATE SEQUENCE</span> <div class="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" data-astro-cid-mppcwxlb></div> </button> <div class="flex items-center space-x-4 font-mono text-sm text-gray-500" data-astro-cid-mppcwxlb> <span class="w-12 h-px bg-gray-600" data-astro-cid-mppcwxlb></span> <span data-astro-cid-mppcwxlb>COORDINATES: 19h 44m 50s +21° 30'</span> </div> </div> </div> <!-- Floating Data Points --> <div class="absolute bottom-10 left-10 font-mono text-xs text-gray-600 hidden lg:block" data-astro-cid-mppcwxlb> <div class="mb-2" data-astro-cid-mppcwxlb>SYS.TEMP: 2.725 K</div> <div class="mb-2" data-astro-cid-mppcwxlb>HUBBLE CONSTANT: 70.4 km/s/Mpc</div> <div data-astro-cid-mppcwxlb>DARK ENERGY: 68.3%</div> </div> </section> <!-- Observatory Section --> <section id="observatory" class="relative py-32 bg-cosmic-900 grid-bg" data-astro-cid-mppcwxlb> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-astro-cid-mppcwxlb> <div class="grid lg:grid-cols-2 gap-16 items-center" data-astro-cid-mppcwxlb> <div class="space-y-8" data-astro-cid-mppcwxlb> <div class="inline-block px-4 py-2 border border-cosmic-purple/30 rounded-full" data-astro-cid-mppcwxlb> <span class="font-mono text-cosmic-purple text-sm tracking-widest" data-astro-cid-mppcwxlb>SECTION 01</span> </div> <h2 class="font-serif text-5xl md:text-6xl font-bold text-white leading-tight" data-astro-cid-mppcwxlb>
+</p> <div class="flex flex-col md:flex-row gap-6 justify-center items-center" data-astro-cid-mppcwxlb> <button class="group relative px-8 py-4 bg-cosmic-accent text-black font-bold font-mono tracking-widest overflow-hidden rounded-sm hover:scale-105 transition-transform duration-300" data-astro-cid-mppcwxlb> <span class="relative z-10" data-astro-cid-mppcwxlb>INITIATE SEQUENCE</span> <div class="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" data-astro-cid-mppcwxlb></div> </button> <div class="flex items-center space-x-4 font-mono text-sm text-gray-500" data-astro-cid-mppcwxlb> <span class="w-12 h-px bg-gray-600" data-astro-cid-mppcwxlb></span> <span data-astro-cid-mppcwxlb>COORDINATES: 19h 44m 50s +21° 30'</span> </div> </div> </div> <!-- Floating Data Points --> <div class="absolute bottom-10 left-10 font-mono text-xs text-gray-600 hidden lg:block" data-astro-cid-mppcwxlb> <div class="mb-2" data-astro-cid-mppcwxlb>SYS.TEMP: 2.725 K</div> <div class="mb-2" data-astro-cid-mppcwxlb>HUBBLE CONSTANT: 70.4 km/s/Mpc</div> <div data-astro-cid-mppcwxlb>DARK ENERGY: 68.3%</div> </div> </section> <!-- Observatory Section --> <section id="observatory" class="relative z-10 py-32" data-astro-cid-mppcwxlb> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-astro-cid-mppcwxlb> <div class="grid lg:grid-cols-2 gap-16 items-center" data-astro-cid-mppcwxlb> <div class="space-y-8" data-astro-cid-mppcwxlb>  <h2 class="font-serif text-5xl md:text-6xl font-bold text-white leading-tight" data-astro-cid-mppcwxlb>
 The Digital<br data-astro-cid-mppcwxlb> <span class="text-transparent bg-clip-text bg-gradient-to-r from-cosmic-accent to-cosmic-purple" data-astro-cid-mppcwxlb>Observatory</span> </h2> <p class="font-sans text-gray-400 text-lg leading-relaxed" data-astro-cid-mppcwxlb>
 Our virtual observatory processes exabytes of data from the James Webb Space Telescope,
                         Event Horizon Telescope, and neutrino detectors worldwide. We map the invisible structures
                         that govern galactic evolution.
-</p> <div class="grid grid-cols-2 gap-6 pt-8" data-astro-cid-mppcwxlb> <div class="glass-panel p-6 rounded-lg border-l-4 border-cosmic-accent" data-astro-cid-mppcwxlb> <div class="font-serif text-3xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>13.8B</div> <div class="font-mono text-xs text-gray-500 uppercase tracking-wider" data-astro-cid-mppcwxlb>Years Observed</div> </div> <div class="glass-panel p-6 rounded-lg border-l-4 border-cosmic-purple" data-astro-cid-mppcwxlb> <div class="font-serif text-3xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>2.4T</div> <div class="font-mono text-xs text-gray-500 uppercase tracking-wider" data-astro-cid-mppcwxlb>Data Points</div> </div> </div> </div> <div class="relative h-[600px] hologram glass-panel rounded-2xl overflow-hidden" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-gradient-to-br from-cosmic-700/50 to-transparent" data-astro-cid-mppcwxlb></div> <!-- Interactive Star Map Visualization --> <div class="absolute inset-0 flex items-center justify-center" data-astro-cid-mppcwxlb> <div class="relative w-96 h-96" data-astro-cid-mppcwxlb> <div class="absolute inset-0 border border-cosmic-accent/20 rounded-full animate-pulse-slow" data-astro-cid-mppcwxlb></div> <div class="absolute inset-4 border border-cosmic-purple/20 rounded-full" style="animation: rotate 30s linear infinite reverse;" data-astro-cid-mppcwxlb></div> <div class="absolute inset-8 border border-cosmic-gold/20 rounded-full" style="animation: rotate 40s linear infinite;" data-astro-cid-mppcwxlb></div> <!-- Constellation Points --> <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-cosmic-accent rounded-full animate-twinkle" data-astro-cid-mppcwxlb></div> <div class="absolute top-1/3 right-1/3 w-3 h-3 bg-cosmic-purple rounded-full animate-twinkle" style="animation-delay: 0.5s;" data-astro-cid-mppcwxlb></div> <div class="absolute bottom-1/4 left-1/3 w-2 h-2 bg-cosmic-gold rounded-full animate-twinkle" style="animation-delay: 1s;" data-astro-cid-mppcwxlb></div> <div class="absolute bottom-1/3 right-1/4 w-4 h-4 bg-white rounded-full animate-twinkle shadow-[0_0_20px_rgba(255,255,255,0.8)]" style="animation-delay: 1.5s;" data-astro-cid-mppcwxlb></div> <!-- Connecting Lines SVG --> <svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" data-astro-cid-mppcwxlb> <line x1="25" y1="25" x2="66" y2="33" class="constellation-line" data-astro-cid-mppcwxlb></line> <line x1="66" y1="33" x2="75" y2="66" class="constellation-line" data-astro-cid-mppcwxlb></line> <line x1="75" y1="66" x2="33" y2="75" class="constellation-line" data-astro-cid-mppcwxlb></line> <line x1="33" y1="75" x2="25" y2="25" class="constellation-line" data-astro-cid-mppcwxlb></line> </svg> </div> </div> <div class="absolute bottom-6 left-6 right-6 glass-panel p-4 rounded-lg" data-astro-cid-mppcwxlb> <div class="flex justify-between items-center font-mono text-xs" data-astro-cid-mppcwxlb> <span class="text-cosmic-accent" data-astro-cid-mppcwxlb>TARGET: ANDROMEDA GALAXY</span> <span class="text-gray-500" data-astro-cid-mppcwxlb>DISTANCE: 2.537 Mly</span> </div> </div> </div> </div> </div> </section> <!-- Cosmology Section --> <section id="cosmology" class="relative py-32 nebula-gradient" data-astro-cid-mppcwxlb> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-astro-cid-mppcwxlb> <div class="text-center mb-20" data-astro-cid-mppcwxlb> <span class="font-mono text-cosmic-gold text-sm tracking-[0.5em] uppercase block mb-4" data-astro-cid-mppcwxlb>Section 02</span> <h2 class="font-serif text-5xl md:text-6xl font-bold text-white mb-6" data-astro-cid-mppcwxlb>Cosmic Evolution</h2> <p class="font-sans text-gray-400 max-w-2xl mx-auto text-lg" data-astro-cid-mppcwxlb>From the Planck epoch to the heat death of the universe, we trace the narrative of existence itself.</p> </div> <div class="relative" data-astro-cid-mppcwxlb> <!-- Timeline --> <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-px bg-gradient-to-b from-cosmic-accent via-cosmic-purple to-transparent" data-astro-cid-mppcwxlb></div> <!-- Timeline Items --> <div class="space-y-24" data-astro-cid-mppcwxlb> <!-- Big Bang --> <div class="relative flex items-center justify-between group" data-astro-cid-mppcwxlb> <div class="w-5/12 text-right pr-8" data-astro-cid-mppcwxlb> <div class="glass-panel p-8 rounded-xl hover:border-cosmic-accent/50 transition-all duration-300 transform hover:-translate-y-2" data-astro-cid-mppcwxlb> <h3 class="font-serif text-2xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>The Primordial Singularity</h3> <span class="font-mono text-cosmic-accent text-sm" data-astro-cid-mppcwxlb>t = 0</span> <p class="text-gray-400 mt-4 text-sm leading-relaxed" data-astro-cid-mppcwxlb>Infinite density. Infinite temperature. The universe begins with a quantum fluctuation in the false vacuum.</p> </div> </div> <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-cosmic-accent rounded-full shadow-[0_0_20px_rgba(0,212,255,0.8)] group-hover:scale-150 transition-transform" data-astro-cid-mppcwxlb></div> <div class="w-5/12 pl-8" data-astro-cid-mppcwxlb> <div class="h-32 w-full bg-gradient-to-r from-orange-500 to-yellow-500 rounded-lg opacity-20 blur-xl" data-astro-cid-mppcwxlb></div> </div> </div> <!-- Inflation --> <div class="relative flex items-center justify-between group flex-row-reverse" data-astro-cid-mppcwxlb> <div class="w-5/12 text-left pl-8" data-astro-cid-mppcwxlb> <div class="glass-panel p-8 rounded-xl hover:border-cosmic-purple/50 transition-all duration-300 transform hover:-translate-y-2" data-astro-cid-mppcwxlb> <h3 class="font-serif text-2xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>Cosmic Inflation</h3> <span class="font-mono text-cosmic-purple text-sm" data-astro-cid-mppcwxlb>t = 10^-36 s</span> <p class="text-gray-400 mt-4 text-sm leading-relaxed" data-astro-cid-mppcwxlb>Space expands exponentially by a factor of 10^26 in 10^-33 seconds, smoothing out the universe.</p> </div> </div> <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-cosmic-purple rounded-full shadow-[0_0_20px_rgba(176,38,255,0.8)] group-hover:scale-150 transition-transform" data-astro-cid-mppcwxlb></div> <div class="w-5/12 pr-8" data-astro-cid-mppcwxlb> <div class="h-32 w-full bg-gradient-to-l from-purple-500 to-pink-500 rounded-lg opacity-20 blur-xl" data-astro-cid-mppcwxlb></div> </div> </div> <!-- Recombination --> <div class="relative flex items-center justify-between group" data-astro-cid-mppcwxlb> <div class="w-5/12 text-right pr-8" data-astro-cid-mppcwxlb> <div class="glass-panel p-8 rounded-xl hover:border-cosmic-gold/50 transition-all duration-300 transform hover:-translate-y-2" data-astro-cid-mppcwxlb> <h3 class="font-serif text-2xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>Epoch of Recombination</h3> <span class="font-mono text-cosmic-gold text-sm" data-astro-cid-mppcwxlb>t = 380,000 years</span> <p class="text-gray-400 mt-4 text-sm leading-relaxed" data-astro-cid-mppcwxlb>Electrons combine with nuclei to form neutral atoms. The universe becomes transparent to radiation. The CMB is released.</p> </div> </div> <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-cosmic-gold rounded-full shadow-[0_0_20px_rgba(255,215,0,0.8)] group-hover:scale-150 transition-transform" data-astro-cid-mppcwxlb></div> <div class="w-5/12 pl-8" data-astro-cid-mppcwxlb> <div class="h-32 w-full bg-gradient-to-r from-yellow-200 to-orange-300 rounded-lg opacity-20 blur-xl" data-astro-cid-mppcwxlb></div> </div> </div> </div> </div> </div> </section> <!-- Phenomena Grid --> <section id="phenomena" class="relative py-32 bg-cosmic-800" data-astro-cid-mppcwxlb> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-astro-cid-mppcwxlb> <div class="mb-16" data-astro-cid-mppcwxlb> <span class="font-mono text-cosmic-accent text-sm tracking-[0.5em] uppercase block mb-4" data-astro-cid-mppcwxlb>Section 03</span> <h2 class="font-serif text-5xl font-bold text-white" data-astro-cid-mppcwxlb>Extreme Phenomena</h2> </div> <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-astro-cid-mppcwxlb> <!-- Black Hole Card --> <div class="phenomena-card group relative h-96 glass-panel rounded-2xl overflow-hidden cursor-pointer" data-phenomenon="blackhole" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 z-10" data-astro-cid-mppcwxlb></div> <div class="absolute inset-0 flex items-center justify-center" data-astro-cid-mppcwxlb> <div class="w-32 h-32 black-hole rounded-full relative" data-astro-cid-mppcwxlb> <div class="absolute inset-[-20px] accretion-disk rounded-full blur-md" data-astro-cid-mppcwxlb></div> </div> </div> <div class="absolute bottom-0 left-0 right-0 p-6 z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" data-astro-cid-mppcwxlb> <h3 class="font-serif text-2xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>Supermassive Black Holes</h3> <p class="text-gray-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-astro-cid-mppcwxlb>Sagittarius A* and M87* anchor their galaxies with gravitational might, warping spacetime itself.</p> <div class="mt-4 flex items-center text-cosmic-accent font-mono text-xs tracking-widest" data-astro-cid-mppcwxlb> <span data-astro-cid-mppcwxlb>VIEW DATA</span> <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" data-astro-cid-mppcwxlb></path> </svg> </div> </div> </div> <!-- Neutron Star Card --> <div class="phenomena-card group relative h-96 glass-panel rounded-2xl overflow-hidden cursor-pointer" data-phenomenon="magnetar" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 z-10" data-astro-cid-mppcwxlb></div> <div class="absolute inset-0 flex items-center justify-center" data-astro-cid-mppcwxlb> <div class="w-24 h-24 bg-gradient-to-br from-white to-blue-200 rounded-full shadow-[0_0_60px_rgba(255,255,255,0.8)] animate-pulse" data-astro-cid-mppcwxlb></div> <div class="absolute w-32 h-32 border-2 border-blue-400/30 rounded-full animate-ping" data-astro-cid-mppcwxlb></div> </div> <div class="absolute bottom-0 left-0 right-0 p-6 z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" data-astro-cid-mppcwxlb> <h3 class="font-serif text-2xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>Magnetars</h3> <p class="text-gray-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-astro-cid-mppcwxlb>Neutron stars with magnetic fields a quadrillion times stronger than Earth's, capable of disrupting atomic structure.</p> <div class="mt-4 flex items-center text-cosmic-accent font-mono text-xs tracking-widest" data-astro-cid-mppcwxlb> <span data-astro-cid-mppcwxlb>VIEW DATA</span> <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" data-astro-cid-mppcwxlb></path> </svg> </div> </div> </div> <!-- Dark Matter Card --> <div class="phenomena-card group relative h-96 glass-panel rounded-2xl overflow-hidden cursor-pointer" data-phenomenon="darkmatter" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 z-10" data-astro-cid-mppcwxlb></div> <div class="absolute inset-0 flex items-center justify-center" data-astro-cid-mppcwxlb> <div class="w-40 h-40 relative" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-purple-500/20 rounded-full blur-2xl animate-pulse" data-astro-cid-mppcwxlb></div> <svg class="w-full h-full animate-[rotate_20s_linear_infinite]" viewBox="0 0 100 100" data-astro-cid-mppcwxlb> <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(176,38,255,0.3)" stroke-width="0.5" stroke-dasharray="4 4" data-astro-cid-mppcwxlb></circle> <circle cx="50" cy="50" r="30" fill="none" stroke="rgba(176,38,255,0.5)" stroke-width="0.5" data-astro-cid-mppcwxlb></circle> <circle cx="50" cy="50" r="20" fill="none" stroke="rgba(176,38,255,0.8)" stroke-width="1" data-astro-cid-mppcwxlb></circle> </svg> </div> </div> <div class="absolute bottom-0 left-0 right-0 p-6 z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" data-astro-cid-mppcwxlb> <h3 class="font-serif text-2xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>Dark Matter Halos</h3> <p class="text-gray-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-astro-cid-mppcwxlb>Invisible scaffolding comprising 85% of matter, detected only through gravitational lensing effects.</p> <div class="mt-4 flex items-center text-cosmic-accent font-mono text-xs tracking-widest" data-astro-cid-mppcwxlb> <span data-astro-cid-mppcwxlb>VIEW DATA</span> <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" data-astro-cid-mppcwxlb></path> </svg> </div> </div> </div> <!-- Gravitational Waves --> <div class="phenomena-card group relative h-96 glass-panel rounded-2xl overflow-hidden cursor-pointer" data-phenomenon="gravitational" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 z-10" data-astro-cid-mppcwxlb></div> <div class="absolute inset-0 flex items-center justify-center overflow-hidden" data-astro-cid-mppcwxlb> <div class="absolute w-full h-px bg-cosmic-accent/50 animate-[pulse_2s_ease-in-out_infinite]" data-astro-cid-mppcwxlb></div> <div class="absolute w-full h-px bg-cosmic-accent/30 animate-[pulse_2s_ease-in-out_infinite_0.5s] transform rotate-45" data-astro-cid-mppcwxlb></div> <div class="absolute w-full h-px bg-cosmic-accent/30 animate-[pulse_2s_ease-in-out_infinite_0.5s] transform -rotate-45" data-astro-cid-mppcwxlb></div> <div class="w-20 h-20 border-2 border-cosmic-accent rounded-full animate-ping" data-astro-cid-mppcwxlb></div> </div> <div class="absolute bottom-0 left-0 right-0 p-6 z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" data-astro-cid-mppcwxlb> <h3 class="font-serif text-2xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>Gravitational Waves</h3> <p class="text-gray-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-astro-cid-mppcwxlb>Ripples in spacetime fabric caused by accelerating massive objects, traveling at light speed across the cosmos.</p> <div class="mt-4 flex items-center text-cosmic-accent font-mono text-xs tracking-widest" data-astro-cid-mppcwxlb> <span data-astro-cid-mppcwxlb>VIEW DATA</span> <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" data-astro-cid-mppcwxlb></path> </svg> </div> </div> </div> <!-- Gamma Ray Bursts --> <div class="phenomena-card group relative h-96 glass-panel rounded-2xl overflow-hidden cursor-pointer" data-phenomenon="grb" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 z-10" data-astro-cid-mppcwxlb></div> <div class="absolute inset-0 flex items-center justify-center" data-astro-cid-mppcwxlb> <div class="relative w-32 h-32" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-gradient-to-t from-green-400 to-transparent opacity-60 blur-xl" data-astro-cid-mppcwxlb></div> <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-32 bg-green-400 blur-sm" data-astro-cid-mppcwxlb></div> <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-2 bg-green-400 blur-sm" data-astro-cid-mppcwxlb></div> </div> </div> <div class="absolute bottom-0 left-0 right-0 p-6 z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" data-astro-cid-mppcwxlb> <h3 class="font-serif text-2xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>Gamma-Ray Bursts</h3> <p class="text-gray-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-astro-cid-mppcwxlb>The brightest electromagnetic events known, releasing more energy in seconds than the Sun will in its lifetime.</p> <div class="mt-4 flex items-center text-cosmic-accent font-mono text-xs tracking-widest" data-astro-cid-mppcwxlb> <span data-astro-cid-mppcwxlb>VIEW DATA</span> <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" data-astro-cid-mppcwxlb></path> </svg> </div> </div> </div> <!-- Quasars --> <div class="phenomena-card group relative h-96 glass-panel rounded-2xl overflow-hidden cursor-pointer" data-phenomenon="quasar" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 z-10" data-astro-cid-mppcwxlb></div> <div class="absolute inset-0 flex items-center justify-center" data-astro-cid-mppcwxlb> <div class="w-28 h-28 bg-blue-600 rounded-full blur-md animate-pulse" data-astro-cid-mppcwxlb></div> <div class="absolute w-40 h-10 bg-blue-400/30 blur-xl transform rotate-12" data-astro-cid-mppcwxlb></div> <div class="absolute w-40 h-10 bg-blue-400/30 blur-xl transform -rotate-12" data-astro-cid-mppcwxlb></div> </div> <div class="absolute bottom-0 left-0 right-0 p-6 z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" data-astro-cid-mppcwxlb> <h3 class="font-serif text-2xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>Quasars</h3> <p class="text-gray-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-astro-cid-mppcwxlb>Active galactic nuclei powered by supermassive black holes accreting matter, outshining their host galaxies.</p> <div class="mt-4 flex items-center text-cosmic-accent font-mono text-xs tracking-widest" data-astro-cid-mppcwxlb> <span data-astro-cid-mppcwxlb>VIEW DATA</span> <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" data-astro-cid-mppcwxlb></path> </svg> </div> </div> </div> </div> </div> </section> <!-- Research Terminal --> <section id="research" class="relative py-32 bg-cosmic-900 border-t border-white/5" data-astro-cid-mppcwxlb> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-astro-cid-mppcwxlb> <div class="glass-panel rounded-3xl p-8 md:p-16 border border-cosmic-accent/20" data-astro-cid-mppcwxlb> <div class="grid lg:grid-cols-3 gap-12" data-astro-cid-mppcwxlb> <div class="lg:col-span-2" data-astro-cid-mppcwxlb> <span class="font-mono text-cosmic-accent text-sm tracking-[0.5em] uppercase block mb-4" data-astro-cid-mppcwxlb>Live Research Terminal</span> <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-8" data-astro-cid-mppcwxlb>Computational Cosmology</h2> <div class="space-y-6 font-mono text-sm" data-astro-cid-mppcwxlb> <div class="flex items-start space-x-4 p-4 bg-black/30 rounded-lg border-l-2 border-green-500" data-astro-cid-mppcwxlb> <span class="text-green-500" data-astro-cid-mppcwxlb>[ACTIVE]</span> <div data-astro-cid-mppcwxlb> <div class="text-white mb-1" data-astro-cid-mppcwxlb>N-Body Simulation: Dark Matter Distribution</div> <div class="text-gray-500 text-xs" data-astro-cid-mppcwxlb>Processing 10^6 particles | Iteration 4,291</div> </div> </div> <div class="flex items-start space-x-4 p-4 bg-black/30 rounded-lg border-l-2 border-yellow-500" data-astro-cid-mppcwxlb> <span class="text-yellow-500" data-astro-cid-mppcwxlb>[QUEUED]</span> <div data-astro-cid-mppcwxlb> <div class="text-white mb-1" data-astro-cid-mppcwxlb>Hydrodynamical Simulation: Galaxy Formation</div> <div class="text-gray-500 text-xs" data-astro-cid-mppcwxlb>Awaiting cluster allocation...</div> </div> </div> <div class="flex items-start space-x-4 p-4 bg-black/30 rounded-lg border-l-2 border-cosmic-purple" data-astro-cid-mppcwxlb> <span class="text-cosmic-purple" data-astro-cid-mppcwxlb>[COMPLETE]</span> <div data-astro-cid-mppcwxlb> <div class="text-white mb-1" data-astro-cid-mppcwxlb>CMB Power Spectrum Analysis</div> <div class="text-gray-500 text-xs" data-astro-cid-mppcwxlb>Chi-squared: 1.04 | Data archived</div> </div> </div> </div> <div class="mt-8 p-6 bg-black/50 rounded-lg font-mono text-xs text-green-400 overflow-hidden" data-astro-cid-mppcwxlb> <div class="flex items-center justify-between mb-4 border-b border-gray-800 pb-2" data-astro-cid-mppcwxlb> <span data-astro-cid-mppcwxlb>TERMINAL_OUTPUT</span> <span class="animate-pulse" data-astro-cid-mppcwxlb>● REC</span> </div> <div class="space-y-2 opacity-80" data-astro-cid-mppcwxlb> <div data-astro-cid-mppcwxlb>> Initializing gravitational field tensors...</div> <div data-astro-cid-mppcwxlb>> Loading Lambda-CDM parameters...</div> <div data-astro-cid-mppcwxlb>> Dark energy density: 0.692 ± 0.012</div> <div data-astro-cid-mppcwxlb>> Computing geodesic equations for test particles...</div> <div class="text-cosmic-accent" data-astro-cid-mppcwxlb>> Simulation convergence achieved in 4.2 hours</div> <div class="animate-pulse" data-astro-cid-mppcwxlb>> _</div> </div> </div> </div> <div class="space-y-6" data-astro-cid-mppcwxlb> <div class="glass-panel p-6 rounded-xl border border-white/10" data-astro-cid-mppcwxlb> <h4 class="font-serif text-xl text-white mb-4" data-astro-cid-mppcwxlb>Research Divisions</h4> <ul class="space-y-3 font-mono text-sm text-gray-400" data-astro-cid-mppcwxlb> <li class="flex items-center hover:text-cosmic-accent cursor-pointer transition-colors" data-astro-cid-mppcwxlb> <span class="w-2 h-2 bg-cosmic-accent rounded-full mr-3" data-astro-cid-mppcwxlb></span>
+</p> <div class="grid grid-cols-2 gap-6 pt-8" data-astro-cid-mppcwxlb> <div class="glass-panel p-6 rounded-lg border-l-4 border-cosmic-accent" data-astro-cid-mppcwxlb> <div class="font-serif text-3xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>13.8B</div> <div class="font-mono text-xs text-gray-500 uppercase tracking-wider" data-astro-cid-mppcwxlb>Years Observed</div> </div> <div class="glass-panel p-6 rounded-lg border-l-4 border-cosmic-purple" data-astro-cid-mppcwxlb> <div class="font-serif text-3xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>2.4T</div> <div class="font-mono text-xs text-gray-500 uppercase tracking-wider" data-astro-cid-mppcwxlb>Data Points</div> </div> </div> </div> <div class="relative h-[600px] hologram glass-panel rounded-2xl overflow-hidden" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-gradient-to-br from-cosmic-700/50 to-transparent" data-astro-cid-mppcwxlb></div> <!-- Interactive Star Map Visualization --> <div class="absolute inset-0 flex items-center justify-center" data-astro-cid-mppcwxlb> <div class="relative w-96 h-96" data-astro-cid-mppcwxlb> <div class="absolute inset-0 border border-cosmic-accent/20 rounded-full animate-pulse-slow" data-astro-cid-mppcwxlb></div> <div class="absolute inset-4 border border-cosmic-purple/20 rounded-full" style="animation: rotate 30s linear infinite reverse;" data-astro-cid-mppcwxlb></div> <div class="absolute inset-8 border border-cosmic-gold/20 rounded-full" style="animation: rotate 40s linear infinite;" data-astro-cid-mppcwxlb></div> <!-- Constellation Points --> <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-cosmic-accent rounded-full animate-twinkle" data-astro-cid-mppcwxlb></div> <div class="absolute top-1/3 right-1/3 w-3 h-3 bg-cosmic-purple rounded-full animate-twinkle" style="animation-delay: 0.5s;" data-astro-cid-mppcwxlb></div> <div class="absolute bottom-1/4 left-1/3 w-2 h-2 bg-cosmic-gold rounded-full animate-twinkle" style="animation-delay: 1s;" data-astro-cid-mppcwxlb></div> <div class="absolute bottom-1/3 right-1/4 w-4 h-4 bg-white rounded-full animate-twinkle shadow-[0_0_20px_rgba(255,255,255,0.8)]" style="animation-delay: 1.5s;" data-astro-cid-mppcwxlb></div> <!-- Connecting Lines SVG --> <svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" data-astro-cid-mppcwxlb> <line x1="25" y1="25" x2="66" y2="33" class="constellation-line" data-astro-cid-mppcwxlb></line> <line x1="66" y1="33" x2="75" y2="66" class="constellation-line" data-astro-cid-mppcwxlb></line> <line x1="75" y1="66" x2="33" y2="75" class="constellation-line" data-astro-cid-mppcwxlb></line> <line x1="33" y1="75" x2="25" y2="25" class="constellation-line" data-astro-cid-mppcwxlb></line> </svg> </div> </div> <div class="absolute bottom-6 left-6 right-6 glass-panel p-4 rounded-lg" data-astro-cid-mppcwxlb> <div class="flex justify-between items-center font-mono text-xs" data-astro-cid-mppcwxlb> <span class="text-cosmic-accent" data-astro-cid-mppcwxlb>TARGET: ANDROMEDA GALAXY</span> <span class="text-gray-500" data-astro-cid-mppcwxlb>DISTANCE: 2.537 Mly</span> </div> </div> </div> </div> </div> </section> <!-- Cosmology Section --> <section id="cosmology" class="relative z-10 py-32" data-astro-cid-mppcwxlb> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-astro-cid-mppcwxlb> <div class="text-center mb-20" data-astro-cid-mppcwxlb>  <h2 class="font-serif text-5xl md:text-6xl font-bold text-white mb-6" data-astro-cid-mppcwxlb>Cosmic Evolution</h2> <p class="font-sans text-gray-400 max-w-2xl mx-auto text-lg" data-astro-cid-mppcwxlb>From the Planck epoch to the heat death of the universe, we trace the narrative of existence itself.</p> </div> <div class="relative" data-astro-cid-mppcwxlb> <!-- Timeline --> <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-px bg-gradient-to-b from-cosmic-accent via-cosmic-purple to-transparent" data-astro-cid-mppcwxlb></div> <!-- Timeline Items --> <div class="space-y-24" data-astro-cid-mppcwxlb> <!-- Big Bang --> <div class="relative flex items-center justify-between group" data-astro-cid-mppcwxlb> <div class="w-5/12 text-right pr-8" data-astro-cid-mppcwxlb> <div class="glass-panel p-8 rounded-xl hover:border-cosmic-accent/50 transition-all duration-300 transform hover:-translate-y-2" data-astro-cid-mppcwxlb> <h3 class="font-serif text-2xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>The Primordial Singularity</h3> <span class="font-mono text-cosmic-accent text-sm" data-astro-cid-mppcwxlb>t = 0</span> <p class="text-gray-400 mt-4 text-sm leading-relaxed" data-astro-cid-mppcwxlb>Infinite density. Infinite temperature. The universe begins with a quantum fluctuation in the false vacuum.</p> </div> </div> <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-cosmic-accent rounded-full shadow-[0_0_20px_rgba(0,212,255,0.8)] group-hover:scale-150 transition-transform" data-astro-cid-mppcwxlb></div> <div class="w-5/12 pl-8" data-astro-cid-mppcwxlb></div> </div> <!-- Inflation --> <div class="relative flex items-center justify-between group flex-row-reverse" data-astro-cid-mppcwxlb> <div class="w-5/12 text-left pl-8" data-astro-cid-mppcwxlb> <div class="glass-panel p-8 rounded-xl hover:border-cosmic-purple/50 transition-all duration-300 transform hover:-translate-y-2" data-astro-cid-mppcwxlb> <h3 class="font-serif text-2xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>Cosmic Inflation</h3> <span class="font-mono text-cosmic-purple text-sm" data-astro-cid-mppcwxlb>t = 10^-36 s</span> <p class="text-gray-400 mt-4 text-sm leading-relaxed" data-astro-cid-mppcwxlb>Space expands exponentially by a factor of 10^26 in 10^-33 seconds, smoothing out the universe.</p> </div> </div> <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-cosmic-purple rounded-full shadow-[0_0_20px_rgba(176,38,255,0.8)] group-hover:scale-150 transition-transform" data-astro-cid-mppcwxlb></div> <div class="w-5/12 pr-8" data-astro-cid-mppcwxlb></div> </div> <!-- Recombination --> <div class="relative flex items-center justify-between group" data-astro-cid-mppcwxlb> <div class="w-5/12 text-right pr-8" data-astro-cid-mppcwxlb> <div class="glass-panel p-8 rounded-xl hover:border-cosmic-gold/50 transition-all duration-300 transform hover:-translate-y-2" data-astro-cid-mppcwxlb> <h3 class="font-serif text-2xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>Epoch of Recombination</h3> <span class="font-mono text-cosmic-gold text-sm" data-astro-cid-mppcwxlb>t = 380,000 years</span> <p class="text-gray-400 mt-4 text-sm leading-relaxed" data-astro-cid-mppcwxlb>Electrons combine with nuclei to form neutral atoms. The universe becomes transparent to radiation. The CMB is released.</p> </div> </div> <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-cosmic-gold rounded-full shadow-[0_0_20px_rgba(255,215,0,0.8)] group-hover:scale-150 transition-transform" data-astro-cid-mppcwxlb></div> <div class="w-5/12 pl-8" data-astro-cid-mppcwxlb></div> </div> </div> </div> </div> </section> <!-- Phenomena Grid --> <section id="phenomena" class="relative z-10 py-32" data-astro-cid-mppcwxlb> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-astro-cid-mppcwxlb> <div class="mb-16" data-astro-cid-mppcwxlb>  <h2 class="font-serif text-5xl font-bold text-white" data-astro-cid-mppcwxlb>Extreme Phenomena</h2> </div> <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-astro-cid-mppcwxlb> <!-- Black Hole Card --> <div class="phenomena-card group relative h-96 glass-panel rounded-2xl overflow-hidden cursor-pointer" data-phenomenon="blackhole" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 z-10" data-astro-cid-mppcwxlb></div> <div class="absolute inset-0 flex items-center justify-center" data-astro-cid-mppcwxlb> <div class="w-32 h-32 black-hole rounded-full relative" data-astro-cid-mppcwxlb> <div class="absolute inset-[-20px] accretion-disk rounded-full blur-md" data-astro-cid-mppcwxlb></div> </div> </div> <div class="absolute bottom-0 left-0 right-0 p-6 z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" data-astro-cid-mppcwxlb> <h3 class="font-serif text-2xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>Supermassive Black Holes</h3> <p class="text-gray-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-astro-cid-mppcwxlb>Sagittarius A* and M87* anchor their galaxies with gravitational might, warping spacetime itself.</p> <div class="mt-4 flex items-center text-cosmic-accent font-mono text-xs tracking-widest" data-astro-cid-mppcwxlb> <span data-astro-cid-mppcwxlb>VIEW DATA</span> <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" data-astro-cid-mppcwxlb></path> </svg> </div> </div> </div> <!-- Neutron Star Card --> <div class="phenomena-card group relative h-96 glass-panel rounded-2xl overflow-hidden cursor-pointer" data-phenomenon="magnetar" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 z-10" data-astro-cid-mppcwxlb></div> <div class="absolute inset-0 flex items-center justify-center" data-astro-cid-mppcwxlb> <div class="w-24 h-24 bg-gradient-to-br from-white to-blue-200 rounded-full shadow-[0_0_60px_rgba(255,255,255,0.8)] animate-pulse" data-astro-cid-mppcwxlb></div> <div class="absolute w-32 h-32 border-2 border-blue-400/30 rounded-full animate-ping" data-astro-cid-mppcwxlb></div> </div> <div class="absolute bottom-0 left-0 right-0 p-6 z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" data-astro-cid-mppcwxlb> <h3 class="font-serif text-2xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>Magnetars</h3> <p class="text-gray-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-astro-cid-mppcwxlb>Neutron stars with magnetic fields a quadrillion times stronger than Earth's, capable of disrupting atomic structure.</p> <div class="mt-4 flex items-center text-cosmic-accent font-mono text-xs tracking-widest" data-astro-cid-mppcwxlb> <span data-astro-cid-mppcwxlb>VIEW DATA</span> <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" data-astro-cid-mppcwxlb></path> </svg> </div> </div> </div> <!-- Dark Matter Card --> <div class="phenomena-card group relative h-96 glass-panel rounded-2xl overflow-hidden cursor-pointer" data-phenomenon="darkmatter" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 z-10" data-astro-cid-mppcwxlb></div> <div class="absolute inset-0 flex items-center justify-center" data-astro-cid-mppcwxlb> <div class="w-40 h-40 relative" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-purple-500/20 rounded-full blur-2xl animate-pulse" data-astro-cid-mppcwxlb></div> <svg class="w-full h-full animate-[rotate_20s_linear_infinite]" viewBox="0 0 100 100" data-astro-cid-mppcwxlb> <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(176,38,255,0.3)" stroke-width="0.5" stroke-dasharray="4 4" data-astro-cid-mppcwxlb></circle> <circle cx="50" cy="50" r="30" fill="none" stroke="rgba(176,38,255,0.5)" stroke-width="0.5" data-astro-cid-mppcwxlb></circle> <circle cx="50" cy="50" r="20" fill="none" stroke="rgba(176,38,255,0.8)" stroke-width="1" data-astro-cid-mppcwxlb></circle> </svg> </div> </div> <div class="absolute bottom-0 left-0 right-0 p-6 z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" data-astro-cid-mppcwxlb> <h3 class="font-serif text-2xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>Dark Matter Halos</h3> <p class="text-gray-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-astro-cid-mppcwxlb>Invisible scaffolding comprising 85% of matter, detected only through gravitational lensing effects.</p> <div class="mt-4 flex items-center text-cosmic-accent font-mono text-xs tracking-widest" data-astro-cid-mppcwxlb> <span data-astro-cid-mppcwxlb>VIEW DATA</span> <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" data-astro-cid-mppcwxlb></path> </svg> </div> </div> </div> <!-- Gravitational Waves --> <div class="phenomena-card group relative h-96 glass-panel rounded-2xl overflow-hidden cursor-pointer" data-phenomenon="gravitational" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 z-10" data-astro-cid-mppcwxlb></div> <div class="absolute inset-0 flex items-center justify-center overflow-hidden" data-astro-cid-mppcwxlb> <div class="absolute w-full h-px bg-cosmic-accent/50 animate-[pulse_2s_ease-in-out_infinite]" data-astro-cid-mppcwxlb></div> <div class="absolute w-full h-px bg-cosmic-accent/30 animate-[pulse_2s_ease-in-out_infinite_0.5s] transform rotate-45" data-astro-cid-mppcwxlb></div> <div class="absolute w-full h-px bg-cosmic-accent/30 animate-[pulse_2s_ease-in-out_infinite_0.5s] transform -rotate-45" data-astro-cid-mppcwxlb></div> <div class="w-20 h-20 border-2 border-cosmic-accent rounded-full animate-ping" data-astro-cid-mppcwxlb></div> </div> <div class="absolute bottom-0 left-0 right-0 p-6 z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" data-astro-cid-mppcwxlb> <h3 class="font-serif text-2xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>Gravitational Waves</h3> <p class="text-gray-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-astro-cid-mppcwxlb>Ripples in spacetime fabric caused by accelerating massive objects, traveling at light speed across the cosmos.</p> <div class="mt-4 flex items-center text-cosmic-accent font-mono text-xs tracking-widest" data-astro-cid-mppcwxlb> <span data-astro-cid-mppcwxlb>VIEW DATA</span> <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" data-astro-cid-mppcwxlb></path> </svg> </div> </div> </div> <!-- Gamma Ray Bursts --> <div class="phenomena-card group relative h-96 glass-panel rounded-2xl overflow-hidden cursor-pointer" data-phenomenon="grb" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 z-10" data-astro-cid-mppcwxlb></div> <div class="absolute inset-0 flex items-center justify-center" data-astro-cid-mppcwxlb> <div class="relative w-32 h-32" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-gradient-to-t from-green-400 to-transparent opacity-60 blur-xl" data-astro-cid-mppcwxlb></div> <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-32 bg-green-400 blur-sm" data-astro-cid-mppcwxlb></div> <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-2 bg-green-400 blur-sm" data-astro-cid-mppcwxlb></div> </div> </div> <div class="absolute bottom-0 left-0 right-0 p-6 z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" data-astro-cid-mppcwxlb> <h3 class="font-serif text-2xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>Gamma-Ray Bursts</h3> <p class="text-gray-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-astro-cid-mppcwxlb>The brightest electromagnetic events known, releasing more energy in seconds than the Sun will in its lifetime.</p> <div class="mt-4 flex items-center text-cosmic-accent font-mono text-xs tracking-widest" data-astro-cid-mppcwxlb> <span data-astro-cid-mppcwxlb>VIEW DATA</span> <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" data-astro-cid-mppcwxlb></path> </svg> </div> </div> </div> <!-- Quasars --> <div class="phenomena-card group relative h-96 glass-panel rounded-2xl overflow-hidden cursor-pointer" data-phenomenon="quasar" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 z-10" data-astro-cid-mppcwxlb></div> <div class="absolute inset-0 flex items-center justify-center" data-astro-cid-mppcwxlb> <div class="w-28 h-28 bg-blue-600 rounded-full blur-md animate-pulse" data-astro-cid-mppcwxlb></div> <div class="absolute w-40 h-10 bg-blue-400/30 blur-xl transform rotate-12" data-astro-cid-mppcwxlb></div> <div class="absolute w-40 h-10 bg-blue-400/30 blur-xl transform -rotate-12" data-astro-cid-mppcwxlb></div> </div> <div class="absolute bottom-0 left-0 right-0 p-6 z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300" data-astro-cid-mppcwxlb> <h3 class="font-serif text-2xl font-bold text-white mb-2" data-astro-cid-mppcwxlb>Quasars</h3> <p class="text-gray-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-astro-cid-mppcwxlb>Active galactic nuclei powered by supermassive black holes accreting matter, outshining their host galaxies.</p> <div class="mt-4 flex items-center text-cosmic-accent font-mono text-xs tracking-widest" data-astro-cid-mppcwxlb> <span data-astro-cid-mppcwxlb>VIEW DATA</span> <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" data-astro-cid-mppcwxlb></path> </svg> </div> </div> </div> </div> </div> </section> <!-- Research Terminal --> <section id="research" class="relative z-10 py-32 border-t border-white/5" data-astro-cid-mppcwxlb> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-astro-cid-mppcwxlb> <div class="glass-panel rounded-3xl p-8 md:p-16 border border-cosmic-accent/20" data-astro-cid-mppcwxlb> <div class="grid lg:grid-cols-3 gap-12" data-astro-cid-mppcwxlb> <div class="lg:col-span-2" data-astro-cid-mppcwxlb> <span class="font-mono text-cosmic-accent text-sm tracking-[0.5em] uppercase block mb-4" data-astro-cid-mppcwxlb>Live Research Terminal</span> <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-8" data-astro-cid-mppcwxlb>Computational Cosmology</h2> <div class="space-y-6 font-mono text-sm" data-astro-cid-mppcwxlb> <div class="flex items-start space-x-4 p-4 bg-black/30 rounded-lg border-l-2 border-green-500" data-astro-cid-mppcwxlb> <span class="text-green-500" data-astro-cid-mppcwxlb>[ACTIVE]</span> <div data-astro-cid-mppcwxlb> <div class="text-white mb-1" data-astro-cid-mppcwxlb>N-Body Simulation: Dark Matter Distribution</div> <div class="text-gray-500 text-xs" data-astro-cid-mppcwxlb>Processing 10^6 particles | Iteration 4,291</div> </div> </div> <div class="flex items-start space-x-4 p-4 bg-black/30 rounded-lg border-l-2 border-yellow-500" data-astro-cid-mppcwxlb> <span class="text-yellow-500" data-astro-cid-mppcwxlb>[QUEUED]</span> <div data-astro-cid-mppcwxlb> <div class="text-white mb-1" data-astro-cid-mppcwxlb>Hydrodynamical Simulation: Galaxy Formation</div> <div class="text-gray-500 text-xs" data-astro-cid-mppcwxlb>Awaiting cluster allocation...</div> </div> </div> <div class="flex items-start space-x-4 p-4 bg-black/30 rounded-lg border-l-2 border-cosmic-purple" data-astro-cid-mppcwxlb> <span class="text-cosmic-purple" data-astro-cid-mppcwxlb>[COMPLETE]</span> <div data-astro-cid-mppcwxlb> <div class="text-white mb-1" data-astro-cid-mppcwxlb>CMB Power Spectrum Analysis</div> <div class="text-gray-500 text-xs" data-astro-cid-mppcwxlb>Chi-squared: 1.04 | Data archived</div> </div> </div> </div> <div class="mt-8 p-6 bg-black/50 rounded-lg font-mono text-xs text-green-400 overflow-hidden" data-astro-cid-mppcwxlb> <div class="flex items-center justify-between mb-4 border-b border-gray-800 pb-2" data-astro-cid-mppcwxlb> <span data-astro-cid-mppcwxlb>TERMINAL_OUTPUT</span> <span class="animate-pulse" data-astro-cid-mppcwxlb>● REC</span> </div> <div class="space-y-2 opacity-80" data-astro-cid-mppcwxlb> <div data-astro-cid-mppcwxlb>> Initializing gravitational field tensors...</div> <div data-astro-cid-mppcwxlb>> Loading Lambda-CDM parameters...</div> <div data-astro-cid-mppcwxlb>> Dark energy density: 0.692 ± 0.012</div> <div data-astro-cid-mppcwxlb>> Computing geodesic equations for test particles...</div> <div class="text-cosmic-accent" data-astro-cid-mppcwxlb>> Simulation convergence achieved in 4.2 hours</div> <div class="animate-pulse" data-astro-cid-mppcwxlb>> _</div> </div> </div> </div> <div class="space-y-6" data-astro-cid-mppcwxlb> <div class="glass-panel p-6 rounded-xl border border-white/10" data-astro-cid-mppcwxlb> <h4 class="font-serif text-xl text-white mb-4" data-astro-cid-mppcwxlb>Research Divisions</h4> <ul class="space-y-3 font-mono text-sm text-gray-400" data-astro-cid-mppcwxlb> <li class="flex items-center hover:text-cosmic-accent cursor-pointer transition-colors" data-astro-cid-mppcwxlb> <span class="w-2 h-2 bg-cosmic-accent rounded-full mr-3" data-astro-cid-mppcwxlb></span>
 Theoretical Astrophysics
 </li> <li class="flex items-center hover:text-cosmic-accent cursor-pointer transition-colors" data-astro-cid-mppcwxlb> <span class="w-2 h-2 bg-cosmic-purple rounded-full mr-3" data-astro-cid-mppcwxlb></span>
 Observational Cosmology
@@ -54,41 +77,42 @@ Observational Cosmology
 High-Energy Phenomena
 </li> <li class="flex items-center hover:text-cosmic-accent cursor-pointer transition-colors" data-astro-cid-mppcwxlb> <span class="w-2 h-2 bg-green-500 rounded-full mr-3" data-astro-cid-mppcwxlb></span>
 Exoplanetary Science
-</li> </ul> </div> <div class="glass-panel p-6 rounded-xl border border-white/10" data-astro-cid-mppcwxlb> <h4 class="font-serif text-xl text-white mb-4" data-astro-cid-mppcwxlb>Latest Publications</h4> <div class="text-gray-400 text-sm italic" data-astro-cid-mppcwxlb>Coming soon</div> </div> </div> </div> </div> </div> </section> <!-- Visitor Map Section --> <section id="visitors" class="relative py-20 bg-cosmic-900 border-t border-white/10" data-astro-cid-mppcwxlb> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-astro-cid-mppcwxlb> <span class="font-mono text-cosmic-accent text-sm tracking-[0.5em] uppercase block mb-4" data-astro-cid-mppcwxlb>Global Visitors</span> <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-6" data-astro-cid-mppcwxlb>Connected From</h2> <!-- Visitor Counter --> <div class="glass-panel inline-block px-8 py-4 rounded-xl border border-cosmic-purple/30 mb-8" data-astro-cid-mppcwxlb> <div class="flex items-center justify-center space-x-3" data-astro-cid-mppcwxlb> <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse" data-astro-cid-mppcwxlb></div> <span class="font-mono text-lg text-white" data-astro-cid-mppcwxlb>TOTAL EXPLORERS:</span> <span id="visitor-count" class="font-serif text-3xl font-bold text-cosmic-accent" data-astro-cid-mppcwxlb>--</span> </div> </div> <p class="font-sans text-gray-400 max-w-xl mx-auto mb-8" data-astro-cid-mppcwxlb>Welcome, cosmic explorer. Your signal has been detected.</p> <!-- Visitor Info Display --> <div id="visitor-info" class="glass-panel inline-block px-8 py-4 rounded-xl border border-cosmic-accent/20 mb-8" data-astro-cid-mppcwxlb> <div class="flex flex-wrap items-center justify-center gap-4 font-mono text-sm" data-astro-cid-mppcwxlb> <div class="flex items-center space-x-2" data-astro-cid-mppcwxlb> <span class="text-gray-500" data-astro-cid-mppcwxlb>COUNTRY:</span> <span id="visitor-country" class="text-cosmic-accent" data-astro-cid-mppcwxlb>Detecting...</span> </div> <span class="text-gray-600 hidden sm:inline" data-astro-cid-mppcwxlb>|</span> <div class="flex items-center space-x-2" data-astro-cid-mppcwxlb> <span class="text-gray-500" data-astro-cid-mppcwxlb>CITY:</span> <span id="visitor-city" class="text-cosmic-purple" data-astro-cid-mppcwxlb>Detecting...</span> </div> <span class="text-gray-600 hidden sm:inline" data-astro-cid-mppcwxlb>|</span> <div class="flex items-center space-x-2" data-astro-cid-mppcwxlb> <span class="text-gray-500" data-astro-cid-mppcwxlb>COORDS:</span> <span id="visitor-coords" class="text-cosmic-gold" data-astro-cid-mppcwxlb>Detecting...</span> </div> </div> </div> <!-- Interactive World Map --> <div class="flex justify-center mb-8" data-astro-cid-mppcwxlb> <div class="glass-panel p-4 rounded-2xl border border-cosmic-accent/20 w-full max-w-4xl" data-astro-cid-mppcwxlb> <div id="visitor-map" style="height: 400px; border-radius: 12px; background: #0a0a0f;" data-astro-cid-mppcwxlb></div> </div> </div> <p class="font-mono text-xs text-gray-600" data-astro-cid-mppcwxlb>You are visitor #<span id="visitor-number" data-astro-cid-mppcwxlb>--</span>. Location detected via IP geolocation.</p> </div> </section>  <!-- Footer --> <footer class="bg-black border-t border-white/10 py-16" data-astro-cid-mppcwxlb> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-astro-cid-mppcwxlb> <div class="grid md:grid-cols-4 gap-12 mb-12" data-astro-cid-mppcwxlb> <div class="col-span-2" data-astro-cid-mppcwxlb> <div class="flex items-center space-x-3 mb-6" data-astro-cid-mppcwxlb> <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cosmic-accent to-cosmic-purple" data-astro-cid-mppcwxlb></div> <span class="font-serif text-2xl font-bold text-white" data-astro-cid-mppcwxlb>COSMOS</span> </div> <p class="text-gray-500 text-sm leading-relaxed max-w-md" data-astro-cid-mppcwxlb>
+</li> </ul> </div> <div class="glass-panel p-6 rounded-xl border border-white/10" data-astro-cid-mppcwxlb> <h4 class="font-serif text-xl text-white mb-4" data-astro-cid-mppcwxlb>Latest Publications</h4> <div class="text-gray-400 text-sm italic" data-astro-cid-mppcwxlb>Coming soon</div> </div> </div> </div> </div> </div> </section> <!-- Visitor Map Section --> <section id="visitors" class="relative z-10 py-20 border-t border-white/10" data-astro-cid-mppcwxlb> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-astro-cid-mppcwxlb> <span class="font-mono text-cosmic-accent text-sm tracking-[0.5em] uppercase block mb-4" data-astro-cid-mppcwxlb>Global Visitors</span> <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-6" data-astro-cid-mppcwxlb>Connected From</h2> <!-- Visitor Counter --> <div class="glass-panel inline-block px-8 py-4 rounded-xl border border-cosmic-purple/30 mb-8" data-astro-cid-mppcwxlb> <div class="flex items-center justify-center space-x-3" data-astro-cid-mppcwxlb> <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse" data-astro-cid-mppcwxlb></div> <span class="font-mono text-lg text-white" data-astro-cid-mppcwxlb>TOTAL EXPLORERS:</span> <span id="visitor-count" class="font-serif text-3xl font-bold text-cosmic-accent" data-astro-cid-mppcwxlb>--</span> </div> </div> <p class="font-sans text-gray-400 max-w-xl mx-auto mb-8" data-astro-cid-mppcwxlb>Welcome, cosmic explorer. Your signal has been detected.</p> <!-- Visitor Info Display --> <div id="visitor-info" class="glass-panel inline-block px-8 py-4 rounded-xl border border-cosmic-accent/20 mb-8" data-astro-cid-mppcwxlb> <div class="flex flex-wrap items-center justify-center gap-4 font-mono text-sm" data-astro-cid-mppcwxlb> <div class="flex items-center space-x-2" data-astro-cid-mppcwxlb> <span class="text-gray-500" data-astro-cid-mppcwxlb>COUNTRY:</span> <span id="visitor-country" class="text-cosmic-accent" data-astro-cid-mppcwxlb>Detecting...</span> </div> <span class="text-gray-600 hidden sm:inline" data-astro-cid-mppcwxlb>|</span> <div class="flex items-center space-x-2" data-astro-cid-mppcwxlb> <span class="text-gray-500" data-astro-cid-mppcwxlb>CITY:</span> <span id="visitor-city" class="text-cosmic-purple" data-astro-cid-mppcwxlb>Detecting...</span> </div> <span class="text-gray-600 hidden sm:inline" data-astro-cid-mppcwxlb>|</span> <div class="flex items-center space-x-2" data-astro-cid-mppcwxlb> <span class="text-gray-500" data-astro-cid-mppcwxlb>COORDS:</span> <span id="visitor-coords" class="text-cosmic-gold" data-astro-cid-mppcwxlb>Detecting...</span> </div> </div> </div> <!-- Interactive World Map --> <div class="relative w-full max-w-6xl mx-auto mb-8" data-astro-cid-mppcwxlb> <div class="absolute inset-0 pointer-events-none z-10" style="background: linear-gradient(to right, #0a0a0f 0%, transparent 8%, transparent 92%, #0a0a0f 100%); " data-astro-cid-mppcwxlb></div> <div class="absolute inset-0 pointer-events-none z-10" style="background: linear-gradient(to bottom, #0a0a0f 0%, transparent 10%, transparent 85%, #0a0a0f 100%);" data-astro-cid-mppcwxlb></div> <div id="visitor-map" style="height: 450px; background: transparent;" data-astro-cid-mppcwxlb></div> </div> <p class="font-mono text-xs text-gray-600" data-astro-cid-mppcwxlb>You are visitor #<span id="visitor-number" data-astro-cid-mppcwxlb>--</span>. Location detected via IP geolocation.</p> </div> </section>  <!-- Footer --> <footer class="relative z-10 border-t border-white/10 py-16" data-astro-cid-mppcwxlb> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-astro-cid-mppcwxlb> <div class="grid md:grid-cols-4 gap-12 mb-12" data-astro-cid-mppcwxlb> <div class="col-span-2" data-astro-cid-mppcwxlb> <div class="flex items-center space-x-3 mb-6" data-astro-cid-mppcwxlb> <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cosmic-accent to-cosmic-purple" data-astro-cid-mppcwxlb></div> <span class="font-serif text-2xl font-bold text-white" data-astro-cid-mppcwxlb>COSMOS</span> </div> <p class="text-gray-500 text-sm leading-relaxed max-w-md" data-astro-cid-mppcwxlb>
 Advancing humanity's understanding of the universe through computational astrophysics,
                         theoretical modeling, and observational data analysis. Established for the pursuit of cosmic truth.
-</p> </div> </div> <div class="border-t border-white/10 pt-8 flex justify-center items-center font-mono text-xs text-gray-600" data-astro-cid-mppcwxlb> <div data-astro-cid-mppcwxlb>&copy; 2026 COSMOS. All rights reserved.</div> </div> </div> </footer> <!-- Detail Modal --> <div id="detail-modal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm" data-astro-cid-mppcwxlb> <div class="modal-content glass-panel w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl border border-cosmic-accent/30 shadow-2xl shadow-cosmic-accent/20" data-astro-cid-mppcwxlb> <!-- Modal Header --> <div class="sticky top-0 bg-cosmic-900/90 backdrop-blur-md border-b border-white/10 p-6 flex justify-between items-center z-10" data-astro-cid-mppcwxlb> <div data-astro-cid-mppcwxlb> <h3 id="modal-title" class="font-serif text-3xl font-bold text-white mb-1" data-astro-cid-mppcwxlb>Phenomenon Title</h3> <p id="modal-subtitle" class="font-mono text-cosmic-accent text-sm" data-astro-cid-mppcwxlb>Classification: Extreme Astrophysical Object</p> </div> <button id="close-modal" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-cosmic-accent hover:text-cosmic-accent transition-all" data-astro-cid-mppcwxlb> <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" data-astro-cid-mppcwxlb></path> </svg> </button> </div> <!-- Modal Body --> <div class="p-8 space-y-8" data-astro-cid-mppcwxlb> <!-- Key Metrics --> <div class="data-grid" id="modal-metrics" data-astro-cid-mppcwxlb> <!-- Populated by JS --> </div> <!-- Main Description --> <div class="prose prose-invert max-w-none" data-astro-cid-mppcwxlb> <p id="modal-description" class="text-gray-300 text-lg leading-relaxed font-sans" data-astro-cid-mppcwxlb>
-Description goes here...
-</p> </div> <!-- Technical Details --> <div class="glass-panel p-6 rounded-xl border border-white/10" data-astro-cid-mppcwxlb> <h4 class="font-mono text-cosmic-accent text-sm tracking-widest mb-4 uppercase" data-astro-cid-mppcwxlb>Technical Specifications</h4> <div id="modal-technical" class="grid md:grid-cols-2 gap-4 font-mono text-sm text-gray-400" data-astro-cid-mppcwxlb> <!-- Populated by JS --> </div> </div> <!-- Observable Instances --> <div data-astro-cid-mppcwxlb> <h4 class="font-mono text-cosmic-accent text-sm tracking-widest mb-4 uppercase" data-astro-cid-mppcwxlb>Notable Examples</h4> <ul id="modal-examples" class="space-y-3" data-astro-cid-mppcwxlb> <!-- Populated by JS --> </ul> </div> <!-- Research Status --> <div class="flex items-center justify-between p-4 bg-cosmic-accent/10 rounded-lg border border-cosmic-accent/20" data-astro-cid-mppcwxlb> <div class="flex items-center space-x-3" data-astro-cid-mppcwxlb> <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse" data-astro-cid-mppcwxlb></div> <span class="font-mono text-sm text-white" data-astro-cid-mppcwxlb>Active Research Program</span> </div> <button class="px-4 py-2 bg-cosmic-accent text-black font-bold font-mono text-xs rounded hover:bg-white transition-colors" data-astro-cid-mppcwxlb>
-ACCESS RAW DATA
-</button> </div> </div> </div> </div> <script>
-        // Three.js Starfield
+</p> </div> </div> <div class="border-t border-white/10 pt-8 flex justify-center items-center font-mono text-xs text-gray-600" data-astro-cid-mppcwxlb> <div data-astro-cid-mppcwxlb>&copy; 2026 COSMOS. All rights reserved.</div> </div> </div> </footer> <!-- Detail Modal --> <div id="detail-modal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md" data-astro-cid-mppcwxlb> <div class="modal-content glass-panel w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-2xl border border-cosmic-accent/30 shadow-2xl shadow-cosmic-accent/20" style="scrollbar-width:thin;scrollbar-color:#00d4ff33 transparent;" data-astro-cid-mppcwxlb> <!-- Modal Header --> <div class="sticky top-0 bg-cosmic-900/95 backdrop-blur-md border-b border-white/10 p-6 md:p-8 flex justify-between items-start z-10" data-astro-cid-mppcwxlb> <div data-astro-cid-mppcwxlb> <h3 id="modal-title" class="font-serif text-3xl md:text-4xl font-bold text-white mb-2" data-astro-cid-mppcwxlb></h3> <p id="modal-subtitle" class="font-mono text-cosmic-accent text-sm" data-astro-cid-mppcwxlb></p> </div> <button id="close-modal" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:border-cosmic-accent hover:text-cosmic-accent transition-all flex-shrink-0 ml-4" data-astro-cid-mppcwxlb> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" data-astro-cid-mppcwxlb></path></svg> </button> </div> <!-- Modal Body --> <div id="modal-body" class="p-6 md:p-8 space-y-8" data-astro-cid-mppcwxlb> <!-- All content populated by JS --> </div> </div> </div> <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>
+        // Three.js Starfield (mobile-optimized)
+        const isMobile = window.innerWidth < 768;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: !isMobile });
         renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-        // Create stars
+        // Create stars (fewer on mobile)
         const starsGeometry = new THREE.BufferGeometry();
-        const starsCount = 8000;
+        const starsCount = isMobile ? 3000 : 8000;
         const posArray = new Float32Array(starsCount * 3);
         const colorArray = new Float32Array(starsCount * 3);
 
         for(let i = 0; i < starsCount * 3; i += 3) {
-            // Position
             posArray[i] = (Math.random() - 0.5) * 100;
             posArray[i+1] = (Math.random() - 0.5) * 100;
             posArray[i+2] = (Math.random() - 0.5) * 100;
 
-            // Color (blue to white to purple)
             const colorChoice = Math.random();
             if(colorChoice > 0.8) {
-                colorArray[i] = 0.7; colorArray[i+1] = 0.8; colorArray[i+2] = 1; // Blue-ish
+                colorArray[i] = 0.7; colorArray[i+1] = 0.8; colorArray[i+2] = 1;
             } else if(colorChoice > 0.6) {
-                colorArray[i] = 0.8; colorArray[i+1] = 0.7; colorArray[i+2] = 1; // Purple-ish
+                colorArray[i] = 0.8; colorArray[i+1] = 0.7; colorArray[i+2] = 1;
             } else {
-                colorArray[i] = 1; colorArray[i+1] = 1; colorArray[i+2] = 1; // White
+                colorArray[i] = 1; colorArray[i+1] = 1; colorArray[i+2] = 1;
             }
         }
 
@@ -108,59 +132,71 @@ ACCESS RAW DATA
 
         camera.position.z = 30;
 
-        // Mouse interaction
+        // Mouse interaction (skip on mobile)
         let mouseX = 0;
         let mouseY = 0;
-        let targetX = 0;
-        let targetY = 0;
 
-        const windowHalfX = window.innerWidth / 2;
-        const windowHalfY = window.innerHeight / 2;
+        if (!isMobile) {
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX - window.innerWidth / 2) / 100;
+                mouseY = (event.clientY - window.innerHeight / 2) / 100;
+            }, { passive: true });
+        }
 
-        document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX - windowHalfX) / 100;
-            mouseY = (event.clientY - windowHalfY) / 100;
+        // Visibility API - pause when tab hidden
+        let isTabVisible = true;
+        document.addEventListener('visibilitychange', () => {
+            isTabVisible = !document.hidden;
         });
 
         // Animation loop
         const clock = new THREE.Clock();
+        let animationId;
 
         function animate() {
-            requestAnimationFrame(animate);
+            animationId = requestAnimationFrame(animate);
+
+            if (!isTabVisible || prefersReducedMotion) return;
 
             const elapsedTime = clock.getElapsedTime();
-
-            targetX = mouseX * 0.5;
-            targetY = mouseY * 0.5;
 
             starsMesh.rotation.y += 0.0005;
             starsMesh.rotation.x += 0.0002;
 
-            // Smooth camera movement
-            camera.position.x += (mouseX - camera.position.x) * 0.05;
-            camera.position.y += (-mouseY - camera.position.y) * 0.05;
+            if (!isMobile) {
+                camera.position.x += (mouseX - camera.position.x) * 0.05;
+                camera.position.y += (-mouseY - camera.position.y) * 0.05;
+            }
             camera.lookAt(scene.position);
 
-            // Twinkle effect
             starsMaterial.opacity = 0.6 + Math.sin(elapsedTime) * 0.2;
 
             renderer.render(scene, camera);
         }
 
-        animate();
+        if (!prefersReducedMotion) {
+            animate();
+        } else {
+            // Render one frame for static stars
+            renderer.render(scene, camera);
+        }
 
-        // Resize handler
+        // Debounced resize handler
+        let resizeTimeout;
         window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }, 250);
+        }, { passive: true });
 
         // GSAP Scroll Animations
         gsap.registerPlugin(ScrollTrigger);
 
         // Fade in elements on scroll
-        gsap.utils.toArray('.glass-panel').forEach((element, i) => {
+        gsap.utils.toArray('.glass-panel:not(.modal-content)').forEach((element, i) => {
             gsap.from(element, {
                 scrollTrigger: {
                     trigger: element,
@@ -178,19 +214,22 @@ ACCESS RAW DATA
         // Navbar scroll effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-cosmic-900/90');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(10, 10, 15, 0.6)';
+                navbar.style.backdropFilter = 'blur(8px)';
             } else {
-                navbar.classList.remove('bg-cosmic-900/90');
+                navbar.style.background = 'transparent';
+                navbar.style.backdropFilter = 'none';
             }
-        });
+        }, { passive: true });
 
-        // Particle effect on click
-        document.addEventListener('click', (e) => {
-            // Don't create particles if clicking on a card or modal
-            if(e.target.closest('.phenomena-card') || e.target.closest('#detail-modal')) return;
-            createParticles(e.clientX, e.clientY);
-        });
+        // Particle effect on click (disabled on mobile)
+        if (!isMobile) {
+            document.addEventListener('click', (e) => {
+                if(e.target.closest('.phenomena-card') || e.target.closest('#detail-modal')) return;
+                createParticles(e.clientX, e.clientY);
+            });
+        }
 
         function createParticles(x, y) {
             for (let i = 0; i < 8; i++) {
@@ -215,138 +254,280 @@ ACCESS RAW DATA
             }
         }
 
-        // Modal Data
+        // Modal Data — comprehensive astrophysics encyclopedia
         const phenomenonData = {
             blackhole: {
                 title: "Supermassive Black Holes",
-                subtitle: "Class: Singularity | Event Horizon Radius: Variable",
+                subtitle: "Class: Gravitational Singularity | Type: Kerr / Schwarzschild",
                 metrics: [
-                    { label: "Mass Range", value: "10^6 - 10^10 M☉", color: "border-cosmic-purple" },
-                    { label: "Schwarzschild Radius", value: "0.08 - 800 AU", color: "border-cosmic-accent" },
-                    { label: "Spin Parameter", value: "0.0 - 0.998", color: "border-cosmic-gold" },
-                    { label: "Hawking Temp", value: "~10^-18 K", color: "border-green-500" }
+                    { label: "Mass Range", value: "10\u2076 \u2013 10\u00B9\u2070 M\u2609", color: "border-cosmic-purple" },
+                    { label: "Schwarzschild Radius", value: "0.08 \u2013 800 AU", color: "border-cosmic-accent" },
+                    { label: "Spin Parameter", value: "a = 0 \u2013 0.998", color: "border-cosmic-gold" },
+                    { label: "Hawking Temperature", value: "~10\u207B\u00B9\u2078 K", color: "border-green-500" },
+                    { label: "Information Paradox", value: "Unresolved", color: "border-cosmic-purple" },
+                    { label: "Event Horizon", value: "One-way causal boundary", color: "border-cosmic-accent" }
                 ],
-                description: "Supermassive black holes (SMBHs) reside at the centers of most massive galaxies, with masses ranging from millions to tens of billions of solar masses. These cosmic giants form through hierarchical merging of smaller black holes and accretion of baryonic matter. The Event Horizon Telescope has resolved the shadow of M87* and Sagittarius A*, confirming Einstein's predictions of general relativity in strong gravitational fields.",
-                technical: [
-                    "<span class='text-white'>Accretion Disk Temp:</span> 10^4 - 10^7 K",
-                    "<span class='text-white'>Eddington Limit:</span> 10^40 - 10^44 erg/s",
-                    "<span class='text-white'>Jet Velocity:</span> 0.99c (relativistic)",
-                    "<span class='text-white'>Last Stable Orbit:</span> 3R_s (Schwarzschild)"
+                overview: "A black hole is a region of spacetime where gravity is so extreme that nothing \u2014 not even light travelling at 299,792 km/s \u2014 can escape once past the event horizon. Predicted by Karl Schwarzschild\u2019s 1916 solution to Einstein\u2019s field equations, black holes were considered mathematical curiosities for decades until observational evidence made them undeniable.",
+                physics: [
+                    "The singularity at the center has infinite density and zero volume \u2014 a point where general relativity breaks down and quantum gravity is needed.",
+                    "For a non-rotating (Schwarzschild) black hole, the event horizon radius is R\u209b = 2GM/c\u00B2. For a solar-mass black hole, this is ~3 km.",
+                    "Rotating (Kerr) black holes drag spacetime itself around them \u2014 a phenomenon called frame-dragging or the Lense-Thirring effect. The ergosphere outside the event horizon allows energy extraction via the Penrose process.",
+                    "Time dilation near the event horizon is extreme: an observer falling in would see the entire future history of the universe flash before them, while a distant observer would see the infalling object freeze and redshift into oblivion.",
+                    "Hawking radiation \u2014 quantum pair production at the event horizon \u2014 causes black holes to slowly evaporate. A solar-mass black hole would take ~10\u2076\u2077 years to evaporate, far longer than the current age of the universe."
+                ],
+                formation: [
+                    "<span class='text-white'>Stellar collapse:</span> Stars > 25 M\u2609 undergo core collapse when nuclear fusion can no longer support them against gravity, forming stellar-mass black holes (3\u201320 M\u2609).",
+                    "<span class='text-white'>Direct collapse:</span> In the early universe, pristine gas clouds may have collapsed directly into ~10\u2074\u201310\u2075 M\u2609 black holes without forming stars first.",
+                    "<span class='text-white'>Hierarchical merging:</span> Supermassive black holes (10\u2076\u201310\u00B9\u2070 M\u2609) grow through billions of years of merging with other black holes and accreting gas.",
+                    "<span class='text-white'>Primordial:</span> Hypothetical black holes formed from density fluctuations in the first second after the Big Bang. Could range from subatomic to stellar mass."
+                ],
+                detection: [
+                    "<span class='text-white'>Accretion disk emission:</span> Gas spiraling in heats to millions of kelvin, radiating X-rays. This is how Cygnus X-1 was identified in 1964.",
+                    "<span class='text-white'>Gravitational lensing:</span> Light from background objects is bent around the black hole, creating Einstein rings and arcs.",
+                    "<span class='text-white'>Stellar orbits:</span> Stars near Sgr A* orbit an invisible mass at speeds up to 7,650 km/s \u2014 the S2 star completes an orbit in just 16 years.",
+                    "<span class='text-white'>Event Horizon Telescope:</span> In 2019, the EHT captured the first image of a black hole shadow (M87*), using a planet-sized array of radio telescopes with a resolution of 20 microarcseconds.",
+                    "<span class='text-white'>Gravitational waves:</span> LIGO/Virgo detect the spacetime ripples from merging black holes \u2014 the chirp signal encodes both masses and spins."
                 ],
                 examples: [
-                    "<span class='text-cosmic-accent'>TON 618:</span> 66 billion solar masses, most massive known",
-                    "<span class='text-cosmic-accent'>Phoenix A:</span> Most luminous black hole, 100 trillion L☉",
-                    "<span class='text-cosmic-accent'>Sagittarius A*:</span> 4.3 million solar masses, Milky Way center"
+                    "<span class='text-cosmic-accent'>Sagittarius A*:</span> 4.3 million M\u2609, center of the Milky Way, 26,000 light-years away. Its shadow was imaged by the EHT in 2022.",
+                    "<span class='text-cosmic-accent'>M87*:</span> 6.5 billion M\u2609, powers a relativistic jet extending 5,000 light-years. First black hole ever photographed (2019).",
+                    "<span class='text-cosmic-accent'>TON 618:</span> 66 billion M\u2609, one of the most massive known. Its Schwarzschild radius is ~1,300 AU \u2014 larger than our entire solar system.",
+                    "<span class='text-cosmic-accent'>Cygnus X-1:</span> ~21 M\u2609 stellar-mass black hole, the first widely accepted black hole candidate (1972). Orbits a blue supergiant star.",
+                    "<span class='text-cosmic-accent'>GW150914:</span> A 36+29 M\u2609 merger detected by LIGO in 2015 \u2014 radiated 3 M\u2609 of energy as gravitational waves in 0.2 seconds."
+                ],
+                mindBlowing: [
+                    "If you compressed Earth to black hole density, it would be roughly the size of a marble (9 mm radius).",
+                    "The supermassive black hole in M87 has a mass equal to 6.5 billion Suns. Its event horizon is larger than the orbit of Pluto.",
+                    "At the moment of a black hole merger, more energy is released in gravitational waves than all the stars in the observable universe emit as light \u2014 combined.",
+                    "The tidal forces near a stellar-mass black hole would stretch you into a stream of atoms \u2014 a process physicists call \u2018spaghettification.\u2019"
                 ]
             },
             magnetar: {
                 title: "Magnetars",
-                subtitle: "Class: Neutron Star | Magnetic Monster",
+                subtitle: "Class: Neutron Star Variant | Type: Soft Gamma Repeater / Anomalous X-ray Pulsar",
                 metrics: [
-                    { label: "Magnetic Field", value: "10^14 - 10^15 G", color: "border-cosmic-purple" },
-                    { label: "Rotation Period", value: "0.3 - 12 seconds", color: "border-cosmic-accent" },
-                    { label: "Mass", value: "1.4 - 2.16 M☉", color: "border-cosmic-gold" },
-                    { label: "Density", value: "10^17 kg/m³", color: "border-green-500" }
+                    { label: "Magnetic Field", value: "10\u00B9\u2074 \u2013 10\u00B9\u2075 Gauss", color: "border-cosmic-purple" },
+                    { label: "Rotation Period", value: "0.3 \u2013 12 seconds", color: "border-cosmic-accent" },
+                    { label: "Mass", value: "1.4 \u2013 2.16 M\u2609", color: "border-cosmic-gold" },
+                    { label: "Radius", value: "~10 km", color: "border-green-500" },
+                    { label: "Density", value: "~10\u00B9\u2077 kg/m\u00B3", color: "border-cosmic-purple" },
+                    { label: "Known Population", value: "~30 confirmed", color: "border-cosmic-accent" }
                 ],
-                description: "Magnetars are neutron stars with extraordinarily powerful magnetic fields, a quadrillion times stronger than Earth's. These fields generate intense stress on the stellar crust, causing starquakes that release gamma-ray flares. The magnetic field is so extreme that it polarizes the vacuum and distorts atomic structure, creating an environment where chemistry as we know it cannot exist.",
-                technical: [
-                    "<span class='text-white'>Crustal Shear:</span> 10^25 N/m² stress",
-                    "<span class='text-white'>Decay Time:</span> 10,000 years (rapid rotators)",
-                    "<span class='text-white'>Flare Energy:</span> 10^44 - 10^47 ergs",
-                    "<span class='text-white'>Surface Gravity:</span> 10^12 m/s²"
+                overview: "Magnetars are neutron stars with the most powerful magnetic fields in the known universe \u2014 up to a quadrillion (10\u00B9\u2075) times stronger than Earth\u2019s. These fields are so intense they can distort atomic electron clouds into cigar shapes, polarize the quantum vacuum, and crack the neutron star\u2019s own crust, triggering catastrophic \u2018starquakes\u2019 that release more energy in a tenth of a second than the Sun emits in 100,000 years.",
+                physics: [
+                    "A magnetar\u2019s field of ~10\u00B9\u2075 G exceeds the quantum electrodynamic critical field (B_QED = 4.4 \u00D7 10\u00B9\u00B3 G), where vacuum birefringence occurs \u2014 empty space itself becomes optically active.",
+                    "The magnetic energy stored is ~10\u2074\u2077 ergs, comparable to the kinetic energy of a supernova. This energy decays on ~10,000-year timescales, powering the observed X-ray luminosity.",
+                    "The interior is a superfluid of neutrons with a thin (~1 km) crystalline crust. Magnetic stresses fracture this crust, producing starquakes detectable as giant flares.",
+                    "At the surface, the magnetic field is so strong that atoms are distorted into cylindrical shapes aligned with field lines. Normal chemistry cannot exist.",
+                    "Magnetars spin down rapidly (period derivative ~10\u207B\u00B9\u00B9 s/s) as magnetic dipole radiation carries away rotational energy. They become radio-quiet within ~10,000 years."
+                ],
+                formation: [
+                    "<span class='text-white'>Core-collapse supernova:</span> Born when a massive star (\u226540 M\u2609) collapses. A dynamo mechanism in the first ~10 seconds after collapse amplifies the magnetic field by a factor of ~1,000.",
+                    "<span class='text-white'>Convective dynamo:</span> Rapid differential rotation (~1 ms period) and neutrino-driven convection in the proto-neutron star generate extreme magnetic flux through an \u03B1\u2013\u03A9 dynamo.",
+                    "<span class='text-white'>Flux conservation:</span> The progenitor star\u2019s existing field is compressed from ~10\u00B3 G to ~10\u00B9\u00B3 G as the core shrinks from ~10,000 km to ~10 km \u2014 but this alone is insufficient; active amplification is needed."
+                ],
+                detection: [
+                    "<span class='text-white'>Soft gamma repeaters (SGRs):</span> Irregular bursts of soft gamma rays lasting ~0.1 s, caused by starquakes fracturing the magnetar\u2019s crust.",
+                    "<span class='text-white'>Anomalous X-ray pulsars (AXPs):</span> Persistent X-ray emission (L_X ~ 10\u00B3\u00B3\u201310\u00B3\u2075 erg/s) powered by magnetic field decay rather than rotation or accretion.",
+                    "<span class='text-white'>Giant flares:</span> Extremely rare (\u223C1 per 30 years per magnetar), releasing up to 10\u2074\u2076 ergs. The SGR 1806-20 flare of 2004 was so powerful it measurably ionized Earth\u2019s upper atmosphere from 50,000 light-years away.",
+                    "<span class='text-white'>Fast Radio Bursts (FRBs):</span> Some FRBs are now linked to magnetars. In 2020, SGR 1935+2154 produced both an X-ray burst and a simultaneous radio burst detectable from extragalactic distances."
                 ],
                 examples: [
-                    "<span class='text-cosmic-accent'>SGR 1806-20:</span> Most powerful magnetic field observed",
-                    "<span class='text-cosmic-accent'>PSR J1745-2900:</span> Magnetar near Galactic Center",
-                    "<span class='text-cosmic-accent'>1E 1048.1-5937:</span> First confirmed anomalous X-ray pulsar"
+                    "<span class='text-cosmic-accent'>SGR 1806-20:</span> Produced the most energetic event ever observed from within our galaxy (Dec 27, 2004). The giant flare temporarily compressed Earth\u2019s magnetosphere and lit up the Moon in gamma rays.",
+                    "<span class='text-cosmic-accent'>SGR 1935+2154:</span> First magnetar confirmed to produce a fast radio burst (2020), bridging the gap between magnetar physics and the FRB mystery.",
+                    "<span class='text-cosmic-accent'>1E 2259+586:</span> An anomalous X-ray pulsar that underwent an anti-glitch \u2014 a sudden spin-down \u2014 challenging our understanding of neutron star interiors.",
+                    "<span class='text-cosmic-accent'>XTE J1810-197:</span> First magnetar detected as a transient radio pulsar (2003). Its radio emission \u2018turned on\u2019 then faded, suggesting a dynamic magnetosphere.",
+                    "<span class='text-cosmic-accent'>Swift J1818.0-1607:</span> Discovered in 2020, the youngest known magnetar at ~240 years old. Also exhibits radio pulsations, making it a rare radio-loud magnetar."
+                ],
+                mindBlowing: [
+                    "A magnetar\u2019s field at 1,000 km distance would erase every credit card on Earth and fatally disrupt human biochemistry.",
+                    "A teaspoon of magnetar material weighs about 6 billion tonnes \u2014 roughly the mass of Mount Everest.",
+                    "The 2004 SGR 1806-20 flare released more energy in 0.1 seconds than the Sun emits in 250,000 years \u2014 from 50,000 light-years away.",
+                    "Only about 30 magnetars have been confirmed in our galaxy, out of an estimated ~10\u2078 neutron stars total."
                 ]
             },
             darkmatter: {
-                title: "Dark Matter Halos",
-                subtitle: "Class: Exotic Matter | Non-Baryonic",
+                title: "Dark Matter",
+                subtitle: "Class: Non-Baryonic Matter | Status: Unidentified",
                 metrics: [
-                    { label: "Density", value: "~0.3 GeV/c²/cm³", color: "border-cosmic-purple" },
-                    { label: "Temperature", value: "Cold (non-relativistic)", color: "border-cosmic-accent" },
-                    { label: "Fraction", value: "85% of total matter", color: "border-cosmic-gold" },
-                    { label: "Interaction", value: "Weak & Gravitational", color: "border-green-500" }
+                    { label: "Cosmic Fraction", value: "26.8% of universe", color: "border-cosmic-purple" },
+                    { label: "Matter Fraction", value: "85% of all matter", color: "border-cosmic-accent" },
+                    { label: "Local Density", value: "~0.3 GeV/c\u00B2/cm\u00B3", color: "border-cosmic-gold" },
+                    { label: "Temperature", value: "Cold (non-relativistic)", color: "border-green-500" },
+                    { label: "Interactions", value: "Gravity + Weak(?)", color: "border-cosmic-purple" },
+                    { label: "Direct Detection", value: "None yet", color: "border-cosmic-accent" }
                 ],
-                description: "Dark matter forms the cosmic scaffolding upon which visible matter assembles. It does not interact with electromagnetic radiation, making it invisible to telescopes, but reveals itself through gravitational lensing and galaxy rotation curves. Leading candidates include WIMPs (Weakly Interacting Massive Particles) and axions, though its true nature remains one of physics' greatest mysteries.",
-                technical: [
-                    "<span class='text-white'>Velocity Dispersion:</span> 200-300 km/s (typical galaxies)",
-                    "<span class='text-white'>NFW Profile:</span> ρ(r) ∝ r⁻¹ at center",
-                    "<span class='text-white'>Free Streaming:</span> < 1 Mpc (small scale cutoff)",
-                    "<span class='text-white'>Self-Interaction:</span> σ/m < 1 cm²/g"
+                overview: "Dark matter is the invisible scaffolding of the cosmos. It does not emit, absorb, or reflect light. It passes through ordinary matter like a ghost. Yet it outmasses all visible stars, planets, and gas by a factor of five. Without it, galaxies would fly apart, galaxy clusters would dissolve, and the large-scale cosmic web \u2014 the foam-like structure of the universe \u2014 would never have formed. Its nature remains the deepest unsolved problem in physics.",
+                physics: [
+                    "Galaxy rotation curves provided the first strong evidence: stars at the edges of spiral galaxies orbit at the same speed as those near the center, implying a massive invisible halo extending far beyond the visible disk. Vera Rubin\u2019s measurements in the 1970s made this undeniable.",
+                    "The cosmic microwave background (CMB) power spectrum \u2014 the pattern of temperature fluctuations from 380,000 years after the Big Bang \u2014 precisely constrains dark matter to 26.8% of the universe\u2019s energy budget.",
+                    "Dark matter halos follow an NFW (Navarro-Frenk-White) density profile: \u03C1(r) \u221D 1/[r(1+r/r_s)\u00B2], with a cuspy center and extended outer envelope. Each galaxy sits inside one.",
+                    "N-body simulations (e.g., Millennium, IllustrisTNG) show that dark matter forms a cosmic web of filaments and nodes. Galaxies form at the intersections. Voids between filaments are nearly empty.",
+                    "The \u2018cusp-core problem\u2019 \u2014 simulations predict cuspy central densities but observations of dwarf galaxies show flat cores \u2014 may indicate dark matter self-interaction or baryonic feedback effects."
+                ],
+                formation: [
+                    "<span class='text-white'>Thermal relic (WIMPs):</span> If dark matter particles were in thermal equilibrium in the early universe and \u2018froze out\u2019 when the universe expanded, their relic abundance naturally matches observations for particles with weak-scale masses (~100 GeV) \u2014 the \u2018WIMP miracle.\u2019",
+                    "<span class='text-white'>Axions:</span> Ultra-light bosons (10\u207B\u2075 eV) originally proposed to solve the strong CP problem in QCD. Could form a cosmic Bose-Einstein condensate.",
+                    "<span class='text-white'>Sterile neutrinos:</span> Right-handed neutrinos with keV masses. Could explain dark matter and neutrino masses simultaneously. Detectable via X-ray emission from decay.",
+                    "<span class='text-white'>Primordial black holes:</span> Black holes formed in the first second after the Big Bang from density fluctuations. LIGO detections of unexpectedly massive mergers have revived interest."
+                ],
+                detection: [
+                    "<span class='text-white'>Gravitational lensing:</span> Dark matter bends light from distant galaxies. Weak lensing surveys (DES, Euclid, Rubin Observatory) map dark matter distributions across the sky.",
+                    "<span class='text-white'>Direct detection:</span> Experiments like LZ, XENONnT, and PandaX use tonnes of liquid xenon deep underground, waiting for a dark matter particle to scatter off a xenon nucleus. Sensitivity has improved by 10\u2076 since the 1990s, but no confirmed signal yet.",
+                    "<span class='text-white'>Indirect detection:</span> If dark matter self-annihilates, it would produce gamma rays, neutrinos, or antimatter. Fermi-LAT searches the Galactic Center; IceCube searches with neutrinos.",
+                    "<span class='text-white'>Collider production:</span> The LHC could produce dark matter particles in proton-proton collisions. They would escape undetected, appearing as \u2018missing energy\u2019 in the detector.",
+                    "<span class='text-white'>Bullet Cluster:</span> The \u2018smoking gun\u2019 \u2014 two galaxy clusters that collided. The hot gas (visible in X-rays) was slowed by friction, but the dark matter (mapped by lensing) passed right through, proving dark matter exists independently of gas."
                 ],
                 examples: [
-                    "<span class='text-cosmic-accent'>Bullet Cluster:</span> Direct evidence of dark matter collision",
-                    "<span class='text-cosmic-accent'>Dragonfly 44:</span> 99.99% dark matter galaxy",
-                    "<span class='text-cosmic-accent'>Local Group Halo:</span> 1-2 x 10^12 M☉ surrounding Milky Way"
+                    "<span class='text-cosmic-accent'>Bullet Cluster (1E 0657-56):</span> The most direct observational proof of dark matter. The separation of visible and dark matter during the collision rules out modified gravity explanations.",
+                    "<span class='text-cosmic-accent'>Dragonfly 44:</span> An ultra-diffuse galaxy that is 99.99% dark matter by mass. It has the mass of the Milky Way but emits only 1% as much light.",
+                    "<span class='text-cosmic-accent'>Milky Way halo:</span> Our galaxy is embedded in a dark matter halo of ~1\u20132 \u00D7 10\u00B9\u00B2 M\u2609, extending ~300 kpc from the center. The visible galaxy is just the luminous core.",
+                    "<span class='text-cosmic-accent'>Cosmic web:</span> Large-scale surveys (SDSS, DESI) reveal galaxies distributed along filaments that trace the underlying dark matter scaffolding, with enormous voids in between.",
+                    "<span class='text-cosmic-accent'>CMB evidence:</span> The Planck satellite\u2019s measurements of CMB anisotropies yield \u03A9_DM h\u00B2 = 0.120 \u00B1 0.001 \u2014 one of the most precise measurements in all of cosmology."
+                ],
+                mindBlowing: [
+                    "About 85% of all matter in the universe is dark matter. Every second, billions of dark matter particles pass through your body without interacting with a single atom.",
+                    "We know more about what dark matter ISN\u2019T than what it IS. It isn\u2019t baryons, neutrinos, black holes (mostly), or any known particle.",
+                    "The dark matter halo of the Milky Way extends roughly 10 times farther than the visible stars. The galaxy you see is just the tip of the iceberg.",
+                    "If dark matter didn\u2019t exist, galaxies wouldn\u2019t have formed after the Big Bang \u2014 ordinary matter alone couldn\u2019t clump fast enough before the universe expanded too much."
                 ]
             },
             gravitational: {
                 title: "Gravitational Waves",
-                subtitle: "Class: Spacetime Perturbation | Relativistic",
+                subtitle: "Class: Spacetime Perturbation | Predicted: 1916 | Detected: 2015",
                 metrics: [
-                    { label: "Propagation Speed", value: "c (light speed)", color: "border-cosmic-purple" },
-                    { label: "Amplitude", value: "10^-21 to 10^-23", color: "border-cosmic-accent" },
-                    { label: "Frequency Range", value: "10^-16 to 10^4 Hz", color: "border-cosmic-gold" },
-                    { label: "Polarization", value: "Plus & Cross modes", color: "border-green-500" }
+                    { label: "Speed", value: "c (299,792 km/s)", color: "border-cosmic-purple" },
+                    { label: "Strain Amplitude", value: "h ~ 10\u207B\u00B2\u00B9", color: "border-cosmic-accent" },
+                    { label: "Frequency Range", value: "10\u207B\u00B9\u2076 \u2013 10\u2074 Hz", color: "border-cosmic-gold" },
+                    { label: "Polarizations", value: "Plus (+) & Cross (\u00D7)", color: "border-green-500" },
+                    { label: "Detections (LIGO/Virgo)", value: "~90+ events", color: "border-cosmic-purple" },
+                    { label: "Nobel Prize", value: "2017 (Weiss, Barish, Thorne)", color: "border-cosmic-accent" }
                 ],
-                description: "Gravitational waves are ripples in the fabric of spacetime predicted by Einstein's general relativity in 1916 and directly detected by LIGO in 2015. Generated by accelerating massive objects, particularly merging black holes and neutron stars, these waves carry information about cataclysmic cosmic events and provide a new spectrum for observing the universe beyond electromagnetic radiation.",
-                technical: [
-                    "<span class='text-white'>Strain Sensitivity:</span> ΔL/L < 10^-23 (LIGO)",
-                    "<span class='text-white'>Energy Flux:</span> 10^-3 erg/s/cm² (typical merger)",
-                    "<span class='text-white'>Wavelength:</span> λ = c/f (lightyears to kilometers)",
-                    "<span class='text-white'>Chirp Mass:</span> ℳ = (m₁m₂)^(3/5)/(m₁+m₂)^(1/5)"
+                overview: "Gravitational waves are ripples in the fabric of spacetime itself, produced when massive objects accelerate. Predicted by Einstein in 1916, they remained purely theoretical for a century because their effect is astonishingly tiny: a passing gravitational wave from a distant black hole merger stretches and squeezes the 4-km LIGO detector arms by less than 1/10,000th the width of a proton. On September 14, 2015, LIGO made the first direct detection \u2014 opening an entirely new window on the universe.",
+                physics: [
+                    "In general relativity, gravitational waves are solutions to the linearized Einstein field equations: \u25A1h_\u03BC\u03BD = -(16\u03C0G/c\u2074)T_\u03BC\u03BD. They propagate as transverse waves at the speed of light.",
+                    "Gravitational waves carry energy and angular momentum away from the source. The orbital decay of the Hulse-Taylor binary pulsar (PSR B1913+16) matched Einstein\u2019s prediction to 0.2% over 30 years \u2014 the first indirect evidence.",
+                    "The two polarization modes (+ and \u00D7) stretch space in perpendicular directions. A ring of test particles would alternately squeeze into an ellipse oriented vertically, then horizontally.",
+                    "The power emitted in gravitational waves is: P = (32/5)(G\u2074/c\u2075)(m\u2081m\u2082)\u00B2(m\u2081+m\u2082)/r\u2075. For two merging 30 M\u2609 black holes, peak luminosity exceeds 10\u2075\u2076 erg/s \u2014 brighter than all stars in the observable universe combined.",
+                    "The \u2018chirp\u2019 signal from a binary inspiral sweeps upward in both frequency and amplitude as the orbit shrinks: f(t) \u221D (t_merge - t)\u207B\u00B3/\u2078. This waveform encodes the masses, spins, distance, and orbital parameters."
+                ],
+                formation: [
+                    "<span class='text-white'>Compact binary mergers:</span> Two black holes or neutron stars spiraling together. The dominant source for ground-based detectors (10\u2013100 Hz). GW150914 was a 36+29 M\u2609 black hole merger.",
+                    "<span class='text-white'>Continuous waves:</span> Rapidly spinning neutron stars with asymmetries (mountains ~1 mm tall) emit continuous, nearly monochromatic gravitational waves.",
+                    "<span class='text-white'>Stochastic background:</span> The superposition of countless unresolved sources from across cosmic history, plus primordial waves from inflation. NANOGrav detected hints of this in 2023 using pulsar timing.",
+                    "<span class='text-white'>Supernovae:</span> Asymmetric core-collapse supernovae produce burst-like gravitational wave signals lasting milliseconds, encoding information about the explosion mechanism.",
+                    "<span class='text-white'>Cosmic inflation:</span> Quantum fluctuations during the inflationary epoch (~10\u207B\u00B3\u2076 s after the Big Bang) would have produced primordial gravitational waves imprinted on the CMB as B-mode polarization."
+                ],
+                detection: [
+                    "<span class='text-white'>LIGO (USA):</span> Two 4-km laser interferometers in Hanford, WA and Livingston, LA. Michelson interferometry measures arm length changes of ~10\u207B\u00B9\u2079 m. Uses 40 kg mirrors, 200 kW circulating laser power, and quantum squeezing.",
+                    "<span class='text-white'>Virgo (Italy):</span> 3-km interferometer near Pisa. Together with LIGO, enables sky localization of sources through triangulation.",
+                    "<span class='text-white'>KAGRA (Japan):</span> Underground, cryogenic detector. Uses sapphire mirrors cooled to 20 K to reduce thermal noise.",
+                    "<span class='text-white'>LISA (ESA, ~2035):</span> Space-based detector with three spacecraft in a triangular formation, 2.5 million km apart. Will detect low-frequency waves (0.1\u2013100 mHz) from supermassive black hole mergers.",
+                    "<span class='text-white'>Pulsar Timing Arrays:</span> NANOGrav, EPTA, and PPTA use millisecond pulsars as cosmic clocks. Gravitational waves from supermassive binary black holes create correlated timing residuals across the array."
                 ],
                 examples: [
-                    "<span class='text-cosmic-accent'>GW150914:</span> First direct detection, 36+29 M☉ merger",
-                    "<span class='text-cosmic-accent'>GW170817:</span> Neutron star merger, multi-messenger event",
-                    "<span class='text-cosmic-accent'>Sagittarius A*:</span> Continuous wave background detection candidate"
+                    "<span class='text-cosmic-accent'>GW150914 (Sep 14, 2015):</span> First direct detection. Two black holes (36+29 M\u2609) merged 1.3 billion light-years away. 3 M\u2609 of energy was radiated as gravitational waves in 0.2 seconds. Peak power: 3.6 \u00D7 10\u2075\u2076 W.",
+                    "<span class='text-cosmic-accent'>GW170817 (Aug 17, 2017):</span> First neutron star merger detected in both gravitational waves AND electromagnetic radiation. Confirmed neutron star mergers as a source of heavy elements (gold, platinum, uranium) via the r-process.",
+                    "<span class='text-cosmic-accent'>GW190521 (May 21, 2019):</span> Merger producing a 142 M\u2609 black hole \u2014 the first confirmed intermediate-mass black hole. The component masses (85+66 M\u2609) fall in the \u2018pair-instability gap\u2019 where stellar black holes shouldn\u2019t form.",
+                    "<span class='text-cosmic-accent'>NANOGrav 15-year dataset (2023):</span> Strong evidence for a gravitational wave background at nanohertz frequencies, likely from the cosmic population of supermassive black hole binaries.",
+                    "<span class='text-cosmic-accent'>Hulse-Taylor pulsar (PSR B1913+16):</span> Indirect evidence: the binary orbit decays at exactly the rate predicted by gravitational wave emission. Won the 1993 Nobel Prize."
+                ],
+                mindBlowing: [
+                    "LIGO can detect a change in arm length of 10\u207B\u00B9\u2079 meters \u2014 1/10,000th the diameter of a proton. If scaled to the distance to the nearest star, this is equivalent to measuring a change of one hair\u2019s width.",
+                    "During the final 0.2 seconds of GW150914, the peak gravitational wave power output exceeded the combined light output of all stars in the observable universe by a factor of 50.",
+                    "Gravitational waves from the Big Bang (if detected) would let us see back to 10\u207B\u00B3\u2076 seconds after creation \u2014 the electromagnetic CMB only reaches 380,000 years.",
+                    "Neutron star mergers (like GW170817) are cosmic forges: a single merger can produce 3\u201313 Earth-masses of gold and 3\u20139 Earth-masses of platinum."
                 ]
             },
             grb: {
                 title: "Gamma-Ray Bursts",
-                subtitle: "Class: High-Energy Transient | Cosmic Beacon",
+                subtitle: "Class: High-Energy Transient | Subtypes: Long (>2s) & Short (<2s)",
                 metrics: [
-                    { label: "Energy Output", value: "10^44 - 10^47 erg/s", color: "border-cosmic-purple" },
-                    { label: "Duration", value: "0.01 - 1000 seconds", color: "border-cosmic-accent" },
-                    { label: "Redshift Range", value: "0.1 - 9.4 (observed)", color: "border-cosmic-gold" },
-                    { label: "Jet Opening", value: "2° - 20°", color: "border-green-500" }
+                    { label: "Peak Luminosity", value: "10\u2074\u2074 \u2013 10\u2074\u2077 erg/s", color: "border-cosmic-purple" },
+                    { label: "Duration", value: "0.01 \u2013 1000 s", color: "border-cosmic-accent" },
+                    { label: "Max Observed Redshift", value: "z = 9.4", color: "border-cosmic-gold" },
+                    { label: "Jet Opening Angle", value: "2\u00B0 \u2013 20\u00B0", color: "border-green-500" },
+                    { label: "Isotropic Energy", value: "Up to 10\u2075\u2074 erg", color: "border-cosmic-purple" },
+                    { label: "Discovery", value: "1967 (Vela satellites)", color: "border-cosmic-accent" }
                 ],
-                description: "Gamma-ray bursts are the most luminous electromagnetic events in the universe since the Big Bang. Occurring when massive stars collapse into black holes (long GRBs) or neutron stars merge (short GRBs), these explosions release focused jets of radiation. If Earth were within a few kiloparsecs of a GRB, the ozone layer could be destroyed, making them potential drivers of mass extinctions.",
-                technical: [
-                    "<span class='text-white'>Lorentz Factor:</span> Γ ~ 100-1000 (ultra-relativistic)",
-                    "<span class='text-white'>Prompt Emission:</span> Non-thermal synchrotron radiation",
-                    "<span class='text-white'>Afterglow:</span> X-ray to radio, days to months",
-                    "<span class='text-white'>Progenitor Mass:</span> > 20-25 M☉ for long GRBs"
+                overview: "Gamma-ray bursts are the most violent explosions in the universe since the Big Bang. For a few seconds, a single GRB outshines the entire observable universe in gamma rays. They were accidentally discovered in 1967 by the Vela satellites \u2014 military satellites designed to detect secret nuclear weapons tests in space. For 30 years their origin was a complete mystery, until the Italian-Dutch BeppoSAX satellite detected the first X-ray afterglow in 1997, proving GRBs were extragalactic.",
+                physics: [
+                    "The \u2018fireball\u2019 model: a compact central engine (black hole or magnetar) launches an ultra-relativistic jet with Lorentz factor \u0393 = 100\u20131,000. Internal shocks within the jet produce the prompt gamma-ray emission.",
+                    "As the jet decelerates against the interstellar medium, it drives an external shock that produces the afterglow \u2014 a broadband fading emission from X-ray to radio wavelengths lasting days to months.",
+                    "Relativistic beaming concentrates the radiation into a narrow cone. The true energy is 100\u20131,000\u00D7 less than the apparent isotropic equivalent, but it\u2019s still 10\u2075\u00B9\u201310\u2075\u00B2 erg \u2014 comparable to the rest-mass energy of the Sun.",
+                    "The compactness problem: the observed rapid variability (\u223C1 ms) combined with the enormous luminosity implies the source would be opaque to gamma rays \u2014 UNLESS the material is moving at \u0393 > 100, which Doppler-shifts the emission into transparency.",
+                    "The jet likely consists of a magnetically dominated Poynting flux that converts to kinetic energy at large radii. Magnetic reconnection may power the prompt emission rather than (or in addition to) internal shocks."
+                ],
+                formation: [
+                    "<span class='text-white'>Long GRBs (collapsar model):</span> A massive star (\u226525 M\u2609) with a stripped hydrogen envelope undergoes core collapse. The core forms a black hole surrounded by a brief, massive accretion disk. Jets punch through the stellar envelope in ~10 s, emerging as ultra-relativistic outflows. Always associated with Type Ic-BL supernovae.",
+                    "<span class='text-white'>Short GRBs (merger model):</span> Two neutron stars (or a neutron star + black hole) spiral together over millions to billions of years via gravitational wave emission. The final merger takes ~1 second, producing a brief, intense gamma-ray flash. GW170817 confirmed this picture.",
+                    "<span class='text-white'>Ultra-long GRBs:</span> Events lasting >10,000 seconds, possibly powered by the tidal disruption of a star by a supermassive black hole, or the collapse of a blue supergiant with an extremely extended envelope.",
+                    "<span class='text-white'>Magnetar giant flares:</span> Some \u2018short\u2019 GRBs detected from nearby galaxies may actually be magnetar giant flares rather than compact binary mergers."
+                ],
+                detection: [
+                    "<span class='text-white'>Swift (NASA, 2004\u2013present):</span> The primary GRB hunter. Its Burst Alert Telescope detects ~100 GRBs/year, then rapidly slews X-ray and UV/optical telescopes to pinpoint the afterglow within ~1 arcminute in ~100 seconds.",
+                    "<span class='text-white'>Fermi (NASA, 2008\u2013present):</span> The Gamma-ray Burst Monitor covers the entire unocculted sky. The Large Area Telescope extends spectral coverage up to 300 GeV.",
+                    "<span class='text-white'>Ground-based follow-up:</span> Robotic optical telescopes (MASTER, ROTSE) capture the optical flash within seconds. Large telescopes (VLT, Keck, Gemini) measure afterglow spectra and redshifts.",
+                    "<span class='text-white'>Multi-messenger:</span> GW170817 demonstrated the power of combining gravitational wave + gamma-ray + optical + X-ray + radio observations of the same event."
                 ],
                 examples: [
-                    "<span class='text-cosmic-accent'>GRB 221009A:</span> Brightest ever detected, 'Boat' event",
-                    "<span class='text-cosmic-accent'>GRB 090423:</span> Most distant, 13.2 billion light-years",
-                    "<span class='text-cosmic-accent'>GRB 080319B:</span> Naked-eye visible, 7.5 billion light-years"
+                    "<span class='text-cosmic-accent'>GRB 221009A (\u2018B.O.A.T.\u2019, Oct 9, 2022):</span> The \u2018Brightest Of All Time\u2019 \u2014 the most energetic GRB ever recorded. At z = 0.151 (~2 billion ly), it was so bright it saturated every gamma-ray detector in space, ionized Earth\u2019s ionosphere, and was detectable in 18 TeV gamma rays by ground-based Cherenkov telescopes.",
+                    "<span class='text-cosmic-accent'>GRB 030329 / SN 2003dh:</span> The Rosetta Stone event that proved long GRBs come from core-collapse supernovae. The afterglow spectrum showed clear supernova features emerging after ~1 week.",
+                    "<span class='text-cosmic-accent'>GRB 090423 (z = 8.2):</span> The most distant GRB with a spectroscopic redshift. The explosion occurred when the universe was only 630 million years old \u2014 a beacon from the epoch of reionization.",
+                    "<span class='text-cosmic-accent'>GRB 080319B (\u2018Naked-Eye Burst\u2019):</span> Briefly reached visual magnitude 5.3, visible to the naked eye from 7.5 billion light-years away. The most luminous optical event ever observed.",
+                    "<span class='text-cosmic-accent'>GRB 170817A / GW170817:</span> The first GRB detected with a simultaneous gravitational wave signal. Confirmed neutron star mergers produce short GRBs and kilonovae."
+                ],
+                mindBlowing: [
+                    "If a GRB\u2019s jet were pointed directly at Earth from 6,000 light-years away, it would strip the ozone layer and trigger a mass extinction. The Late Ordovician extinction (~450 Mya) is a candidate for a GRB-induced event.",
+                    "GRB 221009A was so bright that its signal bounced off the Moon and was detected by lunar orbiters.",
+                    "The gamma-ray photons from a GRB have traveled across billions of light-years of expanding space, yet arrive within a fraction of a second of each other \u2014 proving spacetime is smooth down to Planck-scale precision.",
+                    "A typical long GRB releases more energy in 10 seconds than the Sun will produce in its entire 10-billion-year lifetime."
                 ]
             },
             quasar: {
                 title: "Quasars",
-                subtitle: "Class: Active Galactic Nucleus | Primordial Beacon",
+                subtitle: "Class: Active Galactic Nucleus | Peak Epoch: z ~ 2\u20133 (10\u201311 Gyr ago)",
                 metrics: [
-                    { label: "Luminosity", value: "10^40 - 10^47 erg/s", color: "border-cosmic-purple" },
-                    { label: "Redshift", value: "z = 0.06 - 7.64", color: "border-cosmic-accent" },
-                    { label: "Accretion Rate", value: "1 - 1000 M☉/year", color: "border-cosmic-gold" },
-                    { label: "Lifespan", value: "10^6 - 10^8 years", color: "border-green-500" }
+                    { label: "Luminosity", value: "10\u2074\u2070 \u2013 10\u2074\u2077 erg/s", color: "border-cosmic-purple" },
+                    { label: "Redshift Range", value: "z = 0.06 \u2013 7.64", color: "border-cosmic-accent" },
+                    { label: "Accretion Rate", value: "1 \u2013 1000 M\u2609/year", color: "border-cosmic-gold" },
+                    { label: "Central Engine", value: "10\u2078 \u2013 10\u00B9\u2070 M\u2609 SMBH", color: "border-green-500" },
+                    { label: "Active Lifespan", value: "10\u2076 \u2013 10\u2078 years", color: "border-cosmic-purple" },
+                    { label: "Known Population", value: ">750,000 catalogued", color: "border-cosmic-accent" }
                 ],
-                description: "Quasars (Quasi-Stellar Objects) are ancient supermassive black holes actively accreting matter at the centers of distant galaxies. Their immense luminosity, powered by friction in the accretion disk, outshines their entire host galaxy combined. Serving as cosmic lighthouses, quasars illuminate the intergalactic medium and provide probes of the universe during its formative years.",
-                technical: [
-                    "<span class='text-white'>Broad Line Region:</span> 10^3-10^4 km/s velocity dispersion",
-                    "<span class='text-white'>Fe II Emission:</span> Complex UV/optical line spectrum",
-                    "<span class='text-white'>Radio Loudness:</span> R = F(5GHz)/F(B-band)",
-                    "<span class='text-white'>Eddington Ratio:</span> L/L_Edd ~ 0.01 - 1.0"
+                overview: "Quasars are the most luminous persistent objects in the universe. Powered by supermassive black holes devouring matter at prodigious rates, a single quasar can outshine its entire host galaxy of 100 billion stars by factors of 100 to 1,000. First discovered in 1963 when Maarten Schmidt realized that the \u2018quasi-stellar radio source\u2019 3C 273 had a redshift of z = 0.158 \u2014 placing it at a then-unimaginable distance of 2.4 billion light-years \u2014 quasars became cosmic lighthouses illuminating the structure and evolution of the universe.",
+                physics: [
+                    "The energy source is gravitational potential energy: as matter falls toward the central black hole, it forms a thin accretion disk heated to ~10\u2074\u201310\u2075 K. Up to 40% of the rest-mass energy of infalling matter can be converted to radiation (compared to 0.7% for nuclear fusion).",
+                    "The Eddington luminosity sets a theoretical maximum: L_Edd = 4\u03C0GMm_p c/\u03C3_T \u2248 1.3 \u00D7 10\u00B3\u2078 (M/M\u2609) erg/s. Quasars near or above this limit are radiating so intensely that radiation pressure nearly blows away the infalling gas.",
+                    "Broad emission lines (H\u03B1, Mg II, C IV) with velocity widths of 1,000\u201320,000 km/s originate from the \u2018broad line region\u2019 \u2014 dense gas clouds orbiting within ~1 light-year of the black hole.",
+                    "Some quasars launch relativistic jets extending millions of light-years, powered by magnetic fields threading the spinning black hole (Blandford-Znajek mechanism). The jet luminosity can rival the accretion disk luminosity.",
+                    "Quasar feedback \u2014 the energy and momentum injected by quasar winds and jets \u2014 regulates star formation in the host galaxy. This explains the tight M-\u03C3 relation between black hole mass and galaxy bulge velocity dispersion."
+                ],
+                formation: [
+                    "<span class='text-white'>Gas-rich mergers:</span> Galaxy collisions funnel gas toward the center, feeding the supermassive black hole. Major mergers can trigger luminous quasar activity lasting ~10\u2077\u201310\u2078 years.",
+                    "<span class='text-white'>Secular feeding:</span> Bar instabilities, minor mergers, and disk turbulence can deliver gas to the nucleus without a major merger, powering lower-luminosity AGN.",
+                    "<span class='text-white'>Early universe seeds:</span> The existence of quasars at z > 7 (when the universe was < 700 Myr old) requires either massive seed black holes or sustained super-Eddington accretion from very early times.",
+                    "<span class='text-white'>Quenching:</span> Quasars eventually exhaust or blow away their gas supply. The black hole starves, the quasar dims, and the galaxy transitions from star-forming to \u2018red and dead.\u2019 Every massive elliptical galaxy harbors a dormant quasar engine."
+                ],
+                detection: [
+                    "<span class='text-white'>Optical/UV surveys:</span> SDSS catalogued >500,000 quasars via their distinctive blue colors and broad emission lines. DESI is expanding this to millions.",
+                    "<span class='text-white'>X-ray observations:</span> Chandra and XMM-Newton detect the hot corona above the accretion disk. X-ray variability on timescales of hours constrains the emission region to a few Schwarzschild radii.",
+                    "<span class='text-white'>Radio surveys:</span> ~10% of quasars are \u2018radio-loud,\u2019 producing jets detectable at radio wavelengths. VLBI observations resolve jet structure down to sub-parsec scales.",
+                    "<span class='text-white'>Reverberation mapping:</span> By correlating UV/optical continuum variations with emission line responses, astronomers measure the size of the broad line region and weigh the central black hole.",
+                    "<span class='text-white'>Gravitational lensing:</span> Background quasars lensed by foreground galaxies produce multiple images, time delays, and magnification \u2014 enabling independent measurements of the Hubble constant."
                 ],
                 examples: [
-                    "<span class='text-cosmic-accent'>J0529-4351:</span> Brightest known quasar, 500 trillion L☉",
-                    "<span class='text-cosmic-accent'>ULAS J1342+0928:</span> Most distant, z=7.54 (680 Myr old universe)",
-                    "<span class='text-cosmic-accent'>3C 273:</span> First identified quasar, 2.4 billion light-years"
+                    "<span class='text-cosmic-accent'>3C 273 (z = 0.158):</span> The first identified quasar (1963). At magnitude 12.9, it\u2019s the optically brightest quasar in the sky. Its jet is visible in optical images extending 200,000 light-years.",
+                    "<span class='text-cosmic-accent'>J0529-4351 (z = 3.96):</span> The most luminous known quasar as of 2024, shining at ~500 trillion L\u2609. Its accretion disk is estimated to be 7 light-years across \u2014 consuming roughly one Sun\u2019s worth of matter per day.",
+                    "<span class='text-cosmic-accent'>ULAS J1342+0928 (z = 7.54):</span> One of the most distant known quasars. Its 800-million M\u2609 black hole existed when the universe was only 690 million years old \u2014 a major challenge for black hole growth models.",
+                    "<span class='text-cosmic-accent'>TON 618 (z = 2.219):</span> Hosts one of the most massive known black holes at 66 billion M\u2609. Its Schwarzschild radius is ~1,300 AU, and its luminosity is 140 trillion L\u2609.",
+                    "<span class='text-cosmic-accent'>Einstein Cross (Q2237+030):</span> A quasar at z = 1.7 gravitationally lensed by a foreground galaxy into four images \u2014 a beautiful demonstration of general relativity."
+                ],
+                mindBlowing: [
+                    "The quasar J0529-4351\u2019s accretion disk consumes the equivalent of one Sun per day and is 7 light-years across \u2014 larger than the entire distance from the Sun to its nearest stellar neighbor.",
+                    "3C 273 is 2.4 billion light-years away, yet it\u2019s visible in an amateur telescope. If placed at the distance of the nearest star (4.2 ly), it would appear as bright as the Sun in our sky.",
+                    "Quasars at z > 7 contain billion-solar-mass black holes that formed less than 700 million years after the Big Bang. How they grew so massive so fast remains an open mystery.",
+                    "The total energy output of a luminous quasar over its ~10\u2078-year lifetime equals the rest-mass energy of ~10 billion Suns (E = Mc\u00B2). This is what regulates the growth of entire galaxies."
                 ]
             }
         };
@@ -355,11 +536,29 @@ ACCESS RAW DATA
         const modal = document.getElementById('detail-modal');
         const modalTitle = document.getElementById('modal-title');
         const modalSubtitle = document.getElementById('modal-subtitle');
-        const modalDescription = document.getElementById('modal-description');
-        const modalMetrics = document.getElementById('modal-metrics');
-        const modalTechnical = document.getElementById('modal-technical');
-        const modalExamples = document.getElementById('modal-examples');
+        const modalBody = document.getElementById('modal-body');
         const closeModal = document.getElementById('close-modal');
+
+        function renderSection(title, items, style) {
+            if (!items || items.length === 0) return '';
+            if (style === 'paragraphs') {
+                return '<div class="space-y-4"><h4 class="font-mono text-cosmic-accent text-xs tracking-[0.3em] uppercase mb-3">' + title + '</h4>' +
+                    items.map(p => '<p class="text-gray-300 text-sm leading-relaxed font-sans">' + p + '</p>').join('') + '</div>';
+            }
+            if (style === 'list') {
+                return '<div class="glass-panel p-5 rounded-xl border border-white/10"><h4 class="font-mono text-cosmic-accent text-xs tracking-[0.3em] uppercase mb-4">' + title + '</h4><div class="space-y-3">' +
+                    items.map(item => '<div class="flex items-start space-x-3 text-sm"><span class="text-cosmic-accent mt-0.5 flex-shrink-0">\u203A</span><span class="text-gray-400 leading-relaxed">' + item + '</span></div>').join('') + '</div></div>';
+            }
+            if (style === 'examples') {
+                return '<div><h4 class="font-mono text-cosmic-accent text-xs tracking-[0.3em] uppercase mb-4">' + title + '</h4><div class="space-y-3">' +
+                    items.map(item => '<div class="border-l-2 border-cosmic-accent/30 pl-4 py-2 hover:border-cosmic-accent transition-colors"><span class="text-gray-300 text-sm leading-relaxed font-sans">' + item + '</span></div>').join('') + '</div></div>';
+            }
+            if (style === 'callout') {
+                return '<div class="rounded-xl border border-cosmic-purple/30 bg-cosmic-purple/5 p-5"><h4 class="font-mono text-cosmic-purple text-xs tracking-[0.3em] uppercase mb-4 flex items-center"><svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"/></svg>' + title + '</h4><div class="space-y-3">' +
+                    items.map(item => '<p class="text-gray-300 text-sm leading-relaxed font-sans flex items-start"><span class="text-cosmic-gold mr-2 mt-0.5 flex-shrink-0">\u2022</span>' + item + '</p>').join('') + '</div></div>';
+            }
+            return '';
+        }
 
         // Add click handlers to cards
         document.querySelectorAll('.phenomena-card').forEach(card => {
@@ -368,35 +567,37 @@ ACCESS RAW DATA
                 const data = phenomenonData[phenomenon];
 
                 if(data) {
-                    // Populate modal
                     modalTitle.textContent = data.title;
                     modalSubtitle.textContent = data.subtitle;
-                    modalDescription.textContent = data.description;
 
-                    // Populate metrics
-                    modalMetrics.innerHTML = data.metrics.map(metric => `
-                        <div class="metric-card ${metric.color}">
-                            <div class="font-mono text-xs text-gray-400 mb-1">${metric.label}</div>
-                            <div class="font-serif text-xl text-white font-bold">${metric.value}</div>
-                        </div>
-                    `).join('');
+                    // Build rich modal content
+                    let html = '';
 
-                    // Populate technical specs
-                    modalTechnical.innerHTML = data.technical.map(spec => `
-                        <div class="flex items-start space-x-2">
-                            <span class="text-cosmic-accent mt-1">›</span>
-                            <span>${spec}</span>
-                        </div>
-                    `).join('');
+                    // Metrics grid
+                    html += '<div class="data-grid">' + data.metrics.map(m =>
+                        '<div class="metric-card ' + m.color + '"><div class="font-mono text-[10px] text-gray-500 mb-1 uppercase tracking-wider">' + m.label + '</div><div class="font-serif text-lg text-white font-bold">' + m.value + '</div></div>'
+                    ).join('') + '</div>';
 
-                    // Populate examples
-                    modalExamples.innerHTML = data.examples.map(example => `
-                        <li class="font-mono text-sm text-gray-300 border-l-2 border-cosmic-accent/30 pl-4 py-1 hover:border-cosmic-accent transition-colors">
-                            ${example}
-                        </li>
-                    `).join('');
+                    // Overview
+                    html += '<div><h4 class="font-mono text-cosmic-accent text-xs tracking-[0.3em] uppercase mb-3">Overview</h4><p class="text-gray-300 text-base leading-relaxed font-sans">' + data.overview + '</p></div>';
 
-                    // Show modal
+                    // Physics
+                    html += renderSection('Physics & Mechanics', data.physics, 'paragraphs');
+
+                    // Formation
+                    html += renderSection('Formation & Origin', data.formation, 'list');
+
+                    // Detection
+                    html += renderSection('How We Detect Them', data.detection, 'list');
+
+                    // Examples
+                    html += renderSection('Notable Examples & Key Discoveries', data.examples, 'examples');
+
+                    // Mind-blowing facts
+                    html += renderSection('Mind-Blowing Facts', data.mindBlowing, 'callout');
+
+                    modalBody.innerHTML = html;
+
                     modal.classList.add('active');
                     document.body.style.overflow = 'hidden';
                 }
@@ -423,48 +624,53 @@ ACCESS RAW DATA
             }
         });
 
-        // Visitor Counter using CountAPI
-        async function initVisitorCounter() {
+        // Visitor Counter using localStorage (persistent per-browser)
+        function initVisitorCounter() {
             const countElement = document.getElementById('visitor-count');
             const numberElement = document.getElementById('visitor-number');
-
-            // Check if this session already counted (to avoid counting on refresh)
+            const storageKey = 'cosmos_total_visits';
             const sessionKey = 'cosmos_visitor_counted';
-            const alreadyCounted = sessionStorage.getItem(sessionKey);
 
-            try {
-                let response;
-                if (!alreadyCounted) {
-                    // First visit in this session - increment counter
-                    response = await fetch('https://api.countapi.xyz/hit/omkarbhoite25.github.io/cosmos-visitors');
-                    sessionStorage.setItem(sessionKey, 'true');
-                } else {
-                    // Already counted - just get current value
-                    response = await fetch('https://api.countapi.xyz/get/omkarbhoite25.github.io/cosmos-visitors');
-                }
+            let totalVisits = parseInt(localStorage.getItem(storageKey)) || 0;
 
-                const data = await response.json();
-                if (data.value) {
-                    countElement.textContent = data.value.toLocaleString();
-                    numberElement.textContent = data.value.toLocaleString();
-                }
-            } catch (error) {
-                console.error('Counter error:', error);
-                countElement.textContent = '---';
-                numberElement.textContent = '---';
+            // Increment once per session
+            if (!sessionStorage.getItem(sessionKey)) {
+                totalVisits++;
+                localStorage.setItem(storageKey, totalVisits);
+                sessionStorage.setItem(sessionKey, 'true');
             }
+
+            countElement.textContent = totalVisits.toLocaleString();
+            numberElement.textContent = totalVisits.toLocaleString();
         }
 
         // Initialize counter
         initVisitorCounter();
 
-        // Visitor Map Initialization - wait for Leaflet to load
-        function initVisitorMap() {
-            if (typeof L === 'undefined') {
-                setTimeout(initVisitorMap, 100);
-                return;
-            }
+        // Lazy-load Leaflet when visitor section nears viewport
+        const visitorSection = document.getElementById('visitors');
+        if (visitorSection) {
+            const leafletObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        leafletObserver.disconnect();
+                        // Load Leaflet CSS
+                        const leafletCSS = document.createElement('link');
+                        leafletCSS.rel = 'stylesheet';
+                        leafletCSS.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+                        document.head.appendChild(leafletCSS);
+                        // Load Leaflet JS
+                        const leafletJS = document.createElement('script');
+                        leafletJS.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+                        leafletJS.onload = initVisitorMap;
+                        document.body.appendChild(leafletJS);
+                    }
+                });
+            }, { rootMargin: '200px' });
+            leafletObserver.observe(visitorSection);
+        }
 
+        function initVisitorMap() {
             const mapContainer = document.getElementById('visitor-map');
             if (!mapContainer) return;
 
@@ -473,18 +679,24 @@ ACCESS RAW DATA
                 zoom: 2,
                 minZoom: 2,
                 maxZoom: 10,
-                zoomControl: true,
-                attributionControl: true
+                zoomControl: false,
+                attributionControl: false,
+                scrollWheelZoom: false
             });
 
-            // Add dark-styled tile layer
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
                 subdomains: 'abcd',
-                maxZoom: 19
+                maxZoom: 19,
+                opacity: 0.6
             }).addTo(visitorMap);
 
-            // Custom pulsing marker icon
+            // Add labels as a separate layer on top with lower opacity
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
+                subdomains: 'abcd',
+                maxZoom: 19,
+                opacity: 0.3
+            }).addTo(visitorMap);
+
             const createPulsingIcon = () => {
                 return L.divIcon({
                     className: 'visitor-marker',
@@ -493,13 +705,9 @@ ACCESS RAW DATA
                 });
             };
 
-            // Convert country code to flag emoji
             function getCountryFlag(countryCode) {
                 if (!countryCode) return '';
-                const codePoints = countryCode
-                    .toUpperCase()
-                    .split('')
-                    .map(char => 127397 + char.charCodeAt());
+                const codePoints = countryCode.toUpperCase().split('').map(char => 127397 + char.charCodeAt());
                 return String.fromCodePoint(...codePoints);
             }
 
@@ -509,37 +717,29 @@ ACCESS RAW DATA
                 document.getElementById('visitor-coords').textContent = 'N/A';
             }
 
-            // Fetch visitor location using ipapi.co (works over HTTPS, no key needed)
             async function detectVisitorLocation() {
                 try {
                     const response = await fetch('https://ipapi.co/json/');
                     const data = await response.json();
 
                     if (data.latitude && data.longitude) {
-                        // Update info display
-                        document.getElementById('visitor-country').textContent = `${data.country_name || 'Unknown'} ${getCountryFlag(data.country_code)}`;
+                        document.getElementById('visitor-country').textContent = (data.country_name || 'Unknown') + ' ' + getCountryFlag(data.country_code);
                         document.getElementById('visitor-city').textContent = data.city || 'Unknown';
-                        document.getElementById('visitor-coords').textContent = `${data.latitude.toFixed(2)}°, ${data.longitude.toFixed(2)}°`;
+                        document.getElementById('visitor-coords').textContent = data.latitude.toFixed(2) + '\u00B0, ' + data.longitude.toFixed(2) + '\u00B0';
 
-                        // Add marker to map
-                        const marker = L.marker([data.latitude, data.longitude], {
-                            icon: createPulsingIcon()
-                        }).addTo(visitorMap);
+                        const marker = L.marker([data.latitude, data.longitude], { icon: createPulsingIcon() }).addTo(visitorMap);
 
-                        // Add popup
-                        marker.bindPopup(`
-                            <div style="text-align: center; padding: 8px;">
-                                <div style="color: #00d4ff; font-size: 14px; margin-bottom: 4px;">Your Location</div>
-                                <div style="color: #fff;">${data.city || 'Unknown'}, ${data.country_name || 'Unknown'}</div>
-                                <div style="color: #666; font-size: 10px; margin-top: 4px;">${data.latitude.toFixed(4)}°, ${data.longitude.toFixed(4)}°</div>
-                            </div>
-                        `, { className: 'visitor-popup' }).openPopup();
+                        marker.bindPopup(
+                            '<div style="text-align: center; padding: 8px;">' +
+                            '<div style="color: #00d4ff; font-size: 14px; margin-bottom: 4px;">Your Location</div>' +
+                            '<div style="color: #fff;">' + (data.city || 'Unknown') + ', ' + (data.country_name || 'Unknown') + '</div>' +
+                            '<div style="color: #666; font-size: 10px; margin-top: 4px;">' + data.latitude.toFixed(4) + '\u00B0, ' + data.longitude.toFixed(4) + '\u00B0</div>' +
+                            '</div>',
+                            { className: 'visitor-popup' }
+                        ).openPopup();
 
-                        // Animate map to visitor location
                         setTimeout(() => {
-                            visitorMap.flyTo([data.latitude, data.longitude], 5, {
-                                duration: 2
-                            });
+                            visitorMap.flyTo([data.latitude, data.longitude], 5, { duration: 2 });
                         }, 500);
                     } else {
                         showLocationError();
@@ -550,14 +750,6 @@ ACCESS RAW DATA
                 }
             }
 
-            // Start detection
             detectVisitorLocation();
-        }
-
-        // Initialize when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initVisitorMap);
-        } else {
-            initVisitorMap();
         }
     </script> </body> </html>
