@@ -37,7 +37,7 @@
   style.id = 'cosmic-mode-styles';
   style.textContent = [
     'html{transition:background-color .6s ease,color .6s ease}',
-    A + '{background-color:#0a0a0f!important}',
+    A + '{background-color:#0a0a0f!important;color:#e8dfd5!important}',
 
     A + ' .bg-paper,' + A + ' .bg-paper\\/95,' + A + ' .bg-paper\\/60{background-color:transparent!important}',
     A + ' .text-ink{color:#e8dfd5!important}',
