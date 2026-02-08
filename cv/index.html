@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Omkar Bhoite | CV Terminal</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Reset & Base */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Space Mono', monospace;
+  background: #0a0a0f;
+  color: #c0c0c0;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Cosmic Colors */
+:root {
+  --cosmic-accent: #00d4ff;
+  --cosmic-purple: #b026ff;
+  --cosmic-gold: #ffd700;
+  --cosmic-900: #0a0a0f;
+  --cosmic-800: #12121a;
+  --cosmic-700: #1a1a2e;
+  --cosmic-600: #252545;
+  --terminal-green: #00ff88;
+  --terminal-bg: rgba(10, 10, 15, 0.85);
+}
+
+/* Canvas */
+#canvas-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Scanline Overlay */
+.scanline-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+}
+.scanline-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    transparent 50%,
+    rgba(0, 212, 255, 0.015) 50%
+  );
+  background-size: 100% 4px;
+  animation: scanlines 8s linear infinite;
+}
+@keyframes scanlines {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(4px); }
+}
+
+/* Navigation */
+.nav-bar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(10, 10, 15, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+}
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: #6b7280;
+  transition: color 0.3s;
+}
+.nav-back:hover { color: var(--cosmic-accent); }
+.nav-back svg { width: 1.25rem; height: 1.25rem; }
+.nav-back span {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.nav-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.625rem;
+  color: #4b5563;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  display: none;
+}
+@media (min-width: 1024px) { .nav-title { display: block; } }
+
+/* Section Nav (sidebar) */
+.section-nav {
+  position: fixed;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  display: none;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+@media (min-width: 1024px) { .section-nav { display: flex; } }
+.section-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #4b5563;
+  transition: color 0.3s;
+  font-size: 0.625rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.section-nav a:hover,
+.section-nav a.active { color: var(--cosmic-accent); }
+.section-nav .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4b5563;
+  transition: background 0.3s, box-shadow 0.3s;
+  flex-shrink: 0;
+}
+.section-nav a:hover .dot,
+.section-nav a.active .dot {
+  background: var(--cosmic-accent);
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
+}
+.section-nav .label { opacity: 0; transition: opacity 0.3s; }
+.section-nav a:hover .label { opacity: 1; }
+
+/* Terminal Container */
+.terminal-wrapper {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6rem 1rem 4rem;
+}
+@media (min-width: 768px) { .terminal-wrapper { padding: 7rem 2rem 4rem; } }
+
+.terminal {
+  background: var(--terminal-bg);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    0 0 40px rgba(0, 212, 255, 0.05),
+    0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Terminal Title Bar */
+.terminal-title-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(18, 18, 26, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.terminal-dots {
+  display: flex;
+  gap: 6px;
+}
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.terminal-dot.red { background: #ff5f57; }
+.terminal-dot.yellow { background: #febc2e; }
+.terminal-dot.green { background: #28c840; }
+.terminal-title {
+  flex: 1;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #6b7280;
+  letter-spacing: 0.05em;
+}
+
+/* Terminal Content */
+.terminal-content {
+  padding: 1.5rem;
+  line-height: 1.7;
+  font-size: 1.1rem;
+}
+@media (min-width: 768px) { .terminal-content { padding: 2rem; font-size: 1.15rem; } }
+
+/* Boot Sequence */
+.boot-line {
+  color: var(--terminal-green);
+  opacity: 0;
+  transform: translateY(4px);
+  font-size: 1rem;
+}
+.boot-line.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.boot-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1em;
+  background: var(--terminal-green);
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* CV Sections */
+.cv-section {
+  margin-top: 2rem;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.cv-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Terminal Prompt */
+.prompt {
+  color: var(--cosmic-accent);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  font-size: 1.05rem;
+}
+.prompt .user { color: var(--terminal-green); }
+.prompt .path { color: var(--cosmic-purple); }
+.prompt .cmd { color: #e2e8f0; }
+
+/* Section Header */
+.section-header {
+  font-family: 'Cinzel', serif;
+  color: var(--cosmic-accent);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+/* Header Section */
+.header-name {
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+@media (min-width: 768px) { .header-name { font-size: 2.5rem; } }
+.header-subtitle {
+  color: var(--cosmic-accent);
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+.contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  font-size: 1rem;
+  color: #9ca3af;
+}
+.contact-row a {
+  color: var(--cosmic-purple);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.contact-row a:hover { color: var(--cosmic-accent); }
+
+/* Entry blocks (education, experience, etc.) */
+.entry {
+  margin-bottom: 1.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--cosmic-600);
+  transition: border-color 0.3s;
+}
+.entry:hover { border-left-color: var(--cosmic-accent); }
+.entry-title {
+  color: #e2e8f0;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+.entry-org {
+  color: var(--cosmic-accent);
+  font-size: 1.05rem;
+}
+.entry-date {
+  color: var(--cosmic-gold);
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+}
+.entry-location {
+  color: #6b7280;
+  font-size: 0.95rem;
+  font-style: italic;
+}
+.entry-detail {
+  color: #9ca3af;
+  font-size: 1rem;
+  margin-top: 0.25rem;
+  line-height: 1.6;
+}
+.entry-detail ul {
+  list-style: none;
+  padding: 0;
+}
+.entry-detail li::before {
+  content: '> ';
+  color: var(--cosmic-accent);
+}
+
+/* Skills section */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+@media (min-width: 640px) { .skills-grid { grid-template-columns: 1fr 1fr; } }
+.skill-category h4 {
+  color: var(--cosmic-accent);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.skill-tag {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.92rem;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 4px;
+  color: #c0c0c0;
+  transition: all 0.3s;
+}
+.skill-tag:hover {
+  background: rgba(0, 212, 255, 0.15);
+  border-color: var(--cosmic-accent);
+  color: #fff;
+}
+
+/* Progress bars */
+.progress-bar-container {
+  margin-bottom: 0.6rem;
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-bottom: 0.2rem;
+}
+.progress-track {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--cosmic-accent), var(--cosmic-purple));
+  transition: width 1.5s ease;
+  width: 0;
+}
+
+/* Publications */
+.pub-item {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  border-left: 3px solid var(--cosmic-purple);
+}
+.pub-title {
+  color: #e2e8f0;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.pub-authors {
+  color: #9ca3af;
+  font-size: 0.98rem;
+  margin-top: 0.15rem;
+}
+.pub-venue {
+  color: var(--cosmic-gold);
+  font-size: 0.95rem;
+  margin-top: 0.15rem;
+}
+
+/* Projects grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 640px) { .projects-grid { grid-template-columns: 1fr 1fr; } }
+.project-card {
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+.project-card:hover {
+  border-color: rgba(0, 212, 255, 0.3);
+  transform: translateY(-2px);
+}
+.project-card h4 {
+  color: var(--cosmic-accent);
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+}
+.project-card p {
+  color: #9ca3af;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.project-tech {
+  margin-top: 0.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.project-tech span {
+  font-size: 0.75rem;
+  padding: 0.1rem 0.4rem;
+  background: rgba(176, 38, 255, 0.1);
+  border: 1px solid rgba(176, 38, 255, 0.2);
+  border-radius: 3px;
+  color: #b08fff;
+}
+
+/* References */
+.ref-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 640px) { .ref-grid { grid-template-columns: 1fr 1fr; } }
+.ref-card {
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.ref-card .ref-name {
+  color: #e2e8f0;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.ref-card .ref-title {
+  color: var(--cosmic-gold);
+  font-size: 0.95rem;
+}
+.ref-card .ref-affiliation {
+  color: #9ca3af;
+  font-size: 0.95rem;
+}
+.ref-card a {
+  color: var(--cosmic-purple);
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+.ref-card a:hover { color: var(--cosmic-accent); }
+
+/* Divider */
+.terminal-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+  margin: 2rem 0;
+}
+
+/* Footer */
+.footer {
+  position: relative;
+  z-index: 10;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem 1rem;
+  text-align: center;
+  font-size: 0.7rem;
+  color: #4b5563;
+  letter-spacing: 0.1em;
+}
+
+/* Utilities */
+.text-white { color: #fff; }
+.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<!-- Three.js Starfield -->
+<div id="canvas-container"></div>
+
+<!-- Scanline Overlay -->
+<div class="scanline-overlay"></div>
+
+<!-- Navigation -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <a href="/" class="nav-back">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      <span>Return to Earth</span>
+    </a>
+    <div class="nav-title">63.4305&deg; N &middot; 10.3951&deg; E &mdash; Trondheim</div>
+  </div>
+</nav>
+
+<!-- Section Sidebar Nav -->
+<div class="section-nav" id="section-nav">
+  <a href="#header-section"><span class="dot"></span><span class="label">Identity</span></a>
+  <a href="#education-section"><span class="dot"></span><span class="label">Education</span></a>
+  <a href="#research-section"><span class="dot"></span><span class="label">Research</span></a>
+  <a href="#industry-section"><span class="dot"></span><span class="label">Industry</span></a>
+  <a href="#publications-section"><span class="dot"></span><span class="label">Papers</span></a>
+  <a href="#projects-section"><span class="dot"></span><span class="label">Projects</span></a>
+  <a href="#skills-section"><span class="dot"></span><span class="label">Skills</span></a>
+  <a href="#references-section"><span class="dot"></span><span class="label">Refs</span></a>
+</div>
+
+<!-- Terminal -->
+<div class="terminal-wrapper">
+  <div class="terminal">
+    <!-- Title Bar -->
+    <div class="terminal-title-bar">
+      <div class="terminal-dots">
+        <div class="terminal-dot red"></div>
+        <div class="terminal-dot yellow"></div>
+        <div class="terminal-dot green"></div>
+      </div>
+      <div class="terminal-title">omkar@cosmos &mdash; cv.sh</div>
+      <div style="width: 52px;"></div>
+    </div>
+
+    <!-- Terminal Content -->
+    <div class="terminal-content" id="terminal-content">
+
+      <!-- Boot Sequence -->
+      <div id="boot-sequence">
+        <div class="boot-line" data-delay="200">&gt; Initializing secure connection...</div>
+        <div class="boot-line" data-delay="600">&gt; Loading personnel database...</div>
+        <div class="boot-line" data-delay="1000">&gt; Decrypting CV data...</div>
+        <div class="boot-line" data-delay="1400">&gt; Resolving cosmic coordinates [63.43&deg;N, 10.40&deg;E]...</div>
+        <div class="boot-line" data-delay="1800">&gt; Access granted. Welcome.<span class="boot-cursor"></span></div>
+      </div>
+
+      <!-- ═══ HEADER ═══ -->
+      <div class="cv-section" id="header-section" data-delay="2200">
+        <hr class="terminal-divider">
+        <div class="prompt">
+          <span class="user">visitor</span>@<span class="path">omkar-cv</span>:~$ <span class="cmd">cat identity.log</span>
+        </div>
+        <div class="header-name">Omkar Bhoite</div>
+        <div class="header-subtitle">PhD Researcher &mdash; Optimization &amp; Graph Theory</div>
+        <div class="contact-row">
+          <span>Trondheim, Norway</span>
+          <a href="mailto:omkar.bhoite@ntnu.no">omkar.bhoite@ntnu.no</a>
+          <a href="https://omkarbhoite25.github.io" target="_blank" rel="noopener">omkarbhoite25.github.io</a>
+          <a href="https://www.linkedin.com/in/omkar-bhoite-6335a51b5/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/omkarbhoite25" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <!-- ═══ EDUCATION ═══ -->
+      <div class="cv-section" id="education-section">
+        <hr class="terminal-divider">
+        <div class="prompt">
+          <span class="user">visitor</span>@<span class="path">omkar-cv</span>:~$ <span class="cmd">cat education.log</span>
+        </div>
+        <div class="section-header">Education</div>
+
+        <div class="entry">
+          <div class="entry-title">PhD &mdash; Department of Electronics System (Signal Processing Group)</div>
+          <div class="entry-date">2024 &ndash; 2027</div>
+          <div class="entry-detail">
+            <ul>
+              <li>University: Norges teknisk-naturvitenskapelige universitet (NTNU) [Norway]</li>
+              <li>Research: Optimization and Graph Theory</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-title">Master&rsquo;s &mdash; Autonomous Systems (Robotics &amp; AI) - Specialization in Computer Science for Autonomous Vehicle</div>
+          <div class="entry-org">Recipient of EIT Masters Scholarship</div>
+          <div class="entry-date">2020 &ndash; 2022</div>
+          <div class="entry-detail">
+            <ul>
+              <li>University: KTH Royal Institute of Technology [Sweden]</li>
+              <li>Exchange University: E&ouml;tv&ouml;s Lor&aacute;nd University [Budapest]</li>
+              <li>Overall Qualification: Excellent</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-title">Bachelor&rsquo;s &mdash; Instrumentation &amp; Control Engineering</div>
+          <div class="entry-date">2015 &ndash; 2019</div>
+          <div class="entry-detail">
+            <ul>
+              <li>University: Pune University [India]</li>
+              <li>CGPA: 8.57 / 10</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ RESEARCH EXPERIENCE ═══ -->
+      <div class="cv-section" id="research-section">
+        <hr class="terminal-divider">
+        <div class="prompt">
+          <span class="user">visitor</span>@<span class="path">omkar-cv</span>:~$ <span class="cmd">cat research.log</span>
+        </div>
+        <div class="section-header">Research Experience</div>
+
+        <div class="entry">
+          <div class="entry-title">Master Thesis Internship &mdash; Vehicle in the loop simulation with UAV &amp; artificial companion drone</div>
+          <div class="entry-org">Sztaki Institute of Computer Science &amp; Control</div>
+          <div class="entry-date">January 2022 &ndash; July 2022</div>
+          <div class="entry-location">Budapest, Hungary</div>
+          <div class="entry-detail">
+            <ul>
+              <li>Sensor redundancy of companion drone to enhance navigation of main mission drone</li>
+              <li>Monocular &amp; stereo camera based navigation, Kalman filtering, VIO</li>
+              <li>UnReal Engine 4, MAV&rsquo;s</li>
+            </ul>
+            Advisor: Dr. Ivan Eichhardt &amp; Dr. Antal Hiba
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-title">Researcher &mdash; Neuro-Computing Systems Lab</div>
+          <div class="entry-org">KTH Royal Institute of Technology</div>
+          <div class="entry-date">February 2021 &ndash; July 2021</div>
+          <div class="entry-location">Stockholm, Sweden</div>
+          <div class="entry-detail">
+            <ul>
+              <li>Robotic head motor dynamics control using ROS topics and services</li>
+              <li>Event-based camera (eDVS4337) pipeline to stream events to neural net</li>
+              <li>Neuromorphic Vision, Dynamixel motors, ROS, C++, Python</li>
+            </ul>
+            Advisor: Juan Pablo Romero Bermudez (PhD Student)
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-title">GHz Transimpedance amplifier &amp; Micropillars / Bragg reflectors for exciton-polaritons</div>
+          <div class="entry-org">IISER Pune</div>
+          <div class="entry-date">2017 &ndash; 2018</div>
+          <div class="entry-location">Pune, India</div>
+          <div class="entry-detail">
+            <ul>
+              <li>TIA circuit design for cryostat &amp; shot noise measurement</li>
+              <li>Fabrication of micropillars and study of distributed Bragg reflectors</li>
+            </ul>
+            Advisor: Dr. Datta Shouvik
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ INDUSTRIAL EXPERIENCE ═══ -->
+      <div class="cv-section" id="industry-section">
+        <hr class="terminal-divider">
+        <div class="prompt">
+          <span class="user">visitor</span>@<span class="path">omkar-cv</span>:~$ <span class="cmd">cat experience.log</span>
+        </div>
+        <div class="section-header">Industrial Experience</div>
+
+        <div class="entry">
+          <div class="entry-title">Senior Software Developer (TAE) at IQM Quantum Computers</div>
+          <div class="entry-date">2022 &ndash; 2024</div>
+          <div class="entry-detail">
+            <ul>
+              <li>Developing a de-centralised system based software architecture (Full Stack Development) to experiment different modules of quantum computer automatically</li>
+              <li>Teams: Electronics &amp; Production Development (2022), System Integration (2022), Scalable Electronics (2022&ndash;2024)</li>
+              <li>Python, C++, Flask, RPC, RabbitMQ, HTML, CSS, JavaScript, Gitlab</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ PUBLICATIONS ═══ -->
+      <div class="cv-section" id="publications-section">
+        <hr class="terminal-divider">
+        <div class="prompt">
+          <span class="user">visitor</span>@<span class="path">omkar-cv</span>:~$ <span class="cmd">cat publications.log</span>
+        </div>
+        <div class="section-header">Publications</div>
+
+        <div class="pub-item">
+          <div class="pub-title"><a href="https://ieeexplore.ieee.org/document/10156429" target="_blank" rel="noopener" style="color: #e2e8f0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--cosmic-accent)'" onmouseout="this.style.color='#e2e8f0'">Indoor vehicle-in-the-loop simulation of unmanned micro aerial vehicle with artificial companion</a></div>
+          <div class="pub-authors">A. Hiba, V. Kortvelyesi, A. Kiskaroly, O. Bhoite, P. David, A. Majdik</div>
+          <div class="pub-venue">ICUAS 2023, IEEE &mdash; DOI: 10.1109/ICUAS57906.2023.10156429</div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-title"><a href="https://arxiv.org/abs/1908.02840" target="_blank" rel="noopener" style="color: #e2e8f0; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--cosmic-accent)'" onmouseout="this.style.color='#e2e8f0'">Temperature Tunable Optical Transmission control of VO2 nanostructures by IR based 1-D Photonic crystals</a></div>
+          <div class="pub-authors">D. U. Singh, O. Bhoite, R. Narayanan</div>
+          <div class="pub-venue">arXiv:1908.02840, 2019</div>
+        </div>
+      </div>
+
+      <!-- ═══ PROJECTS ═══ -->
+      <div class="cv-section" id="projects-section">
+        <hr class="terminal-divider">
+        <div class="prompt">
+          <span class="user">visitor</span>@<span class="path">omkar-cv</span>:~$ <span class="cmd">ls -la projects/</span>
+        </div>
+        <div class="section-header">Projects</div>
+
+        <!-- Computer Vision -->
+        <div style="color: var(--cosmic-accent); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem; text-decoration: underline;">Computer Vision:</div>
+
+        <div class="entry">
+          <div class="entry-title">Image-Video Processing</div>
+          <div class="entry-date">2021 &ndash; 2022</div>
+          <div class="entry-detail">Experimenting on different feature extraction and edge detection algorithms. Analysing optical density flow and motion tracking algorithm for tracking fish movements and motor movement.</div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-title">3D Sensor Fusion and Sensing</div>
+          <div class="entry-date">2021 &ndash; 2022</div>
+          <div class="entry-detail">Implementation of different types of filters (Median, Gaussian, Bilateral Filter), worked on stereo matching, ICP &amp; 3D-Point Cloud reconstruction of different scenes.</div>
+        </div>
+
+        <!-- Mobile Robots -->
+        <div style="color: var(--cosmic-accent); font-size: 1.05rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; text-decoration: underline;">Mobile Robots:</div>
+
+        <div class="entry">
+          <div class="entry-title">Manipulators</div>
+          <div class="entry-date">2021 &ndash; 2022</div>
+          <div class="entry-detail">Designing different manipulators in CoppeliaSim simulator and perform different task for motion planning to generating path for end effector to carry out task.</div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-title">Bosch Future Mobility Challenge (One of the top three teams from Sweden qualified for the challenge.)</div>
+          <div class="entry-date">2020 &ndash; 2021</div>
+          <div class="entry-detail">Designed a system composed of different algorithms to emulate autonomous car on 1/10th the scale of actual car and also in Gazebo Environment. Worked on the perception and learning domain where we gathered the data using raspberry pi camera to perceive the world, then based on this do different functions like lane following, traffic sign detection, pedestrian detection.</div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-title">Mobile Manipulation Project</div>
+          <div class="entry-date">2020 &ndash; 2021</div>
+          <div class="entry-detail">Implemented a mission planner for TIAGo to Pick &amp; Place an aruco cube in Gazebo (ROS) indoor environment with three different approaches which includes without sensory input, with visual sensing, with visual sensing and navigation using Monte Carlo approach.</div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-title">Evaluation of Effective Sensor Positioning in Autonomous Vehicles via Simulation</div>
+          <div class="entry-date">2020 &ndash; 2021</div>
+          <div class="entry-detail">Analyse how the number of sensors can affect the power usage in the car, and how we can get an optimal set of sensors to perform autonomous driving efficiently. We use real world data of a small-scale car to gather electrical power usages, along with a simulation over several obstacle courses, to show that sensor placement can significantly alter the total energy used by an autonomous vehicle.</div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-title">UAV</div>
+          <div class="entry-date">2017 &ndash; 2018</div>
+          <div class="entry-detail">Calculating spatial position of the drone in Euclidean Space and its flight speed by utilising gyroscope &amp; accelerometer. Controlled positioning of the drone in 3D Space by optimizing YPR parameters.</div>
+        </div>
+
+        <!-- Robotics Mapping -->
+        <div style="color: var(--cosmic-accent); font-size: 1.05rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; text-decoration: underline;">Robotics Mapping:</div>
+
+        <div class="entry">
+          <div class="entry-title">Occupancy Grid Mapping</div>
+          <div class="entry-date">2020 &ndash; 2021</div>
+          <div class="entry-detail">Converting laser scan ranges and bearings to coordinates in the laser frame, then convert the coordinates to the map frame and map indices, and then simulate the map.</div>
+        </div>
+
+        <!-- AI/ML -->
+        <div style="color: var(--cosmic-accent); font-size: 1.05rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; text-decoration: underline;">AI/ML:</div>
+
+        <div class="entry">
+          <div class="entry-title">Emotion Detection</div>
+          <div class="entry-date">2021 &ndash; 2022</div>
+          <div class="entry-detail">Multimodal deep neural network for emotion detection using FER2013 dataset.</div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-title">Keypoint Detection</div>
+          <div class="entry-date">2021 &ndash; 2022</div>
+          <div class="entry-detail">FNC8 based neural net to detect the keypoints on &quot;CAT&quot; dataset.</div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-title">AI Based Game</div>
+          <div class="entry-date">2020 &ndash; 2021</div>
+          <div class="entry-detail">Catching fish in a game simulation and try to score better using Hidden Markov Model &amp; Reinforcement Learning (Epsilon Greedy and Mini-Max) algorithms.</div>
+        </div>
+
+        <!-- Other -->
+        <div style="color: var(--cosmic-accent); font-size: 1.05rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; text-decoration: underline;">Other:</div>
+
+        <div class="entry">
+          <div class="entry-title">Designed and developed an automated testing equipment for a switch mode power supply (SMPS) &amp; its analysis and data acquisition using LabVIEW <span style="color: var(--cosmic-gold); font-size: 0.8rem; font-weight: 400;">[Bachelor&rsquo;s Thesis]</span></div>
+          <div class="entry-date">2018 &ndash; 2019</div>
+          <div class="entry-detail">We measure, evaluate and analyze different performance characteristics of SMPS using the testing equipment we built and we use LabVIEW Software for data acquisition and analyzing the test data acquired from the testing equipment.</div>
+        </div>
+      </div>
+
+      <!-- ═══ SKILLS ═══ -->
+      <div class="cv-section" id="skills-section">
+        <hr class="terminal-divider">
+        <div class="prompt">
+          <span class="user">visitor</span>@<span class="path">omkar-cv</span>:~$ <span class="cmd">cat skills.dat</span>
+        </div>
+        <div class="section-header">Languages &amp; Software</div>
+
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h4>Programming Languages</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">C/C++</span>
+              <span class="skill-tag">MATLAB</span>
+              <span class="skill-tag">Julia</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">Bash</span>
+              <span class="skill-tag">LaTeX</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h4>Frameworks &amp; Libraries</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">PyTorch</span>
+              <span class="skill-tag">NumPy/SciPy</span>
+              <span class="skill-tag">CVXPY</span>
+              <span class="skill-tag">ROS</span>
+              <span class="skill-tag">OpenCV</span>
+              <span class="skill-tag">Three.js</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h4>Tools &amp; Platforms</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Linux</span>
+              <span class="skill-tag">HPC/Slurm</span>
+              <span class="skill-tag">VS Code</span>
+              <span class="skill-tag">Vim</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h4>Natural Languages</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">English (Fluent)</span>
+              <span class="skill-tag">Hindi (Native)</span>
+              <span class="skill-tag">Marathi (Native)</span>
+              <span class="skill-tag">Norwegian (Basic)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proficiency Bars -->
+        <div style="margin-top: 1.5rem;">
+          <div class="progress-bar-container">
+            <div class="progress-label"><span>Python</span><span>95%</span></div>
+            <div class="progress-track"><div class="progress-fill" data-width="95"></div></div>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-label"><span>C/C++</span><span>80%</span></div>
+            <div class="progress-track"><div class="progress-fill" data-width="80"></div></div>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-label"><span>MATLAB</span><span>85%</span></div>
+            <div class="progress-track"><div class="progress-fill" data-width="85"></div></div>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-label"><span>Optimization (CVXPY/SCS)</span><span>90%</span></div>
+            <div class="progress-track"><div class="progress-fill" data-width="90"></div></div>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-label"><span>Robotics (ROS/Gazebo)</span><span>75%</span></div>
+            <div class="progress-track"><div class="progress-fill" data-width="75"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ REFERENCES ═══ -->
+      <div class="cv-section" id="references-section">
+        <hr class="terminal-divider">
+        <div class="prompt">
+          <span class="user">visitor</span>@<span class="path">omkar-cv</span>:~$ <span class="cmd">cat references.log</span>
+        </div>
+        <div class="section-header">References</div>
+
+        <div class="ref-grid">
+          <div class="ref-card">
+            <div class="ref-name">Dr. Stefan Werner</div>
+            <div class="ref-title">Professor</div>
+            <div class="ref-affiliation">NTNU, Norway</div>
+            <a href="mailto:stefan.werner@ntnu.no">stefan.werner@ntnu.no</a>
+          </div>
+          <div class="ref-card">
+            <div class="ref-name">Dr. Kimmo Juhani Kansanen</div>
+            <div class="ref-title">Professor</div>
+            <div class="ref-affiliation">NTNU, Norway</div>
+            <a href="mailto:kimmo.kansanen@ntnu.no">kimmo.kansanen@ntnu.no</a>
+          </div>
+          <div class="ref-card">
+            <div class="ref-name">Dr. Shouvik Datta</div>
+            <div class="ref-title">Associate Professor, Dept. of Physics</div>
+            <div class="ref-affiliation">Indian Institute of Science Education and Research (IISER)</div>
+            <a href="mailto:shouvik@iiserpune.ac.in">shouvik@iiserpune.ac.in</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Terminal end -->
+      <div class="cv-section" id="end-section">
+        <hr class="terminal-divider">
+        <div class="prompt" style="margin-bottom: 0;">
+          <span class="user">visitor</span>@<span class="path">omkar-cv</span>:~$ <span class="cmd" style="color: var(--terminal-green);">exit</span>
+        </div>
+        <div style="color: #6b7280; font-size: 0.75rem; margin-top: 0.5rem;">
+          Connection closed. Thank you for visiting.<span class="boot-cursor"></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  &copy; 2026 Omkar Bhoite. Rendered at the edge of the observable universe.
+</footer>
+
+<!-- Three.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function() {
+  // Three.js Starfield
+  const isMobile = window.innerWidth < 768;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: !isMobile });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+  const starsGeometry = new THREE.BufferGeometry();
+  const starsCount = isMobile ? 3000 : 7000;
+  const posArray = new Float32Array(starsCount * 3);
+  const colorArray = new Float32Array(starsCount * 3);
+
+  for (let i = 0; i < starsCount * 3; i += 3) {
+    posArray[i] = (Math.random() - 0.5) * 120;
+    posArray[i+1] = (Math.random() - 0.5) * 120;
+    posArray[i+2] = (Math.random() - 0.5) * 120;
+
+    colorArray[i] = 1; colorArray[i+1] = 1; colorArray[i+2] = 1; // white
+  }
+
+  starsGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+  starsGeometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
+
+  const starsMaterial = new THREE.PointsMaterial({
+    size: 0.12,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.8,
+    sizeAttenuation: true
+  });
+
+  const starsMesh = new THREE.Points(starsGeometry, starsMaterial);
+  scene.add(starsMesh);
+  camera.position.z = 30;
+
+  let mouseX = 0, mouseY = 0;
+  if (!isMobile) {
+    document.addEventListener('mousemove', function(e) {
+      mouseX = (e.clientX - window.innerWidth / 2) / 100;
+      mouseY = (e.clientY - window.innerHeight / 2) / 100;
+    }, { passive: true });
+  }
+
+  let isTabVisible = true;
+  document.addEventListener('visibilitychange', function() {
+    isTabVisible = !document.hidden;
+  });
+
+  function animate() {
+    requestAnimationFrame(animate);
+    if (!isTabVisible || prefersReducedMotion) return;
+
+    starsMesh.rotation.y += 0.0003;
+    starsMesh.rotation.x += 0.0001;
+
+    if (!isMobile) {
+      camera.position.x += (mouseX - camera.position.x) * 0.04;
+      camera.position.y += (-mouseY - camera.position.y) * 0.04;
+    }
+    camera.lookAt(scene.position);
+    renderer.render(scene, camera);
+  }
+
+  if (!prefersReducedMotion) {
+    animate();
+  } else {
+    renderer.render(scene, camera);
+  }
+
+  let resizeTimeout;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(function() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }, 250);
+  }, { passive: true });
+
+  // ─── Boot Sequence ───
+  var bootLines = document.querySelectorAll('.boot-line');
+  bootLines.forEach(function(line) {
+    var delay = parseInt(line.getAttribute('data-delay'), 10) || 0;
+    setTimeout(function() {
+      line.classList.add('visible');
+    }, delay);
+  });
+
+  // ─── CV Sections Reveal ───
+  var cvSections = document.querySelectorAll('.cv-section');
+
+  // Initial header section fades in after boot
+  var headerSection = document.getElementById('header-section');
+  if (headerSection) {
+    var headerDelay = parseInt(headerSection.getAttribute('data-delay'), 10) || 2200;
+    setTimeout(function() {
+      headerSection.classList.add('visible');
+    }, headerDelay);
+  }
+
+  // IntersectionObserver for remaining sections
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+          // Animate progress bars inside this section
+          var bars = entry.target.querySelectorAll('.progress-fill');
+          bars.forEach(function(bar) {
+            var w = bar.getAttribute('data-width');
+            setTimeout(function() { bar.style.width = w + '%'; }, 300);
+          });
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+    cvSections.forEach(function(section) {
+      if (section.id !== 'header-section') {
+        observer.observe(section);
+      }
+    });
+  } else {
+    // Fallback: show all
+    cvSections.forEach(function(s) { s.classList.add('visible'); });
+    document.querySelectorAll('.progress-fill').forEach(function(bar) {
+      bar.style.width = bar.getAttribute('data-width') + '%';
+    });
+  }
+
+  // ─── Section Nav Active State ───
+  var navLinks = document.querySelectorAll('#section-nav a');
+  var sectionIds = [];
+  navLinks.forEach(function(link) {
+    sectionIds.push(link.getAttribute('href').substring(1));
+  });
+
+  function updateActiveNav() {
+    var scrollY = window.scrollY + window.innerHeight / 3;
+    var active = '';
+    sectionIds.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el && el.offsetTop <= scrollY) {
+        active = id;
+      }
+    });
+    navLinks.forEach(function(link) {
+      var href = link.getAttribute('href').substring(1);
+      if (href === active) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  var scrollTick = false;
+  window.addEventListener('scroll', function() {
+    if (!scrollTick) {
+      requestAnimationFrame(function() {
+        updateActiveNav();
+        scrollTick = false;
+      });
+      scrollTick = true;
+    }
+  }, { passive: true });
+
+  updateActiveNav();
+})();
+</script>
+</body>
+</html>
