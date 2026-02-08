@@ -89,7 +89,7 @@
     '#cosmic-toggle.cosmic-on .icon-light{display:none}',
     '#cosmic-toggle.cosmic-on .icon-cosmic{display:block}',
 
-    A + ' header,' + A + ' main,' + A + ' footer,' + A + ' .fixed.bottom-4{position:relative;z-index:10}',
+    A + ' header,' + A + ' main,' + A + ' footer{position:relative;z-index:10}',
     A + ' [filter*="watercolor"]{filter:none}',
     A + ' .lightbox{background-color:rgba(0,0,0,.95)!important}',
 
