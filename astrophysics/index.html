@@ -57,6 +57,59 @@ body[data-astro-cid-mppcwxlb] { font-family: 'Inter', sans-serif; }
 body[data-astro-cid-mppcwxlb] .font-serif { font-family: 'Cinzel', serif; }
 body[data-astro-cid-mppcwxlb] .font-mono { font-family: 'Space Mono', monospace; }
 body[data-astro-cid-mppcwxlb] .font-sans { font-family: 'Inter', sans-serif; }
+/* Mobile responsive fixes */
+@media (max-width: 767px) {
+  /* === Cosmic Evolution Timeline === */
+  /* Move vertical line to left edge */
+  #cosmology .relative > .absolute:first-child {
+    left: 0.75rem !important;
+    transform: none !important;
+  }
+  /* Reduce spacing between timeline items */
+  #cosmology .space-y-24 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 3rem;
+  }
+  /* Stack timeline items in single column */
+  #cosmology .space-y-24 > div {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding-left: 2.5rem;
+  }
+  /* Card wrappers: full width, left aligned */
+  #cosmology .space-y-24 div[class*="w-5/12"] {
+    width: 100% !important;
+    text-align: left !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  /* Hide empty spacer divs */
+  #cosmology .space-y-24 div[class*="w-5/12"]:empty {
+    display: none;
+  }
+  /* Move timeline dots to left edge */
+  #cosmology .space-y-24 > div > .absolute {
+    left: 0.75rem !important;
+    transform: translateX(-50%) !important;
+    top: 1.25rem;
+  }
+  /* Reduce card padding on mobile */
+  #cosmology .glass-panel.p-8 {
+    padding: 1.25rem !important;
+  }
+  /* === Phenomena Cards === */
+  /* Reduce fixed height on mobile */
+  .phenomena-card {
+    height: 18rem !important;
+  }
+  /* Show card text overlay without hover */
+  .phenomena-card .translate-y-4 {
+    transform: translateY(0) !important;
+  }
+  /* Show descriptions on mobile (no hover on touch) */
+  .phenomena-card p.opacity-0 {
+    opacity: 1 !important;
+  }
+}
 </style></head> <body class="font-sans antialiased" data-astro-cid-mppcwxlb> <div id="canvas-container" class="fixed inset-0 z-0" data-astro-cid-mppcwxlb></div> <!-- Navigation --> <nav class="fixed w-full z-50 border-b border-white/5 transition-all duration-500" id="navbar" data-astro-cid-mppcwxlb> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-astro-cid-mppcwxlb> <div class="flex justify-between items-center h-16" data-astro-cid-mppcwxlb> <a href="/" class="flex items-center space-x-3 group" data-astro-cid-mppcwxlb> <svg class="w-5 h-5 text-gray-500 group-hover:text-cosmic-accent transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-astro-cid-mppcwxlb><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 19l-7-7m0 0l7-7m-7 7h18" data-astro-cid-mppcwxlb></path></svg> <span class="font-mono text-xs text-gray-500 group-hover:text-cosmic-accent transition-colors tracking-widest uppercase" data-astro-cid-mppcwxlb>Return to Earth</span> </a> <div class="hidden md:flex items-center space-x-1" data-astro-cid-mppcwxlb> <a href="#observatory" class="nav-dot group relative px-4 py-2" data-astro-cid-mppcwxlb><span class="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-cosmic-accent inline-block transition-colors" data-astro-cid-mppcwxlb></span><span class="absolute -bottom-5 left-1/2 -translate-x-1/2 font-mono text-[10px] text-gray-600 group-hover:text-cosmic-accent transition-colors tracking-widest opacity-0 group-hover:opacity-100 whitespace-nowrap" data-astro-cid-mppcwxlb>I</span></a> <span class="w-8 h-px bg-white/10" data-astro-cid-mppcwxlb></span> <a href="#cosmology" class="nav-dot group relative px-4 py-2" data-astro-cid-mppcwxlb><span class="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-cosmic-purple inline-block transition-colors" data-astro-cid-mppcwxlb></span><span class="absolute -bottom-5 left-1/2 -translate-x-1/2 font-mono text-[10px] text-gray-600 group-hover:text-cosmic-purple transition-colors tracking-widest opacity-0 group-hover:opacity-100 whitespace-nowrap" data-astro-cid-mppcwxlb>II</span></a> <span class="w-8 h-px bg-white/10" data-astro-cid-mppcwxlb></span> <a href="#phenomena" class="nav-dot group relative px-4 py-2" data-astro-cid-mppcwxlb><span class="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-cosmic-gold inline-block transition-colors" data-astro-cid-mppcwxlb></span><span class="absolute -bottom-5 left-1/2 -translate-x-1/2 font-mono text-[10px] text-gray-600 group-hover:text-cosmic-gold transition-colors tracking-widest opacity-0 group-hover:opacity-100 whitespace-nowrap" data-astro-cid-mppcwxlb>III</span></a> <span class="w-8 h-px bg-white/10" data-astro-cid-mppcwxlb></span> <a href="#research" class="nav-dot group relative px-4 py-2" data-astro-cid-mppcwxlb><span class="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-cosmic-accent inline-block transition-colors" data-astro-cid-mppcwxlb></span><span class="absolute -bottom-5 left-1/2 -translate-x-1/2 font-mono text-[10px] text-gray-600 group-hover:text-cosmic-accent transition-colors tracking-widest opacity-0 group-hover:opacity-100 whitespace-nowrap" data-astro-cid-mppcwxlb>IV</span></a> </div> <div class="font-mono text-[10px] text-gray-600 tracking-[0.3em] uppercase hidden lg:block" data-astro-cid-mppcwxlb>47.3714° N &middot; 8.5412° E</div> </div> </div> </nav> <!-- Hero Section with Three.js Background --> <section class="relative h-screen w-full overflow-hidden flex items-center justify-center" data-astro-cid-mppcwxlb> <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-transparent z-10" data-astro-cid-mppcwxlb></div> <div class="relative z-20 text-center px-4 max-w-6xl mx-auto" data-astro-cid-mppcwxlb> <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-8 leading-none tracking-tight" data-astro-cid-mppcwxlb> <span class="block transform hover:scale-105 transition-transform duration-700 cursor-default" data-astro-cid-mppcwxlb>COSMOS</span> <span class="block text-2xl md:text-4xl font-light text-gray-400 mt-4 tracking-[0.3em]" data-astro-cid-mppcwxlb>BEYOND THE VEIL</span> </h1> <p class="font-mono text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed" data-astro-cid-mppcwxlb>
 Exploring the fundamental nature of spacetime, dark matter, and the cosmic web that binds our universe together.
 </p> <div class="flex flex-col md:flex-row gap-6 justify-center items-center" data-astro-cid-mppcwxlb> <button class="group relative px-8 py-4 bg-cosmic-accent text-black font-bold font-mono tracking-widest overflow-hidden rounded-sm hover:scale-105 transition-transform duration-300" data-astro-cid-mppcwxlb> <span class="relative z-10" data-astro-cid-mppcwxlb>INITIATE SEQUENCE</span> <div class="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" data-astro-cid-mppcwxlb></div> </button> <div class="flex items-center space-x-4 font-mono text-sm text-gray-500" data-astro-cid-mppcwxlb> <span class="w-12 h-px bg-gray-600" data-astro-cid-mppcwxlb></span> <span data-astro-cid-mppcwxlb>COORDINATES: 19h 44m 50s +21° 30'</span> </div> </div> </div> <!-- Floating Data Points --> <div class="absolute bottom-10 left-10 font-mono text-xs text-gray-600 hidden lg:block" data-astro-cid-mppcwxlb> <div class="mb-2" data-astro-cid-mppcwxlb>SYS.TEMP: 2.725 K</div> <div class="mb-2" data-astro-cid-mppcwxlb>HUBBLE CONSTANT: 70.4 km/s/Mpc</div> <div data-astro-cid-mppcwxlb>DARK ENERGY: 68.3%</div> </div> </section> <!-- Observatory Section --> <section id="observatory" class="relative z-10 py-32" data-astro-cid-mppcwxlb> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-astro-cid-mppcwxlb> <div class="grid lg:grid-cols-2 gap-16 items-center" data-astro-cid-mppcwxlb> <div class="space-y-8" data-astro-cid-mppcwxlb>  <h2 class="font-serif text-5xl md:text-6xl font-bold text-white leading-tight" data-astro-cid-mppcwxlb>
