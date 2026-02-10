@@ -79,15 +79,20 @@
     '#cosmic-canvas-container canvas{display:block;width:100%;height:100%}',
 
     /* Button lives inside <header> flex row. margin-left:auto pushes it + nav/hamburger to the right. */
-    '#cosmic-toggle{margin-left:auto;margin-right:12px;z-index:51;width:42px;height:42px;border-radius:50%;border:2px solid rgba(107,154,143,.65);background:rgba(235,228,218,.95);backdrop-filter:blur(8px);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .4s ease;box-shadow:0 2px 12px rgba(0,0,0,.15),0 0 0 1px rgba(107,154,143,.15);flex-shrink:0}',
-    '#cosmic-toggle:hover{transform:scale(1.1);box-shadow:0 4px 16px rgba(0,0,0,.15);border-color:rgba(107,154,143,.8)}',
-    '#cosmic-toggle.cosmic-on{border-color:rgba(0,212,255,.5);background:rgba(10,10,15,.85);box-shadow:0 0 16px rgba(0,212,255,.25),0 0 32px rgba(176,38,255,.08)}',
+    '#cosmic-toggle{margin-left:auto;margin-right:12px;z-index:51;height:38px;padding:0 14px;border-radius:999px;border:2px solid rgba(107,154,143,.65);background:rgba(235,228,218,.95);backdrop-filter:blur(8px);cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .4s ease;box-shadow:0 2px 12px rgba(0,0,0,.15),0 0 0 1px rgba(107,154,143,.15);flex-shrink:0;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#5a4e42;white-space:nowrap}',
+    '#cosmic-toggle:hover{transform:scale(1.05);box-shadow:0 4px 16px rgba(0,0,0,.15);border-color:rgba(107,154,143,.8)}',
+    '#cosmic-toggle.cosmic-on{border-color:rgba(0,212,255,.5);background:rgba(10,10,15,.85);box-shadow:0 0 16px rgba(0,212,255,.25),0 0 32px rgba(176,38,255,.08);color:#00d4ff}',
     '#cosmic-toggle.cosmic-on:hover{box-shadow:0 0 22px rgba(0,212,255,.4),0 0 44px rgba(176,38,255,.15)}',
-    '#cosmic-toggle svg{width:20px;height:20px;transition:all .4s ease}',
+    '#cosmic-toggle svg{width:18px;height:18px;transition:all .4s ease;flex-shrink:0}',
     '#cosmic-toggle .icon-light{display:block}',
     '#cosmic-toggle .icon-cosmic{display:none}',
     '#cosmic-toggle.cosmic-on .icon-light{display:none}',
     '#cosmic-toggle.cosmic-on .icon-cosmic{display:block}',
+    '#cosmic-toggle .label-light{display:inline}',
+    '#cosmic-toggle .label-cosmic{display:none}',
+    '#cosmic-toggle.cosmic-on .label-light{display:none}',
+    '#cosmic-toggle.cosmic-on .label-cosmic{display:inline}',
+    '@media(max-width:400px){#cosmic-toggle .label-light,#cosmic-toggle .label-cosmic{display:none}#cosmic-toggle{padding:0 10px}}',
 
     A + ' header,' + A + ' main,' + A + ' footer{position:relative;z-index:10}',
     A + ' [filter*="watercolor"]{filter:none}',
@@ -112,6 +117,7 @@
       '<circle cx="17" cy="5" r="1" fill="#6b5a4a" stroke="none"/>' +
       '<circle cx="19" cy="8" r="0.5" fill="#6b5a4a" stroke="none"/>' +
     '</svg>' +
+    '<span class="label-light">Cosmic Mode</span>' +
     '<svg class="icon-cosmic" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
       '<circle cx="12" cy="12" r="5"/>' +
       '<line x1="12" y1="1" x2="12" y2="3"/>' +
@@ -122,7 +128,8 @@
       '<line x1="21" y1="12" x2="23" y2="12"/>' +
       '<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>' +
       '<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>' +
-    '</svg>';
+    '</svg>' +
+    '<span class="label-cosmic">Earth Mode</span>';
 
   function ensureButton() {
     if (document.getElementById('cosmic-toggle')) return;
