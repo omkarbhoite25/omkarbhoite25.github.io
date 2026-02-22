@@ -18,7 +18,7 @@
   var STORAGE_KEY = 'cosmic_dark_mode';
   var ATTR = 'data-astro-cosmic';
   var state = {
-    active: localStorage.getItem(STORAGE_KEY) === 'true',
+    active: localStorage.getItem(STORAGE_KEY) !== 'false',
     scene: null,
     camera: null,
     renderer: null,
@@ -44,30 +44,30 @@
     A + ' .text-ink\\/80{color:rgba(232,223,213,.8)!important}',
     A + ' .text-muted-ink{color:#b8a898!important}',
     A + ' .text-muted-ink\\/70{color:rgba(184,168,152,.7)!important}',
-    A + ' .text-accent-sage{color:#00d4ff!important}',
-    A + ' .border-accent-sage,' + A + ' .border-accent-sage\\/30{border-color:rgba(0,212,255,.3)!important}',
-    A + ' .border-wash-sage{border-color:rgba(0,212,255,.2)!important}',
-    A + ' .bg-wash-sage,' + A + ' .bg-wash-sage\\/50,' + A + ' .bg-wash-sage\\/60{background-color:rgba(0,212,255,.1)!important}',
-    A + ' .bg-wash-sage:hover,' + A + ' .hover\\:bg-wash-sage:hover{background-color:rgba(0,212,255,.2)!important}',
+    A + ' .text-accent-sage{color:#ff6b00!important}',
+    A + ' .border-accent-sage,' + A + ' .border-accent-sage\\/30{border-color:rgba(255,107,0,.3)!important}',
+    A + ' .border-wash-sage{border-color:rgba(255,107,0,.2)!important}',
+    A + ' .bg-wash-sage,' + A + ' .bg-wash-sage\\/50,' + A + ' .bg-wash-sage\\/60{background-color:rgba(255,107,0,.1)!important}',
+    A + ' .bg-wash-sage:hover,' + A + ' .hover\\:bg-wash-sage:hover{background-color:rgba(255,107,0,.2)!important}',
 
     A + ' .bg-white\\/10{background-color:rgba(255,255,255,.05)!important}',
     A + ' .bg-white\\/15{background-color:rgba(255,255,255,.08)!important}',
     A + ' .hover\\:bg-white\\/20:hover{background-color:rgba(255,255,255,.1)!important}',
     A + ' .border-white\\/20{border-color:rgba(255,255,255,.1)!important}',
     A + ' .border-white\\/25{border-color:rgba(255,255,255,.12)!important}',
-    A + ' .hover\\:border-pigment-orange\\/40:hover{border-color:rgba(0,212,255,.3)!important}',
+    A + ' .hover\\:border-pigment-orange\\/40:hover{border-color:rgba(255,107,0,.3)!important}',
     A + ' .bg-paper-dark\\/20,' + A + ' .bg-paper-dark\\/30{background-color:rgba(255,255,255,.05)!important}',
 
     A + ' .bg-wash-pink,' + A + ' .bg-wash-coral,' + A + ' .bg-wash-orange,' + A + ' .bg-wash-peach,' + A + ' .bg-wash-amber,' + A + ' .bg-wash-teal,' + A + ' .bg-wash-butter,' + A + ' .bg-wash-cream,' + A + ' .bg-wash-ivory,' + A + ' .bg-wash-linen,' + A + ' .bg-wash-pearl,' + A + ' .bg-wash-snow{background-color:rgba(176,38,255,.06)!important}',
 
-    A + ' .watercolor-text{color:#00d4ff!important;-webkit-text-fill-color:#00d4ff!important}',
+    A + ' .watercolor-text{color:#ff6b00!important;-webkit-text-fill-color:#ff6b00!important}',
     A + ' .nav-link .relative{color:inherit}',
-    A + ' .nav-brush{background-color:rgba(0,212,255,.15)!important}',
-    A + ' .bio-brush,' + A + ' .page-brush{background:rgba(0,212,255,.3)!important}',
+    A + ' .nav-brush{background-color:rgba(255,107,0,.15)!important}',
+    A + ' .bio-brush,' + A + ' .page-brush{background:rgba(255,107,0,.3)!important}',
     A + ' strong{color:#fff!important}',
     A + ' .bg-paper\\/60{background-color:rgba(10,10,15,.6)!important}',
-    A + ' .shadow-pigment{box-shadow:0 8px 32px rgba(0,212,255,.05),inset 0 1px 0 rgba(255,255,255,.05)!important}',
-    A + ' .hover\\:shadow-lg:hover{box-shadow:0 10px 25px rgba(0,212,255,.1)!important}',
+    A + ' .shadow-pigment{box-shadow:0 8px 32px rgba(255,107,0,.05),inset 0 1px 0 rgba(255,255,255,.05)!important}',
+    A + ' .hover\\:shadow-lg:hover{box-shadow:0 10px 25px rgba(255,107,0,.1)!important}',
     A + ' #mobile-menu{background-color:rgba(10,10,15,.95)!important}',
 
     A + ' #meadow-container{opacity:0!important;transition:opacity .8s ease;pointer-events:none}',
@@ -81,8 +81,8 @@
     /* Button lives inside <header> flex row. margin-left:auto pushes it + nav/hamburger to the right. */
     '#cosmic-toggle{margin-left:auto;margin-right:12px;z-index:51;height:38px;padding:0 14px;border-radius:999px;border:2px solid rgba(107,154,143,.65);background:rgba(235,228,218,.95);backdrop-filter:blur(8px);cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .4s ease;box-shadow:0 2px 12px rgba(0,0,0,.15),0 0 0 1px rgba(107,154,143,.15);flex-shrink:0;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#5a4e42;white-space:nowrap}',
     '#cosmic-toggle:hover{transform:scale(1.05);box-shadow:0 4px 16px rgba(0,0,0,.15);border-color:rgba(107,154,143,.8)}',
-    '#cosmic-toggle.cosmic-on{border-color:rgba(0,212,255,.5);background:rgba(10,10,15,.85);box-shadow:0 0 16px rgba(0,212,255,.25),0 0 32px rgba(176,38,255,.08);color:#00d4ff}',
-    '#cosmic-toggle.cosmic-on:hover{box-shadow:0 0 22px rgba(0,212,255,.4),0 0 44px rgba(176,38,255,.15)}',
+    '#cosmic-toggle.cosmic-on{border-color:rgba(255,107,0,.5);background:rgba(10,10,15,.85);box-shadow:0 0 16px rgba(255,107,0,.25),0 0 32px rgba(176,38,255,.08);color:#ff6b00}',
+    '#cosmic-toggle.cosmic-on:hover{box-shadow:0 0 22px rgba(255,107,0,.4),0 0 44px rgba(176,38,255,.15)}',
     '#cosmic-toggle svg{width:18px;height:18px;transition:all .4s ease;flex-shrink:0}',
     '#cosmic-toggle .icon-light{display:block}',
     '#cosmic-toggle .icon-cosmic{display:none}',
@@ -118,7 +118,7 @@
       '<circle cx="19" cy="8" r="0.5" fill="#6b5a4a" stroke="none"/>' +
     '</svg>' +
     '<span class="label-light">Cosmic Mode</span>' +
-    '<svg class="icon-cosmic" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+    '<svg class="icon-cosmic" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
       '<circle cx="12" cy="12" r="5"/>' +
       '<line x1="12" y1="1" x2="12" y2="3"/>' +
       '<line x1="12" y1="21" x2="12" y2="23"/>' +
