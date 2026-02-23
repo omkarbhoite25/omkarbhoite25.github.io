@@ -36,7 +36,8 @@
   var style = document.createElement('style');
   style.id = 'cosmic-mode-styles';
   style.textContent = [
-    'html{transition:background-color .6s ease,color .6s ease}',
+    'html.cosmic-transitions-ready,html.cosmic-transitions-ready *{transition:background-color .4s ease,color .4s ease,border-color .4s ease,box-shadow .4s ease}',
+    '@media(prefers-reduced-motion:reduce){html.cosmic-transitions-ready,html.cosmic-transitions-ready *{transition:none!important}}',
     A + '{background-color:#0a0a0f!important;color:#e8dfd5!important}',
 
     A + ' .bg-paper,' + A + ' .bg-paper\\/95,' + A + ' .bg-paper\\/60{background-color:transparent!important}',
@@ -136,6 +137,7 @@
     var b = document.createElement('button');
     b.id = 'cosmic-toggle';
     b.setAttribute('aria-label', 'Toggle cosmic dark mode');
+    b.setAttribute('aria-pressed', String(state.active));
     b.innerHTML = BTN_HTML;
     if (state.active) b.classList.add('cosmic-on');
     b.addEventListener('click', function () {
@@ -265,7 +267,7 @@
     localStorage.setItem(STORAGE_KEY, 'true');
     document.documentElement.setAttribute(ATTR, 'true');
     var b = document.getElementById('cosmic-toggle');
-    if (b) b.classList.add('cosmic-on');
+    if (b) { b.classList.add('cosmic-on'); b.setAttribute('aria-pressed', 'true'); }
     canvasEl.classList.add('active');
     initStarfield();
     if (!state.animId) animate();
@@ -276,7 +278,7 @@
     localStorage.setItem(STORAGE_KEY, 'false');
     document.documentElement.removeAttribute(ATTR);
     var b = document.getElementById('cosmic-toggle');
-    if (b) b.classList.remove('cosmic-on');
+    if (b) { b.classList.remove('cosmic-on'); b.setAttribute('aria-pressed', 'false'); }
     canvasEl.classList.remove('active');
     if (state.animId) { cancelAnimationFrame(state.animId); state.animId = null; }
   }
@@ -307,6 +309,13 @@
     requestAnimationFrame(initStarfield);
   }
   syncPage();
+
+  // Enable transitions only after first paint (prevents flash/fade-in on load)
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      document.documentElement.classList.add('cosmic-transitions-ready');
+    });
+  });
 
   document.addEventListener('astro:page-load', syncPage);
 })();
