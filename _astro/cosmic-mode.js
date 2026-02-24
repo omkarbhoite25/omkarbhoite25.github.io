@@ -18,7 +18,7 @@
   var STORAGE_KEY = 'cosmic_dark_mode';
   var ATTR = 'data-astro-cosmic';
   var state = {
-    active: localStorage.getItem(STORAGE_KEY) !== 'false',
+    active: true,  /* forced dark-only — ignore stored preference */
     scene: null,
     camera: null,
     renderer: null,
@@ -111,55 +111,53 @@
   canvasEl.id = 'cosmic-canvas-container';
   document.documentElement.appendChild(canvasEl);
 
-  /* ───────── Button HTML (recreated on each page load) ───────── */
-  var BTN_HTML =
-    '<svg class="icon-light" viewBox="0 0 24 24" fill="none" stroke="#6b5a4a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
-      '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>' +
-      '<circle cx="17" cy="5" r="1" fill="#6b5a4a" stroke="none"/>' +
-      '<circle cx="19" cy="8" r="0.5" fill="#6b5a4a" stroke="none"/>' +
-    '</svg>' +
-    '<span class="label-light">Cosmic Mode</span>' +
-    '<svg class="icon-cosmic" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
-      '<circle cx="12" cy="12" r="5"/>' +
-      '<line x1="12" y1="1" x2="12" y2="3"/>' +
-      '<line x1="12" y1="21" x2="12" y2="23"/>' +
-      '<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>' +
-      '<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>' +
-      '<line x1="1" y1="12" x2="3" y2="12"/>' +
-      '<line x1="21" y1="12" x2="23" y2="12"/>' +
-      '<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>' +
-      '<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>' +
-    '</svg>' +
-    '<span class="label-cosmic">Earth Mode</span>';
+  /* ───────── Button HTML (DISABLED — dark-only mode, no toggle needed) ───────── */
+  // var BTN_HTML =
+  //   '<svg class="icon-light" viewBox="0 0 24 24" fill="none" stroke="#6b5a4a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+  //     '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>' +
+  //     '<circle cx="17" cy="5" r="1" fill="#6b5a4a" stroke="none"/>' +
+  //     '<circle cx="19" cy="8" r="0.5" fill="#6b5a4a" stroke="none"/>' +
+  //   '</svg>' +
+  //   '<span class="label-light">Cosmic Mode</span>' +
+  //   '<svg class="icon-cosmic" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+  //     '<circle cx="12" cy="12" r="5"/>' +
+  //     '<line x1="12" y1="1" x2="12" y2="3"/>' +
+  //     '<line x1="12" y1="21" x2="12" y2="23"/>' +
+  //     '<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>' +
+  //     '<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>' +
+  //     '<line x1="1" y1="12" x2="3" y2="12"/>' +
+  //     '<line x1="21" y1="12" x2="23" y2="12"/>' +
+  //     '<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>' +
+  //     '<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>' +
+  //   '</svg>' +
+  //   '<span class="label-cosmic">Earth Mode</span>';
 
-  function ensureButton() {
-    if (document.getElementById('cosmic-toggle')) return;
-    var b = document.createElement('button');
-    b.id = 'cosmic-toggle';
-    b.setAttribute('aria-label', 'Toggle cosmic dark mode');
-    b.setAttribute('aria-pressed', String(state.active));
-    b.innerHTML = BTN_HTML;
-    if (state.active) b.classList.add('cosmic-on');
-    b.addEventListener('click', function () {
-      if (state.active) disableCosmic(); else enableCosmic();
-    });
-    // Insert into header, before <nav> — puts it visually before "Home"
-    var header = document.querySelector('header');
-    if (header) {
-      var nav = header.querySelector('nav');
-      if (nav) {
-        header.insertBefore(b, nav);
-      } else {
-        var hamburger = document.getElementById('mobile-menu-btn');
-        if (hamburger) header.insertBefore(b, hamburger);
-        else header.appendChild(b);
-      }
-    } else {
-      // Fallback: fixed position if no header found
-      b.style.cssText = 'position:fixed;top:24px;right:24px';
-      document.body.appendChild(b);
-    }
-  }
+  // function ensureButton() {  /* DISABLED — dark-only mode */
+  //   if (document.getElementById('cosmic-toggle')) return;
+  //   var b = document.createElement('button');
+  //   b.id = 'cosmic-toggle';
+  //   b.setAttribute('aria-label', 'Toggle cosmic dark mode');
+  //   b.setAttribute('aria-pressed', String(state.active));
+  //   b.innerHTML = BTN_HTML;
+  //   if (state.active) b.classList.add('cosmic-on');
+  //   b.addEventListener('click', function () {
+  //     if (state.active) disableCosmic(); else enableCosmic();
+  //   });
+  //   var header = document.querySelector('header');
+  //   if (header) {
+  //     var nav = header.querySelector('nav');
+  //     if (nav) {
+  //       header.insertBefore(b, nav);
+  //     } else {
+  //       var hamburger = document.getElementById('mobile-menu-btn');
+  //       if (hamburger) header.insertBefore(b, hamburger);
+  //       else header.appendChild(b);
+  //     }
+  //   } else {
+  //     b.style.cssText = 'position:fixed;top:24px;right:24px';
+  //     document.body.appendChild(b);
+  //   }
+  // }
 
   /* ───────── Three.js starfield (exact astrophysics replica) ───────── */
   function initStarfield() {
@@ -273,24 +271,24 @@
     if (!state.animId) animate();
   }
 
-  function disableCosmic() {
-    state.active = false;
-    localStorage.setItem(STORAGE_KEY, 'false');
-    document.documentElement.removeAttribute(ATTR);
-    var b = document.getElementById('cosmic-toggle');
-    if (b) { b.classList.remove('cosmic-on'); b.setAttribute('aria-pressed', 'false'); }
-    canvasEl.classList.remove('active');
-    if (state.animId) { cancelAnimationFrame(state.animId); state.animId = null; }
-  }
+  // function disableCosmic() {  /* DISABLED — dark-only mode, no switching to light */
+  //   state.active = false;
+  //   localStorage.setItem(STORAGE_KEY, 'false');
+  //   document.documentElement.removeAttribute(ATTR);
+  //   var b = document.getElementById('cosmic-toggle');
+  //   if (b) { b.classList.remove('cosmic-on'); b.setAttribute('aria-pressed', 'false'); }
+  //   canvasEl.classList.remove('active');
+  //   if (state.animId) { cancelAnimationFrame(state.animId); state.animId = null; }
+  // }
 
   /* ───────── Page sync ───────── */
   function syncPage() {
     var isAstro = location.pathname.indexOf('/astrophysics') === 0;
 
-    // Re-inject button into the new page's header (body was swapped)
-    if (!isAstro) {
-      ensureButton();
-    }
+    // DISABLED — dark-only mode, no toggle button needed
+    // if (!isAstro) {
+    //   ensureButton();
+    // }
 
     // Hide canvas on astrophysics (it has its own starfield)
     if (isAstro && state.active) {
