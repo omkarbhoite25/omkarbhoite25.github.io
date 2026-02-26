@@ -510,6 +510,10 @@ body {
 }
 .ref-card a:hover { color: var(--cosmic-accent); }
 
+/* Publication links */
+.pub-link { color: #f1f5f9; text-decoration: none; transition: color 0.3s; }
+.pub-link:hover { color: var(--cosmic-accent); }
+
 /* Divider */
 .terminal-divider {
   border: none;
@@ -533,6 +537,7 @@ body {
 /* Utilities */
 .text-white { color: #fff; }
 .hidden { display: none; }
+.typewriter,.typewriter-sub{min-height:1em}.typewriter-active::after{content:'|';animation:blink-cursor .7s step-end infinite;color:var(--terminal-green);font-weight:400}@keyframes blink-cursor{0%,100%{opacity:1}50%{opacity:0}}
 </style>
 </head>
 <body>
@@ -600,8 +605,8 @@ body {
         <div class="prompt">
           <span class="user">visitor</span>@<span class="path">omkar-cv</span>:~$ <span class="cmd">cat identity.log</span>
         </div>
-        <div class="header-name">Omkar Bhoite</div>
-        <div class="header-subtitle">PhD Researcher &mdash; Optimization &amp; Graph Theory</div>
+        <div class="header-name typewriter">Omkar Bhoite</div>
+        <div class="header-subtitle typewriter-sub">PhD Researcher &mdash; Optimization &amp; Graph Theory</div>
         <div class="contact-row">
           <span>Trondheim, Norway</span>
           <a href="mailto:omkar.bhoite@ntnu.no">omkar.bhoite@ntnu.no</a>
@@ -738,13 +743,13 @@ body {
         <div class="section-header">Publications</div>
 
         <div class="pub-item">
-          <div class="pub-title"><a href="https://ieeexplore.ieee.org/document/10156429" target="_blank" rel="noopener" style="color: #f1f5f9; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--cosmic-accent)'" onmouseout="this.style.color='#f1f5f9'">Indoor vehicle-in-the-loop simulation of unmanned micro aerial vehicle with artificial companion</a></div>
+          <div class="pub-title"><a href="https://ieeexplore.ieee.org/document/10156429" target="_blank" rel="noopener" class="pub-link">Indoor vehicle-in-the-loop simulation of unmanned micro aerial vehicle with artificial companion</a></div>
           <div class="pub-authors">A. Hiba, V. Kortvelyesi, A. Kiskaroly, O. Bhoite, P. David, A. Majdik</div>
           <div class="pub-venue">ICUAS 2023, IEEE &mdash; DOI: 10.1109/ICUAS57906.2023.10156429</div>
         </div>
 
         <div class="pub-item">
-          <div class="pub-title"><a href="https://arxiv.org/abs/1908.02840" target="_blank" rel="noopener" style="color: #f1f5f9; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--cosmic-accent)'" onmouseout="this.style.color='#f1f5f9'">Temperature Tunable Optical Transmission control of VO2 nanostructures by IR based 1-D Photonic crystals</a></div>
+          <div class="pub-title"><a href="https://arxiv.org/abs/1908.02840" target="_blank" rel="noopener" class="pub-link">Temperature Tunable Optical Transmission control of VO2 nanostructures by IR based 1-D Photonic crystals</a></div>
           <div class="pub-authors">D. U. Singh, O. Bhoite, R. Narayanan</div>
           <div class="pub-venue">arXiv:1908.02840, 2019</div>
         </div>
@@ -862,6 +867,7 @@ body {
               <span class="skill-tag">C/C++</span>
               <span class="skill-tag">MATLAB</span>
               <span class="skill-tag">Julia</span>
+              <span class="skill-tag">Rust</span>
               <span class="skill-tag">JavaScript</span>
               <span class="skill-tag">Bash</span>
               <span class="skill-tag">LaTeX</span>
@@ -875,7 +881,6 @@ body {
               <span class="skill-tag">CVXPY</span>
               <span class="skill-tag">ROS</span>
               <span class="skill-tag">OpenCV</span>
-              <span class="skill-tag">Three.js</span>
             </div>
           </div>
           <div class="skill-category">
@@ -884,7 +889,6 @@ body {
               <span class="skill-tag">Git</span>
               <span class="skill-tag">Docker</span>
               <span class="skill-tag">Linux</span>
-              <span class="skill-tag">HPC/Slurm</span>
               <span class="skill-tag">VS Code</span>
               <span class="skill-tag">Vim</span>
             </div>
@@ -1151,6 +1155,39 @@ body {
   }, { passive: true });
 
   updateActiveNav();
+
+  // Typewriter for header
+  function initCvTypewriter(){
+    var title=document.querySelector('.typewriter');
+    var sub=document.querySelector('.typewriter-sub');
+    if(!title)return;
+    if(!title.getAttribute('data-text'))title.setAttribute('data-text',title.textContent.trim());
+    if(sub&&!sub.getAttribute('data-text'))sub.setAttribute('data-text',sub.innerHTML.trim());
+    var titleText=title.getAttribute('data-text');
+    var subText=sub?sub.getAttribute('data-text'):'';
+    title.textContent='';if(sub)sub.innerHTML='';
+    function typewrite(el,text,speed,useHtml,cb){
+      el.classList.add('typewriter-active');
+      if(useHtml){
+        var i=0;var iv=setInterval(function(){
+          i++;el.innerHTML=text.substring(0,i);
+          if(i>=text.length){clearInterval(iv);el.classList.remove('typewriter-active');if(cb)cb()}
+        },speed);
+      }else{
+        var i=0;var iv=setInterval(function(){
+          el.textContent+=text[i++];
+          if(i>=text.length){clearInterval(iv);el.classList.remove('typewriter-active');if(cb)cb()}
+        },speed);
+      }
+    }
+    // Start after boot sequence + header reveal
+    setTimeout(function(){
+      typewrite(title,titleText,50,false,function(){
+        if(sub&&subText)typewrite(sub,subText,30,true);
+      });
+    },2700);
+  }
+  initCvTypewriter();
 })();
 </script>
 </body>
