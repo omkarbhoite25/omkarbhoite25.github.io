@@ -537,7 +537,7 @@ body {
 /* Utilities */
 .text-white { color: #fff; }
 .hidden { display: none; }
-.typewriter,.typewriter-sub{min-height:1em}.typewriter-active::after{content:'|';animation:blink-cursor .7s step-end infinite;color:var(--terminal-green);font-weight:400}@keyframes blink-cursor{0%,100%{opacity:1}50%{opacity:0}}
+.typewriter,.typewriter-sub{min-height:1em;visibility:hidden}.typewriter-active::after{content:'|';animation:blink-cursor .7s step-end infinite;color:var(--terminal-green);font-weight:400}@keyframes blink-cursor{0%,100%{opacity:1}50%{opacity:0}}
 </style>
 </head>
 <body>
@@ -1165,7 +1165,7 @@ body {
     if(sub&&!sub.getAttribute('data-text'))sub.setAttribute('data-text',sub.innerHTML.trim());
     var titleText=title.getAttribute('data-text');
     var subText=sub?sub.getAttribute('data-text'):'';
-    title.textContent='';if(sub)sub.innerHTML='';
+    title.textContent='';title.style.visibility='visible';if(sub){sub.innerHTML='';sub.style.visibility='visible';}
     function typewrite(el,text,speed,useHtml,cb){
       el.classList.add('typewriter-active');
       if(useHtml){
