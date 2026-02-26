@@ -13,30 +13,27 @@ Capturing moments through my lens
 © 2026 </div> <script src="/_astro/cosmic-mode.js?v=4"></script>
 <script>
 (function(){
-  var running=false;
   function initTypewriter(){
-    if(running)return;
     if(document.documentElement.getAttribute('data-reduced-motion')==='true')return;
     var title=document.querySelector('.typewriter');
     var sub=document.querySelector('.typewriter-sub');
-    if(!title)return;
-    running=true;
-    if(!title.getAttribute('data-text'))title.setAttribute('data-text',title.textContent.trim());
-    if(sub&&!sub.getAttribute('data-text'))sub.setAttribute('data-text',sub.textContent.trim());
-    var titleText=title.getAttribute('data-text');
-    var subText=sub?sub.getAttribute('data-text'):'';
+    if(!title||title.hasAttribute('data-tw-running'))return;
+    title.setAttribute('data-tw-running','1');
+    var titleText=title.getAttribute('data-text')||title.textContent.trim();
+    title.setAttribute('data-text',titleText);
+    var subText='';
+    if(sub){subText=sub.getAttribute('data-text')||sub.textContent.trim();sub.setAttribute('data-text',subText);}
     title.textContent='';if(sub)sub.textContent='';
     function typewrite(el,text,speed,cb){
       el.classList.add('typewriter-active');
       var i=0;var iv=setInterval(function(){
         el.textContent+=text[i++];
-        if(i>=text.length){clearInterval(iv);el.classList.remove('typewriter-active');if(cb)cb()}
+        if(i>=text.length){clearInterval(iv);el.classList.remove('typewriter-active');if(cb)cb();}
       },speed);
     }
     setTimeout(function(){
       typewrite(title,titleText,50,function(){
-        if(sub&&subText)typewrite(sub,subText,30,function(){running=false;});
-        else running=false;
+        if(sub&&subText)typewrite(sub,subText,30);
       });
     },200);
   }
