@@ -47,14 +47,16 @@ Email address copied!
   document.addEventListener('astro:page-load',initHandwriting);
 })();
 
+/*
 // ─── Dynamic Pixel Dither Effect on Profile Photo ───
+// Uncomment to re-enable: WebGL2 Bayer ordered dithering on profile image
+// with 4s hold then 2s CSS opacity fade to reveal real photo.
 (function(){
   function initPixelDither(){
     var imgEl=document.querySelector('img[alt="Omkar Bhoite"]');
     if(!imgEl)return;
     var container=imgEl.closest('div[style*="border-radius"]');
     if(!container)return;
-    // Remove old canvas if re-initializing
     var old=container.querySelector('canvas.pixel-dither');
     if(old)old.remove();
 
@@ -94,26 +96,23 @@ void main(){
   vec2 cell=floor(gl_FragCoord.xy/pxSize);
   vec2 uv=(cell*pxSize+pxSize*0.5)/u_res;
 
-  // Subtle animated drift
   vec2 drift=vec2(sin(u_time*0.3)*0.008,cos(u_time*0.2)*0.006);
   uv+=drift;
 
-  // Cover-fit UV: match browser object-fit:cover + object-position:80% center
   float scrAsp=u_res.x/u_res.y;
   float imgAsp=u_texSize.x/u_texSize.y;
   vec2 texUV=uv;
   if(scrAsp>imgAsp){
     float s=imgAsp/scrAsp;
-    texUV.y=(uv.y-0.5)/s+0.5; // vertical crop centered (50%)
+    texUV.y=(uv.y-0.5)/s+0.5;
   } else {
     float s=scrAsp/imgAsp;
     float crop=1.0-s;
-    texUV.x=(uv.x-0.5)/s+0.5+crop*(0.8-0.5); // horizontal crop at 80%
+    texUV.x=(uv.x-0.5)/s+0.5+crop*(0.8-0.5);
   }
 
   vec4 color=texture(u_tex,texUV);
 
-  // Ordered dither per RGB channel — 5 quantization levels
   float thr=getBayer(ivec2(cell))-0.5;
   float lvl=5.0;
   vec3 d;
@@ -168,8 +167,8 @@ void main(){
     }
 
     var t0=performance.now(),raf,stopped=false;
-    var HOLD=4.0;  // seconds of full dither before fade begins
-    var FADE=2.0;  // seconds for the CSS opacity fade
+    var HOLD=4.0;
+    var FADE=2.0;
 
     function render(t){
       if(!loaded||stopped)return;
@@ -199,5 +198,6 @@ void main(){
   document.addEventListener('DOMContentLoaded',initPixelDither);
   document.addEventListener('astro:page-load',initPixelDither);
 })();
+*/
 </script>
   </html>  
